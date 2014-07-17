@@ -1,0 +1,7 @@
+name: is
+description: A sample command-line application
+dependencies:
+  form_data:
+    path: ../form_data
+#dev_dependencies:
+#  unittest: any
