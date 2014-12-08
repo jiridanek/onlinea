@@ -30,4 +30,9 @@ describe("A test suite", function() {
         var doc = getDoc('test/myGradedPost.html');
         expect(shouldStopUnload(doc)).equal(false);
     });
+    
+    it('should not stop unload myPostNoChangesMade.html', function() {
+      var doc = getDoc('test/myPostNoChangesMade.html');
+      expect(shouldStopUnload(doc)).equal(false);
+    });
 });
