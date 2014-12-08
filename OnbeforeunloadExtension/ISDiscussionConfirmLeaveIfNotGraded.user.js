@@ -6,7 +6,7 @@
 // @match          https://is.muni.cz/auth/diskuse/diskusni_forum_indiv.pl*
 // @namespace      https://is.muni.cz/auth/web/374368
 // @run-at         document-end
-// @version        0.99.2
+// @version        1.0.1
 // ==/UserScript==
 
 /*
@@ -56,6 +56,16 @@
 
         return (hasCommandLink && !hasConfirmSuccessHeadline);
     };
+    
+    /**
+     * @param hodn_pri {HTMLDivElement}
+     * @returns {boolean}
+     */
+    var isBeingGraded = function(hodn_pri) {
+        var textarea = hodn_pri.querySelector('textarea');
+
+        return (textarea !== null);
+    };
 
     /**
      * document {Document}
@@ -64,7 +74,7 @@
     var shouldStopUnload = function(document) {
         var hodn_pris = document.querySelectorAll('#pr_vse > div > div.hodn_pri');
         for (var i = 0; i < hodn_pris.length; i++) {
-            if (isNotGraded(hodn_pris[i])) {
+            if (isNotGraded(hodn_pris[i]) || isBeingGraded(hodn_pris[i])) {
                 return true;
             }
         }
