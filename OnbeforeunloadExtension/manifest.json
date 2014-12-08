@@ -10,5 +10,5 @@
    } ],
    "description": "Zobrazí varovný dialog, pokud se pokusíte zavřít nebo jinak opustit stránku, ve které ještě máte neobodovaný příspěvek.",
    "name": "IS MU Confirm Leave If Not Graded Posts",
-   "version": "1.0.1"
+   "version": "1.0.2"
 }

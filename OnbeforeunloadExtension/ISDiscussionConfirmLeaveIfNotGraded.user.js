@@ -6,7 +6,7 @@
 // @match          https://is.muni.cz/auth/diskuse/diskusni_forum_indiv.pl*
 // @namespace      https://is.muni.cz/auth/web/374368
 // @run-at         document-end
-// @version        1.0.1
+// @version        1.0.2
 // ==/UserScript==
 
 /*
@@ -37,6 +37,8 @@
         "COMMAND_EN": 'Enter evaluation into a notebook',
         "CONFIRM_SUCCESS_CS": 'Úspěšně uloženo.',
         "CONFIRM_SUCCESS_EN": 'Saved successfully.',
+        "WARN_NO_CHANGES_CS": 'Žádná změna.',
+        "WARN_NO_CHANGES_EN": 'No changes made.',
 
         "WARNING_MSG": 'Na stránce ještě jsou neobodované příspěvky!'
     };
@@ -50,11 +52,13 @@
         var hasCommandLink = (commandLink != null &&
             (commandLink.text == CONFIG.COMMAND_CS || commandLink.text == CONFIG.COMMAND_EN));
 
-        var confirmSuccessHeadline = hodn_pri.querySelector('div.zdurazneni.potvrzeni > h3');
-        var hasConfirmSuccessHeadline = (confirmSuccessHeadline != null &&
-            (confirmSuccessHeadline.textContent == CONFIG.CONFIRM_SUCCESS_CS || confirmSuccessHeadline.textContent == CONFIG.CONFIRM_SUCCESS_EN));
+        var msgBox = hodn_pri.querySelector('div.zdurazneni.potvrzeni > h3, div.zdurazneni.upozorneni > h3');
+        var hasConfirmSuccessHeadline = (msgBox != null &&
+            (msgBox.textContent == CONFIG.CONFIRM_SUCCESS_CS || msgBox.textContent == CONFIG.CONFIRM_SUCCESS_EN));
+        var hasNoChangesHeadline = (msgBox != null &&   // impossible to say, but it's reasonable to guess post is graded
+            (msgBox.textContent == CONFIG.WARN_NO_CHANGES_CS || msgBox.textContent == CONFIG.WARN_NO_CHANGES_EN));
 
-        return (hasCommandLink && !hasConfirmSuccessHeadline);
+        return (hasCommandLink && !hasConfirmSuccessHeadline && !hasNoChangesHeadline);
     };
     
     /**
