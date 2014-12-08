@@ -18,6 +18,10 @@ describe("A test suite", function() {
         var doc = getDoc('test/myNotGradedPost.html');
         expect(shouldStopUnload(doc)).equal(true);
     });
+    it('should stop unload myGradedPostGradingBeingEdited.html', function() {
+      var doc = getDoc('test/myGradedPostGradingBeingEdited.html');
+      expect(shouldStopUnload(doc)).equal(true);
+    });
     it('should not stop unload myNotGradedPostSaved.html', function() {
         var doc = getDoc('test/myNotGradedPostSaved.html');
         expect(shouldStopUnload(doc)).equal(false);
