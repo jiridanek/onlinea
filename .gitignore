@@ -13,6 +13,8 @@ packages/
 pubspec.lock
 
 .DS_Store
-node_modules
-gulpfile.js
-*.zip
+/node_modules
+/gulpfile.js
+/mkrelease.js
+/build_feedlearn*/
+/*.zip
