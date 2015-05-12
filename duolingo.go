@@ -11,10 +11,11 @@ import (
     "bytes"
     "io"
     "github.com/jirkadanek/onlinea/misc"
+    "strings"
 )
 
 var (
-    first = time.Date(2015, time.February, 2, 23, 0, 0, 0, time.UTC)
+    first = time.Date(2015, time.February, 16, 23, 0, 0, 0, time.UTC)
 )
 
 func date(i int) string {
@@ -62,9 +63,12 @@ func Duolingo(args []string) {
         _ = students
         record := bloky.Record{[]string{"","","","","","","",""}}
         var event EventsOrErr
+        if len(events) != 1 {
+            panic("len events is not 1")
+        }
         for _, e := range events {
             event = e
-            break
+            //break
         }
         print_scores_student(os.Stdout, record, event, false)
     }
@@ -95,9 +99,11 @@ func duolingo(week string, nick string) ([]duo.Observee, map[string]EventsOrErr)
     }
     
     if nick != "" {
+        // clear events
+        events := make(map[string]EventsOrErr)
         for _, student := range students {
 //             fmt.Println(student.User_name)
-            if nick != student.User_name {
+            if !strings.EqualFold(nick, student.User_name) {
                 continue
             }
             user_id := fmt.Sprintf("%d", student.User_id)
@@ -152,7 +158,7 @@ func print_scores(records []bloky.Record, students []duo.Observee, events map[st
         found := false
         for _, s := range students {
             nick := misc.NickFromBlokText(r.Value())
-            if nick == s.User_name {
+            if strings.EqualFold(nick, s.User_name) {
                 found = true
                 user_id := fmt.Sprintf("%d", s.User_id)
                 var b bytes.Buffer
