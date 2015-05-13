@@ -1,6 +1,6 @@
 #perl6 compress_blok.pl < in.txt > out-txt
 
-my $message = "\n|*points moved to a new notebook";
+my $message = "|points were moved to a new notebook";
 
 my $inrecord = False;
 my $isheader = True;
@@ -9,15 +9,12 @@ for slurp.lines -> $line {
   $isheader = $line ~~ /^\d/;
   if $isheader {
     if $inrecord {
-      say "$message";
+      say "\n$message";
     }
     $inrecord = False;
-    say $line;
+    print $line;
   } else {
     if $line ~~ /| <( \[df_id\:\d*\] )> / {
-      unless $inrecord {
-        print '|';
-      }
       $inrecord = True;
       print ~$/;
     }
