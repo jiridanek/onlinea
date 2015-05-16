@@ -1,6 +1,8 @@
 import 'dart:async' as async;
-import 'dart:html' as dom;
-import 'dart:js' as js;
+//import 'dart:html' as dom;
+import 'package:html5lib/dom.dart' as dom;
+import 'package:html5lib/parser.dart' as dom;
+//import 'dart:js' as js;
 import 'dart:math' as math;
 
 var jsPrefix = 'xpath';
@@ -18,31 +20,36 @@ dom.Element xpathSelector(query, element) {
   return null;
 }
 
-// avoids the implicit sanitization? do I really want that?
-// Uncaught Error: Bad state: More than one element
-class NullHtmlValidator implements dom.NodeValidator {
-  const NullHtmlValidator();
-  @override
-  bool allowsAttribute(dom.Element element, String attributeName, String value)
-    => true;
+//// avoids the implicit sanitization? do I really want that?
+//// Uncaught Error: Bad state: More than one element
+////FIXME The library can fetch whole Documents, I do not need to do this
+//class NullHtmlValidator implements dom.NodeValidator {
+//  const NullHtmlValidator();
+//  @override
+//  bool allowsAttribute(dom.Element element, String attributeName, String value)
+//    => true;
+//
+//  @override
+//  bool allowsElement(dom.Element element)
+//    => true;
+//}
+//final nullHtmlValidator = const NullHtmlValidator();
+////final silentHtmlValidator = new dom.NodeValidatorBuilder.common().;
+//dom.Element elementFromHtml(String html) {
+//  //print(html);
+//  //dom.document.createExpression();
+//  return new dom.DivElement()..setInnerHtml(html, validator: nullHtmlValidator);
+//  //return new dom.Element.html(html);
+//  //return new dom.DocumentFragment.html(html, validator: nullHtmlValidator);
+//}
 
-  @override
-  bool allowsElement(dom.Element element)
-    => true;
-}
-final nullHtmlValidator = const NullHtmlValidator();
-//final silentHtmlValidator = new dom.NodeValidatorBuilder.common().;
-dom.Element elementFromHtml(String html) {
-  //print(html);
-  //dom.document.createExpression();
-  return new dom.DivElement()..setInnerHtml(html, validator: nullHtmlValidator);
-  //return new dom.Element.html(html);
-  //return new dom.DocumentFragment.html(html, validator: nullHtmlValidator);
+dom.Document elementFromHtml(String html) {
+  return dom.parse(html, encoding: 'utf-8');
 }
 
 async.Future<String> get(String url, {bool shouldNotDelay: false}) {
   //skip that
-  return _get(url, shouldNotDelay);
+  return CONFIG.get(url, shouldNotDelay);
   // does ad-hoc caching in chrome.storage for faster testing
 //  var completer = new async.Completer();
 //  var found = false;
@@ -61,27 +68,37 @@ async.Future<String> get(String url, {bool shouldNotDelay: false}) {
 
 var random = new math.Random();
 
-async.Future<String> _get(String url, bool shouldNotDelay) {
-  int maxDelay = 6;
-  var completer = new async.Completer();
-  var ajax = () {
-    dom.HttpRequest.request(url).then((dom.HttpRequest r) {
-        completer.complete(r.responseText);
-      }, onError: (e) {
-        dom.HttpRequest r = e.target;
-        completer.complete(r);
-      });
-  };
-  
-  
-  if(shouldNotDelay) {
-    ajax();
-  } else {
-    new async.Timer(new Duration(milliseconds: 500, seconds: random.nextInt(maxDelay)), () {
+class CONFIG {
+  static var postFormData = null; //dom.HttpRequest.postFormData;
+  static var request = null; //dom.HttpRequest.request;
+  static var get = (String url, bool shouldNotDelay) {
+    int maxDelay = 6;
+    var completer = new async.Completer();
+    var ajax = () {
+      CONFIG.request(url).then((var request) {
+        var body = null;
+        try {
+          body = request.body;
+        } on NoSuchMethodError {
+          body = request.responseText; // would be responseText with dart:html
+        }
+        completer.complete(body); // would be responseText with dart:html
+      }//, //library:http always returns http.Response
+//          onError: (e) {
+//          var r = e.target;
+//          completer.completeError(r);
+//        }
+    );};
+
+    if(shouldNotDelay) {
       ajax();
-    });
-  }
-  return completer.future;
+    } else {
+      new async.Timer(new Duration(milliseconds: 500, seconds: random.nextInt(maxDelay)), () {
+        ajax();
+      });
+    }
+    return completer.future;
+  };
 }
 
 //TODO: failed login
@@ -90,14 +107,14 @@ class LogInPage {
   static const url = 'https://is.muni.cz/system/login_form.pl';
   static const expiration = '345600'; //1 hodině    8 hodinách    1 dni    4 dnech
     
-  static async.Future<String> logIn(String username, String password, {destination: '/auth'}) {
+  static async.Future<dynamic> logIn(String username, String password, {destination: '/auth/'}) {
     var data = {'destination': destination,
                 'credential_0': username,
                 'credential_1': password,
                 'credential_2': expiration};
     var completer = new async.Completer();
-    dom.HttpRequest.postFormData(url, data).then((dom.HttpRequest r) {
-      completer.complete(r.responseText);
+    CONFIG.postFormData(url, data).then((response) {
+      completer.complete(response); //i need cookies // dart:html would use request.responseText
     }, onError: (e) => completer.completeError(e));
     return completer.future;
   }
