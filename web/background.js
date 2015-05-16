@@ -4,7 +4,7 @@ var myJsHelpers = {
       new chrome.declarativeContent.PageStateMatcher({
         pageUrl: {
           schemes: ['https']
-         ,pathSuffix: 'auth/diskuse/diskusni_forum_indiv.pl'
+         ,pathPrefix: '/auth/diskuse/diskusni_forum_indiv'
          ,queryContains: 'guz'
         }
        ,css: ['div.df_vl,div.df_vl_nect']
