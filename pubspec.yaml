@@ -2,7 +2,9 @@ name: online_a_discussion_points
 description: A sample Chrome packaged application
 dependencies:
   chrome: any
-  is:
-    path: ../is
+  ismu:
+    path: ../ismu
 transformers:
 - chrome
+- $dart2js:
+    csp: true

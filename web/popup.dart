@@ -3,7 +3,7 @@ import 'dart:html' as dom;
 import 'dart:convert' as convert;
 import 'package:chrome/chrome_ext.dart' as chrome;
 
-import 'package:is/discussion.dart' as df;
+import 'package:ismu/discussion.dart' as df;
 
 import 'analytics.dart' as analytics;
 
