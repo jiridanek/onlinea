@@ -3,6 +3,7 @@ import 'dart:html' as dom;
 import 'dart:convert' as convert;
 import 'package:chrome/chrome_ext.dart' as chrome;
 
+import 'package:ismu/is.dart' as ismu;
 import 'package:ismu/discussion.dart' as df;
 
 import 'analytics.dart' as analytics;
@@ -79,6 +80,11 @@ main() {
   analytics.setLocation("popup.html");
   dom.window.onLoad.listen((_){
     analytics.sendPageview();
+
+    // lame dependency injection
+    ismu.CONFIG.postFormData = dom.HttpRequest.postFormData;
+    ismu.CONFIG.request = dom.HttpRequest.request;
+
     chrome.runtime.onMessage.listen((chrome.OnMessageEvent e) {
       try {
 //        print(e);
