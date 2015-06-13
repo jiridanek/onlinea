@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "[ONLINE_A] Feed Learn for Dril",
+  "short_name": "feedlearn",
+  "description": "This modified version of Geza Kovacs' FeedLearn helps you learn vocabulary by showing you IS MU Dril cards as you browse your Facebook feed",
+  "version": "1.15.0.1",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "http://facebook.com/*",
+    "https://facebook.com/*",
+    "http://www.facebook.com/*",
+    "https://www.facebook.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.11.1.min.js",
+      "baseurl.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "jquery-1.11.1.min.js",
+        "jquery.isinview.js",
+        "baseurl.js",
+        "feedlearn.js"
+      ],
+      "matches": [
+        "http://facebook.com/*",
+        "https://facebook.com/*",
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
