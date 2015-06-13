@@ -1,0 +1,2 @@
+Geza Kovacs <geza@cs.stanford.edu>
+Jirka Daněk <dnk@mail.muni.cz>

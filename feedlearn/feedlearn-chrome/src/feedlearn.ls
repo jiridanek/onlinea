@@ -11,18 +11,38 @@ randstr = ->
 insertBeforeItem = (jfeeditem) ->
   #jfeeditem.before $('<div>').text('newfoobar')
   quizid = randstr()
-  jfeeditem.before $('<iframe>').css({
-    width: '495px'
-    height: '300px'
-  }).attr('src', baseurl + '/?facebook=true&quizid=' + quizid).attr('frameBorder', '0').addClass('feedlearnquiz').attr('id', quizid)
-  return
+  div = $('<div>').css({
+    border: '1px solid rgb(208, 209, 213)'
+    'border-radius': '3px'
+    'margin-bottom': '10px'
+    background: 'white'
+    padding: '12px'
+    width: '470px'
+  })
+  iframe = $('<iframe>').css({
+    width: '470px'
+    height: '400px'
+  }).attr('src', 'https://is.muni.cz/auth/dril/dril?akce=start_drill;oblast_id=1').attr('frameBorder', '0').addClass('feedlearnquiz').attr('id', quizid)
+  nw = chrome.extension.getURL 'nw.png'
+  menu = $('<div style="margin-top: 1em;">
+    <h1>Done for now?</h1>
+    <p>Click the following link to get points: <a href="https://is.muni.cz/auth/el/1441/podzim2015/ONLINE_A/aux/gimmepoints.html" target="_blank">I solemnly swear I Dril\'d much today <img src="' + nw + '">.</a></p></div>')
+  div.append(iframe)
+  div.append(menu)
+  jfeeditem.before(div)
+  #console.log iframe
+  #console.log iframe.add-event-listener
+  
+window.add-event-listener 'message', (e) ->
+    if e.origin = 'https://is.muni.cz'
+        e.source.post-message {dril: 'reformat'}, 'https://is.muni.cz'
 
 root.numitems = 0
 
 insertIfMissing = ->
   for feeditem in $('.mbm._5jmm')
     #jfeeditem = $(feeditem)
-    #if not jfeeditem.attr('feedlearninserted')
+    #if not jfeeditem.attr('feedlearninserted')on
     if not feeditem.feedlearninserted
       #jfeeditem.attr('feedlearninserted', true)
       feeditem.feedlearninserted = true

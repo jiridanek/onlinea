@@ -4,7 +4,7 @@ require! {
 }
 
 gulp.task 'dist', ['build'], ->
-    return gulp.src(['src/*.js', 'third_party/*.js', 'build/*', 'src/manifest.json'])
+    return gulp.src(['src/*.js', 'third_party/**', 'build/*', 'src/manifest.json'])
         .pipe(gulp.dest('dist'))
 
 gulp.task 'zip', ['dist'], ->

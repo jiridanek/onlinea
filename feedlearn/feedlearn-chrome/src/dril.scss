@@ -1,0 +1,25 @@
+#obalka {
+    width: 470px;
+}
+#hlavicka {
+    & h2 {
+        width: 12em !important;
+    }
+    & h1 {
+        top: 65px !important;
+    }
+}
+#drill_ui {
+    & .center-box {
+        margin-right: inherit;
+    }
+    & .right-box {
+        display: none;
+    }
+    & .navodek span {
+        white-space: nowrap;
+    }
+    & .pr_zpet {
+        display: none;
+    }
+}

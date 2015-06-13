@@ -10,7 +10,8 @@
     "http://facebook.com/*",
     "https://facebook.com/*",
     "http://www.facebook.com/*",
-    "https://www.facebook.com/*"
+    "https://www.facebook.com/*",
+    "https://is.muni.cz/auth/dril/*"
   ],
   "background": {
     "scripts": [
@@ -36,6 +37,21 @@
         "https://www.facebook.com/*"
       ],
       "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "dril.js"
+      ],
+      "matches": [
+        "https://is.muni.cz/auth/dril/*"
+      ],
+      "run_at": "document_end"
     }
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.css",
+    "*.js.map"
   ]
 }
