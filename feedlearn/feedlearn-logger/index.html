@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FeedLearn - Learn Japanese as you browse your Facebook feed</title>
+    <meta charset="utf-8">
+    <meta name="DESCRIPTION" content="FeedLearn is a Chrome extension that helps you learn Japanese vocabulary as you browse your Facebook feed.">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="index.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jadeDom/jquery.jadedom.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/prelude-browser-min/index.js"></script>
+    <script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
+    <script src="bower_components/randstr/randstr.js"></script>
+    <script src="bower_components/async/lib/async.js"></script>
+    <script src="commonlib.js"></script>
+    <script src="flashcards.js"></script>
+    <script src="logging_client.js"></script>
+    <script src="index.js"></script>
+    <div id="fb-root"></div>
+    <audio id="speechsynth" style="display: none" src="error.mp3"></audio>
+    <div id="mainviewpage" style="background-color: white" class="bluebackground outermainpage">
+      <div id="introducewordpage" style="display: none" class="mainpage">
+        <div style="padding-top: 12px; position: absolute"><img style="border-style: solid; border-width: 1px; border-color: grey" src="feedlearn-40px.png"></div>
+        <div style="font-size: 18px; text-align: center">New word! Do you want to learn it?</div>
+        <div id="questionworddiv" style="font-size: 30px; text-align: center"><span style="font-weight: bold" class="introducedword"></span><span id="introducedwordaudio" onclick="playSoundCurrentWord()" style="cursor: pointer; margin-left: 10px; margin-top: -7px; vertical-align: middle; font-size: 30px" class="glyphicon glyphicon-volume-up"></span>
+          <div id="introducedwordenglish"></div>
+        </div>
+        <button onclick="introducedwordAlreadyKnow()" style="width: 100%; font-size: 20px; margin-top: 20px" class="btn btn-lg btn-default"><span>I already know</span><span> </span><span>"</span><span class="introducedword"></span><span>"</span></button>
+        <button onclick="introducedwordAskAgainLater()" style="width: 100%; font-size: 20px" class="btn btn-lg btn-default"><span>Ask me again later</span></button>
+        <button onclick="introducedwordAddToStudyList()" style="width: 100%; font-size: 20px" class="btn btn-lg btn-primary"><span>Add</span><span> </span><span>"</span><span class="introducedword"></span><span>"</span><span> </span><span>to my study list</span></button>
+      </div>
+      <div id="quizpage" style="display: none" class="mainpage">
+        <div style="padding-top: 12px; position: absolute"><img style="border-style: solid; border-width: 1px; border-color: grey" src="feedlearn-40px.png"></div>
+        <div id="questionmessage" style="font-size: 18px; text-align: center"></div>
+        <div id="questionworddiv" style="font-size: 30px; text-align: center"><span id="questionword"></span><span id="questionwordaudio" onclick="playSoundCurrentWord()" style="cursor: pointer; margin-left: 10px; margin-top: -7px; vertical-align: middle; font-size: 30px" class="glyphicon glyphicon-volume-up"></span></div>
+        <div id="answeroptions"></div>
+        <button id="showanswersbutton" onclick="showAnswers()" style="font-size: 20px; margin-top: 15px; width: 48.5%; margin-right: 1%" class="btn btn-primary"><span style="margin-right: 7px; font-size: 18px" class="glyphicon glyphicon-question-sign"></span><span>Show Answers</span></button>
+        <button id="optionbutton" onclick="gotoOptionPage()" style="font-size: 20px; margin-top: 15px; width: 48.5%; margin-left: 1%" class="btn btn-primary"><span style="margin-right: 7px; font-size: 18px" class="glyphicon glyphicon-wrench"></span><span>Options</span></button>
+      </div>
+      <div id="optionpage" style="display: none" class="mainpage">
+        <div style="overflow: hidden"><span style="margin-right: 7px; font-size: 18px" class="glyphicon glyphicon-wrench"></span><span style="font-size: 26px">Options</span>
+          <button onclick="gotoQuizPage()" style="font-size: 20px; float: right; width: 50%" class="btn btn-primary"><span style="margin-right: 7px; font-size: 18px" class="glyphicon glyphicon-backward"></span><span>Back to Quiz</span></button>
+        </div>
+        <div style="margin-top: 20px"><span style="font-size: 20px; width: 50%">Your Name:</span>
+          <input id="fullnameinput" onkeyup="changeFullName()" style="width: auto; display; font-size: 20px; float: right; width: 50%" class="form-control">
+        </div>
+        <div style="margin-top: 20px"><span style="font-size: 20px; width: 50%">Currently Studying:</span>
+          <select id="langselect" onchange="changeLang()" style="width: auto; display; font-size: 20px; float: right; width: 50%" class="form-control">
+            <option>japanese1</option>
+            <option>japanese2</option>
+            <option>japanese3</option>
+            <option>chinese1</option>
+            <option>korean1</option>
+            <option>vietnamese1</option>
+            <option>french1</option>
+            <option>french2</option>
+            <option>french3</option>
+          </select>
+        </div>
+        <div style="margin-top: 20px"><span style="font-size: 20px; width: 50%">Display Romanizations:</span>
+          <select id="scriptselect" onchange="changeScriptFormat()" style="width: auto; display; font-size: 20px; float: right; width: 50%" class="form-control">
+            <option>show romanized only</option>
+            <option>show native script</option>
+            <option>show both scripts</option>
+          </select>
+        </div>
+        <div style="margin-top: 20px"><span style="font-size: 20px; width: 50%">Feed Insertion Format:</span>
+          <select id="formatselect" onchange="changeFeedInsertionFormat()" style="width: auto; display; font-size: 20px; float: right; width: 50%" class="form-control">
+            <option>interactive</option>
+            <option>link</option>
+            <option>none</option>
+          </select>
+        </div>
+      </div>
+      <div id="chatpage" style="display: none" class="mainpage">
+        <div style="overflow: hidden"><span style="margin-right: 7px; font-size: 18px" class="glyphicon glyphicon-question-sign"></span><span style="font-size: 26px">Answer + Discuss</span>
+          <button onclick="gotoQuizPage()" style="font-size: 20px; float: right; width: 50%" class="btn btn-primary"><span style="margin-right: 7px; font-size: 18px" class="glyphicon glyphicon-backward"></span><span>Back to Quiz</span></button>
+        </div>
+        <div id="currentanswer" style="font-size: 30px; text-align: center; margin-top: 20px"></div>
+        <div style="margin-top: 20px">TODO discussion forum goes here</div>
+      </div>
+    </div>
+    <div id="controlviewpage" style="background-color: white; display: none" onclick="openfeedlearnlink()" class="bluebackgroundcontrol outermainpage">
+      <div style="padding-top: 12px"><img style="border-style: solid; border-width: 1px; border-color: grey" src="feedlearn-40px.png">
+        <div style="display: inline-block; vertical-align: top; margin-left: 10px"><span style="font-weight: bold; font-size: 15px; color: #3b5998; vertical-align: top; ">FeedLearn</span><br><span style="font-size: 13px; color: #9197a3">Just now</span></div>
+      </div>
+      <div class="titlelink">Study Vocabulary at FeedLearn</div>
+      <div style="display: table-row"><img id="previewdisplay" src="preview.png" style="width: 270px; display: table-cell; border-color: #e9eaed; border-width: 1px; border-style: solid; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px">
+        <div style="display: table-cell; vertical-align: middle; text-align: left; padding-left: 10px; border-color: #e9eaed; border-width: 1px; border-style: solid">
+          <div style="font-size: 13px; font-family: Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif"><span>Your friends are studying vocabulary in</span><span> </span><span id="langdisplay">Chinese</span><span> </span><span>at FeedLearn, go join them!</span>
+          </div>
+          <div style="color: grey; font-size: 12px; margin-top: 20px">FEEDLEARN.HEROKUAPP.COM</div>
+        </div>
+      </div>
+    </div>
+    <div id="requiredtestpage" style="background-color: white; display: none" class="bluebackground outermainpage">
+      <div style="padding-top: 12px"><img style="border-style: solid; border-width: 1px; border-color: grey" src="feedlearn-40px.png">
+        <div style="display: inline-block; vertical-align: top; margin-left: 10px"><span style="font-weight: bold; font-size: 15px; color: #3b5998; vertical-align: top; ">FeedLearn</span><br><span style="font-size: 13px; color: #9197a3">Just now</span></div>
+      </div>
+      <div style="padding-top: 12px"><span>To continue studying vocabulary using FeedLearn, please take the Vocabulary </span><span> </span><span class="requiredtesttype">TESTTYPE</span><span> </span><span>for week</span><span> </span><span class="requiredtestweek">WEEKNUM</span><span> </span><span>words.</span><span> </span><span class="pretestexplanation">This test helps us determine what words you need to study this week. If you don't know any of the words on the pre-test, you can submit it blank.</span><span class="posttestexplanation">This test helps us determine which words you have learned this week.</span></div>
+      <button style="margin-top: 20px" onclick="openvocabtestlink()" class="btn btn-lg btn-primary"><span>Take Vocabulary </span><span> </span><span class="requiredtesttype">TESTYPE</span><span> </span><span>for Week</span><span> </span><span class="requiredtestweek">WEEKNUM</span><span> </span><span>Words</span></button>
+    </div>
+    <div id="fbloginpage" style="background-color: white; display: none" class="bluebackground outermainpage">
+      <div style="padding-top: 12px"><img style="border-style: solid; border-width: 1px; border-color: grey" src="feedlearn-40px.png">
+        <div style="display: inline-block; vertical-align: top; margin-left: 10px"><span style="font-weight: bold; font-size: 15px; color: #3b5998; vertical-align: top; ">FeedLearn</span><br><span style="font-size: 13px; color: #9197a3">Just now</span></div>
+      </div>
+      <div style="padding-top: 12px"><span>Welcome to FeedLearn! To start studying vocabulary with FeedLearn, please login with Facebook. We use your login only to keep track of your progress. We will not post on your wall or access any private data:</span></div>
+      <div style="padding-bottom: 12px"></div>
+      <div id="fbloginbutton" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" scope="public_profile,email" onlogin="fbButtonOnlogin()" class="fb-login-button"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+doctype html
+html(lang='en')
+  head
+    title FeedLearn - Learn Japanese as you browse your Facebook feed
+    meta(charset='utf-8')
+    meta(name='DESCRIPTION' content='FeedLearn is a Chrome extension that helps you learn Japanese vocabulary as you browse your Facebook feed.')
+    meta(name='viewport' content='user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1')
+    link(href='index.css' rel='stylesheet')
+    link(href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')
+    link(href='bower_components/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet')
+  body
+    script(src='bower_components/jquery/dist/jquery.min.js')
+    script(src='bower_components/bootstrap/dist/js/bootstrap.min.js')
+    script(src='bower_components/jadeDom/jquery.jadedom.js')
+    script(src='bower_components/underscore/underscore.js')
+    script(src='bower_components/prelude-browser-min/index.js')
+    script(src='bower_components/jquery-cookie/jquery.cookie.js')
+    script(src='bower_components/randstr/randstr.js')
+    script(src='bower_components/async/lib/async.js')
+    script(src='commonlib.js')
+    script(src='flashcards.js')
+    script(src='logging_client.js')
+    script(src='index.js')
+    #fb-root
+    //- audio(style='display: none' src='error.mp3')
+    audio#speechsynth(style='display: none' src='error.mp3')
+    .bluebackground.outermainpage#mainviewpage(style='background-color: white')
+      #introducewordpage.mainpage(style='display: none')
+        div(style='padding-top: 12px; position: absolute')
+          img(style='border-style: solid; border-width: 1px; border-color: grey' src='feedlearn-40px.png')
+        //- #scorebox(style='position: absolute; right: 5px; border-radius: 10px; width: 50px; height: 50px; background-color: blue')
+        //-  div(style='font-size: 12px') Score:
+        //-  div 
+        div(style='font-size: 18px; text-align: center') New word! Do you want to learn it?
+        #questionworddiv(style='font-size: 30px; text-align: center')
+          span.introducedword(style='font-weight: bold')
+          span#introducedwordaudio.glyphicon.glyphicon-volume-up(onclick='playSoundCurrentWord()' style='cursor: pointer; margin-left: 10px; margin-top: -7px; vertical-align: middle; font-size: 30px')
+          #introducedwordenglish
+        button.btn.btn-lg.btn-default(onclick='introducedwordAlreadyKnow()' style='width: 100%; font-size: 20px; margin-top: 20px')
+          span I already know
+          span 
+          span "
+          span.introducedword
+          span "
+        button.btn.btn-lg.btn-default(onclick='introducedwordAskAgainLater()' style='width: 100%; font-size: 20px')
+          span Ask me again later
+        button.btn.btn-lg.btn-primary(onclick='introducedwordAddToStudyList()' style='width: 100%; font-size: 20px')
+          span Add
+          span 
+          span "
+          span.introducedword
+          span "
+          span 
+          span to my study list
+      #quizpage.mainpage(style='display: none')
+        div(style='padding-top: 12px; position: absolute')
+          img(style='border-style: solid; border-width: 1px; border-color: grey' src='feedlearn-40px.png')
+        //- #scorebox(style='position: absolute; right: 5px; border-radius: 10px; width: 50px; height: 50px; background-color: blue')
+        //-  div(style='font-size: 12px') Score:
+        //-  div 
+        #questionmessage(style='font-size: 18px; text-align: center')
+        #questionworddiv(style='font-size: 30px; text-align: center')
+          span#questionword
+          span#questionwordaudio.glyphicon.glyphicon-volume-up(onclick='playSoundCurrentWord()' style='cursor: pointer; margin-left: 10px; margin-top: -7px; vertical-align: middle; font-size: 30px')
+        #answeroptions
+        button#showanswersbutton.btn.btn-primary(onclick='showAnswers()' style='font-size: 20px; margin-top: 15px; width: 48.5%; margin-right: 1%')
+          span.glyphicon.glyphicon-question-sign(style='margin-right: 7px; font-size: 18px')
+          span Show Answers
+        button#optionbutton.btn.btn-primary(onclick='gotoOptionPage()' style='font-size: 20px; margin-top: 15px; width: 48.5%; margin-left: 1%')
+          span.glyphicon.glyphicon-wrench(style='margin-right: 7px; font-size: 18px')
+          span Options
+      #optionpage.mainpage(style='display: none')
+        div(style='overflow: hidden')
+          span.glyphicon.glyphicon-wrench(style='margin-right: 7px; font-size: 18px')
+          span(style='font-size: 26px') Options
+          button.btn.btn-primary(onclick='gotoQuizPage()' style='font-size: 20px; float: right; width: 50%')
+            span.glyphicon.glyphicon-backward(style='margin-right: 7px; font-size: 18px')
+            span Back to Quiz
+        div(style='margin-top: 20px')
+          span(style='font-size: 20px; width: 50%') Your Name:
+          input#fullnameinput.form-control(onkeyup='changeFullName()' style='width: auto; display; font-size: 20px; float: right; width: 50%')
+        div(style='margin-top: 20px')
+          span(style='font-size: 20px; width: 50%') Currently Studying:
+          select#langselect.form-control(onchange='changeLang()' style='width: auto; display; font-size: 20px; float: right; width: 50%')
+            option japanese1
+            option japanese2
+            option japanese3
+            option chinese1
+            option korean1
+            option vietnamese1
+            option french1
+            option french2
+            option french3
+        div(style='margin-top: 20px')
+          span(style='font-size: 20px; width: 50%') Display Romanizations:
+          select#scriptselect.form-control(onchange='changeScriptFormat()' style='width: auto; display; font-size: 20px; float: right; width: 50%')
+            option show romanized only
+            option show native script
+            option show both scripts
+        div(style='margin-top: 20px')
+          span(style='font-size: 20px; width: 50%') Feed Insertion Format:
+          select#formatselect.form-control(onchange='changeFeedInsertionFormat()' style='width: auto; display; font-size: 20px; float: right; width: 50%')
+            option interactive
+            option link
+            option none
+      #chatpage.mainpage(style='display: none')
+        div(style='overflow: hidden')
+          span.glyphicon.glyphicon-question-sign(style='margin-right: 7px; font-size: 18px')
+          span(style='font-size: 26px') Answer + Discuss
+          button.btn.btn-primary(onclick='gotoQuizPage()' style='font-size: 20px; float: right; width: 50%')
+            span.glyphicon.glyphicon-backward(style='margin-right: 7px; font-size: 18px')
+            span Back to Quiz
+        #currentanswer(style='font-size: 30px; text-align: center; margin-top: 20px')
+        div(style='margin-top: 20px') TODO discussion forum goes here
+    .bluebackgroundcontrol.outermainpage#controlviewpage(style='background-color: white; display: none' onclick='openfeedlearnlink()')
+      div(style='padding-top: 12px')
+        img(style='border-style: solid; border-width: 1px; border-color: grey' src='feedlearn-40px.png')
+        div(style='display: inline-block; vertical-align: top; margin-left: 10px')
+          span(style='font-weight: bold; font-size: 15px; color: #3b5998; vertical-align: top; ') FeedLearn
+          br
+          span(style='font-size: 13px; color: #9197a3') Just now
+      div.titlelink Study Vocabulary at FeedLearn
+      div(style='display: table-row')
+        img#previewdisplay(src='preview.png' style='width: 270px; display: table-cell; border-color: #e9eaed; border-width: 1px; border-style: solid; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px')
+        div(style='display: table-cell; vertical-align: middle; text-align: left; padding-left: 10px; border-color: #e9eaed; border-width: 1px; border-style: solid')
+          div(style="font-size: 13px; font-family: Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif")
+            //- span(style='font-size: 32px') Study Vocabulary at FeedLearn
+            //- br
+            span Your friends are studying vocabulary in
+            span 
+            span#langdisplay Chinese
+            span 
+            span at FeedLearn, go join them!
+          div(style='color: grey; font-size: 12px; margin-top: 20px') FEEDLEARN.HEROKUAPP.COM
+    .bluebackground.outermainpage#requiredtestpage(style='background-color: white; display: none')
+      div(style='padding-top: 12px')
+        img(style='border-style: solid; border-width: 1px; border-color: grey' src='feedlearn-40px.png')
+        div(style='display: inline-block; vertical-align: top; margin-left: 10px')
+          span(style='font-weight: bold; font-size: 15px; color: #3b5998; vertical-align: top; ') FeedLearn
+          br
+          span(style='font-size: 13px; color: #9197a3') Just now
+      div(style='padding-top: 12px')
+        span To continue studying vocabulary using FeedLearn, please take the Vocabulary 
+        span 
+        span.requiredtesttype TESTTYPE
+        span 
+        span for week
+        span 
+        span.requiredtestweek WEEKNUM
+        span 
+        span words.
+        span 
+        span.pretestexplanation This test helps us determine what words you need to study this week. If you don't know any of the words on the pre-test, you can submit it blank.
+        span.posttestexplanation This test helps us determine which words you have learned this week.
+      button.btn.btn-lg.btn-primary(style='margin-top: 20px' onclick='openvocabtestlink()')
+        span Take Vocabulary 
+        span 
+        span.requiredtesttype TESTYPE
+        span 
+        span for Week
+        span 
+        span.requiredtestweek WEEKNUM
+        span 
+        span Words
+    .bluebackground.outermainpage#fbloginpage(style='background-color: white; display: none')
+      div(style='padding-top: 12px')
+        img(style='border-style: solid; border-width: 1px; border-color: grey' src='feedlearn-40px.png')
+        div(style='display: inline-block; vertical-align: top; margin-left: 10px')
+          span(style='font-weight: bold; font-size: 15px; color: #3b5998; vertical-align: top; ') FeedLearn
+          br
+          span(style='font-size: 13px; color: #9197a3') Just now
+      div(style='padding-top: 12px')
+        span Welcome to FeedLearn! To start studying vocabulary with FeedLearn, please login with Facebook. We use your login only to keep track of your progress. We will not post on your wall or access any private data:
+      div(style='padding-bottom: 12px')
+      div.fb-login-button#fbloginbutton(data-max-rows='1' data-size='xlarge' data-show-faces='false' data-auto-logout-link='false' scope="public_profile,email" onlogin='fbButtonOnlogin()')

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FeedLearn - Learn basic Japanese words as you browse your Facebook feed</title>
+    <meta charset="utf-8">
+    <meta name="DESCRIPTION" content="FeedLearn is a Chrome extension that helps you learn Japanese vocabulary as you browse your Facebook feed.">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="index.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="bower_components/toastr/toastr.min.css" rel="stylesheet">
+    <link href="https://chrome.google.com/webstore/detail/ebmjdfhplinmlajmdcmhkikideknlgkf" rel="chrome-webstore-item">
+  </head>
+  <body>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/jadeDom/jquery.jadedom.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/prelude-browser-min/index.js"></script>
+    <script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
+    <script src="bower_components/async/lib/async.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/toastr/toastr.min.js"></script>
+    <script src="commonlib.js"></script>
+    <script src="logging_client.js"></script>
+    <script src="study1.js"></script>
+    <div id="fb-root"></div>
+    <div id="fbloginpage" style="margin-left: 130px; margin-top: 10px"><img src="feedlearn-100px.png" style="position: absolute; left: 10px">
+      <h1>FeedLearn</h1>
+      <h3>Learn basic Japanese words as you browse your Facebook news feed</h3>
+      <div style="height: 15px"></div><img src="feedlearn-screenshot.png" style="border-radius: 15px">
+      <div style="height: 15px"></div>
+      <h3>Start learning Japanese with FeedLearn!</h3>
+      <div>FeedLearn is a Chrome extension that teaches you basic Japanese words by showing you quizzes as you browse your Facebook feed.</div>
+      <div><b>You do not need to know any Japanese</b><span> </span><span>- it is designed for beginners.</span></div><br>
+      <div>If you would like to try FeedLearn, you can join our user study to learn 150 basic Japanese words over 3 weeks.</div>
+      <div>Each week, you will take a vocabulary test and learn 50 Japanese words with one of 3 tools.</div>
+      <div><span>To use FeedLearn, please login below using Facebook (we</span><span> </span><b>do not post</b><span> </span><span>to your wall, we only use your account to keep track of your study progress):</span></div>
+      <div style="padding-bottom: 10px"></div>
+      <div id="fbloginbutton" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" scope="public_profile,email" onlogin="fbButtonOnlogin()" class="fb-login-button"></div>
+      <div style="padding-bottom: 10px"></div>
+      <h3>Study Description</h3>
+      <div>This is a study where we try to help you learn basic Japanese vocabulary as you browse your Facebook news feed.</div>
+      <div><b>You do not need to know any Japanese </b><span> </span><span>- it is designed for beginners.</span></div>
+      <div>You will first install our Chrome extension, FeedLearn. This extension will show you vocabulary flashcards while you browse your Facebook news feed.</div><br>
+      <div>The study lasts for 3 weeks. Each week, you will:</div>
+      <div style="margin-left: 10px">1) Take a vocabulary pre-test on the 50 new words you will be studying that week</div>
+      <div style="margin-left: 10px">2) Study the words, using one of the following 3 approaches:</div>
+      <div style="margin-left: 20px">• One week, you will be shown vocabulary quizzes directly in your feed</div>
+      <div style="margin-left: 20px">• Another week, you will be shown links in your feed asking you to go to the FeedLearn site to do the quizzes.</div>
+      <div style="margin-left: 20px">• Another week, you will be sent daily email reminders to study Japanese on the FeedLearn site.</div>
+      <div style="margin-left: 10px">3) At the end of the week, you will take a vocabulary post-test to see what you have learned.</div><br>
+      <div><span>We</span><span> </span><b>do not post</b><span> </span><span>anything on your Facebook wall. We</span><span> </span><b>do not access</b><span> </span><span>any of your private data. You can leave the study at any time.</span></div>
+      <div>To use FeedLearn, please login below using Facebook (we only use your account to keep track of your study progress):</div>
+      <div style="padding-bottom: 10px"></div>
+      <div id="fbloginbutton2" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" scope="public_profile,email" onlogin="fbButtonOnlogin()" class="fb-login-button"></div>
+      <div style="padding-bottom: 10px"></div>
+      <h3>Contact Information</h3>
+      <div>If you have questions, ask <a href="mailto:geza@cs.stanford.edu">Geza Kovacs</a><span>, Computer Science Department, Stanford University</span></div>
+    </div>
+    <div id="getfullname" style="margin-left: 10px; margin-top: 10px; display: none">
+      <div style="font-size: 20px; margin-bottom: 10px">Welcome to the FeedLearn study! What is your name?</div>
+      <input id="fullnameinput" onkeyup="console.log(event.keyCode); if (event.keyCode == 13) document.getElementById(&quot;fullnamesubmitbutton&quot;).click()" style="width: 350px; display: inline-block; margin-right: 10px" class="form-control">
+      <button id="fullnamesubmitbutton" style="width: 100px" onclick="fullNameSubmitted()" class="btn btn-primary">Submit</button>
+    </div>
+    <div id="accordion" role="tablist" aria-multiselectable="true" style="display: none" class="panel-group">
+      <div class="panel panel-default">
+        <div id="headingOne" role="tab" class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><span id="consentcheck" style="visibility: hidden; margin-right: 7px" class="glyphicon glyphicon-ok"></span><span>Welcome to FeedLearn</span><span id="fullnamedisplay"> </span><span>! Please read the study desciption</span></a></h4>
+        </div>
+        <div id="collapseOne" role="tabpanel" aria-labelledby="headingOne" class="panel-collapse collapse">
+          <div class="panel-body">
+            <h4>Study Description</h4>
+            <div>This is a study where we try to help you learn basic Japanese vocabulary as you browse your Facebook news feed.</div>
+            <div><b>You do not need to know any Japanese</b><span> </span><span>- it is designed for beginners.</span></div>
+            <div>You will first install our Chrome extension, FeedLearn. This extension will show you vocabulary flashcards while you browse your Facebook news feed.</div><br>
+            <div>The study lasts for 3 weeks. Each week, you will:</div>
+            <div style="margin-left: 10px">1) Take a vocabulary pre-test on the 50 new words you will be studying that week</div>
+            <div style="margin-left: 10px">2) Study the words, using a different tool each week:</div>
+            <div style="margin-left: 20px"><span>• On week 1,</span><span> </span><span id="week1format">you will be shown vocabulary quizzes directly in your feed</span></div>
+            <div style="margin-left: 20px"><span>• On week 2,</span><span> </span><span id="week2format">you will be shown links in your feed asking you to go to the FeedLearn site to do the quizzes.</span></div>
+            <div style="margin-left: 20px"><span>• On week 3,</span><span> </span><span id="week3format">you will be sent daily email reminders to study Japanese on the FeedLearn site.</span></div>
+            <div style="margin-left: 10px">3) At the end of the week, you will take a vocabulary post-test to see what you have learned.</div><br>
+            <div><span>We</span><span> </span><b>do not post</b><span> </span><span>anything on your Facebook wall. We</span><span> </span><b>do not access</b><span> </span><span>any of your private data. You can leave the study at any time.</span></div>
+            <div style="padding-bottom: 10px"></div>
+            <h4>Contact Information</h4>
+            <div>If you have questions, ask <a href="mailto:geza@cs.stanford.edu">Geza Kovacs</a><span>, Computer Science Department, Stanford University</span></div><br>
+            <div id="consentdisplay"></div>
+            <button id="consentbutton" onclick="consentAgreed()" class="btn btn-lg btn-primary">I agree to these conditions</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div id="headingThree" role="tab" class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><span id="extensioninstalledcheck" style="visibility: hidden; margin-right: 7px" class="glyphicon glyphicon-ok"></span><span>Install the FeedLearn Chrome Extension</span></a></h4>
+        </div>
+        <div id="collapseThree" role="tabpanel" aria-labelledby="headingThree" class="panel-collapse collapse">
+          <div class="panel-body">
+            <div>Please now install the FeedLearn Chrome extension, which will show you vocabulary as you browse your Facebook feed.</div>
+            <div>Please do not uninstall the extension until the conclusion of this study.</div>
+            <div><b>After installing the FeedLearn extension, please do the pre-test for week 1</b><span> </span><span>(the extension will not activate until you have taken the pre-test).</span></div><br>
+            <div id="extensioninstalleddisplay"><span>The FeedLearn extension is not yet installed. If you just installed it</span><span> </span><a href="/study1">reload this page</a><span>.</span><span> </span><span>If the install button does not work,</span><span> </span><a href="https://chrome.google.com/webstore/detail/feed-learn/ebmjdfhplinmlajmdcmhkikideknlgkf" target="_blank">click here</a><span>.</span></div>
+            <button id="extensioninstallbutton" onclick="installChromeExtension()" class="btn btn-lg btn-primary">Install FeedLearn Chrome Extension</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div id="headingTwo" role="tab" class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><span id="posttest1check" style="visibility: hidden; margin-right: 7px" class="glyphicon glyphicon-ok"></span><span>Week 1: Take pre-test, study 50 new words for a week, then take post-test</span></a></h4>
+        </div>
+        <div id="collapseTwo" role="tabpanel" aria-labelledby="headingTwo" class="panel-collapse collapse">
+          <div class="panel-body">
+            <h4>Pre-Test for Week 1 Vocabulary</h4>
+            <div>Please follow this link to take a vocabulary test on the 50 words you will be studying over week 1.</div>
+            <div>We don't expect you to know any Japanese beforehand, so don't worry if you don't know these words, you can just submit it blank.</div><br>
+            <div id="pretest1donedisplay"></div>
+            <button id="pretest1button" onclick="openPretest1()" class="btn btn-lg btn-primary">Take the pre-test for Week 1 Vocabulary</button>
+            <div style="height: 30px"></div>
+            <h4>Study Week 1 Vocabulary</h4>
+            <div id="week1desc">WEEK1</div>
+            <div style="height: 30px"></div>
+            <h4>Post-Test for Week 1 Vocabulary</h4>
+            <div id="week1posttesttime">Please first take the pre-test for week 1 vocabulary, then wait a week before taking the post-test.</div>
+            <div>This is a vocabulary test on the 50 words you studied during week 1.</div><br>
+            <div id="posttest1donedisplay"></div>
+            <button id="posttest1button" onclick="openPosttest1()" class="btn btn-lg btn-primary">Take the post-test for Week 1 Vocabulary</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div id="headingSix" role="tab" class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix"><span id="posttest2check" style="visibility: hidden; margin-right: 7px" class="glyphicon glyphicon-ok"></span><span>Week 2: Take pre-test, study 50 new words for a week, then take post-test</span></a></h4>
+        </div>
+        <div id="collapseSix" role="tabpanel" aria-labelledby="headingSix" class="panel-collapse collapse">
+          <div class="panel-body">
+            <h4>Pre-Test for Week 2 Vocabulary</h4>
+            <div>Please follow this link to take a vocabulary test on the 50 words you will be studying over week 2.</div>
+            <div>We don't expect you to know any Japanese beforehand, so don't worry if you don't know these words, you can just submit it blank.</div><br>
+            <div id="pretest2donedisplay"></div>
+            <button id="pretest2button" onclick="openPretest2()" class="btn btn-lg btn-primary">Take the pre-test for Week 2 Vocabulary</button>
+            <div style="height: 30px"></div>
+            <h4>Study Week 2 Vocabulary</h4>
+            <div id="week2desc">WEEK2</div>
+            <div style="height: 30px"></div>
+            <h4>Post-Test for Week 2 Vocabulary</h4>
+            <div id="week2posttesttime">Please first take the pre-test for week 2 vocabulary, then wait a week before taking the post-test.</div>
+            <div>This is a vocabulary test on the 50 words you studied during week 2.</div><br>
+            <div id="posttest2donedisplay"></div>
+            <button id="posttest2button" onclick="openPosttest2()" class="btn btn-lg btn-primary">Take the post-test for Week 2 Vocabulary</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div id="headingNine" role="tab" class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine"><span id="pretest3check" style="visibility: hidden; margin-right: 7px" class="glyphicon glyphicon-ok"></span><span>Week 3: Take pre-test, study 50 new words for a week, then take post-test</span></a></h4>
+        </div>
+        <div id="collapseNine" role="tabpanel" aria-labelledby="headingNine" class="panel-collapse collapse">
+          <div class="panel-body">
+            <h4>Pre-Test for Week 3 Vocabulary</h4>
+            <div>Please follow this link to take a vocabulary test on the 50 words you will be studying over week 3.</div>
+            <div>We don't expect you to know any Japanese beforehand, so don't worry if you don't know these words, you can just submit it blank.</div><br>
+            <div id="pretest3donedisplay"></div>
+            <button id="pretest3button" onclick="openPretest3()" class="btn btn-lg btn-primary">Take the pre-test for Week 3 Japanese Vocabulary</button>
+            <div style="height: 30px"></div>
+            <h4>Study Week 3 Vocabulary</h4>
+            <div id="week3desc">WEEK3</div>
+            <div style="height: 30px"></div>
+            <h4>Post-Test for Week 3 Vocabulary</h4>
+            <div id="week3posttesttime">Please first take the pre-test for week 3 vocabulary, then wait a week before taking the post-test.</div>
+            <div>This is a vocabulary test on the 50 words you studied during week 3.</div><br>
+            <div id="posttest3donedisplay"></div>
+            <button id="posttest3button" onclick="openPosttest3()" class="btn btn-lg btn-primary">Take the post-test for Week 3 Vocabulary</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div id="headingTen" role="tab" class="panel-heading">
+          <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen"><span id="surveycheck" style="visibility: hidden; margin-right: 7px" class="glyphicon glyphicon-ok"></span><span>Survey</span></a></h4>
+        </div>
+        <div id="collapseTen" role="tabpanel" aria-labelledby="headingTen" class="panel-collapse collapse">
+          <div class="panel-body">
+            <h4>Survey</h4>
+            <div>Please follow this link to take a survey about your experiences using these tools</div><br>
+            <button id="surveybutton" onclick="openSurvey()" class="btn btn-lg btn-primary">Take the survey</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
