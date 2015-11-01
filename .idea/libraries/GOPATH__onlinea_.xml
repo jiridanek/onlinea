@@ -25,6 +25,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/gulp-util/node_modules/chalk/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-stylus/node_modules/gulp-util/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/gulp-util/node_modules/chalk/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/websites/duolingo" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/touch/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-stylus/node_modules/accord/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/node-sass/node_modules/.bin" />
@@ -90,6 +91,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/../../crhym3/go-endpoints/.git" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/html/charset/testdata" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/text/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/.bin" />
@@ -109,6 +111,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/chalk/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/oauth2/google/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/chalk/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/../../golang/protobuf/.git" />
       <root url="file://$PROJECT_DIR$/bota_imap/.idea" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/jade/node_modules/transformers/node_modules/uglify-js/node_modules/optimist/test/_" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/.bin" />
@@ -122,6 +125,7 @@
       <root url="file://$PROJECT_DIR$/form_data/.git" />
       <root url="file://$PROJECT_DIR$/websites/ReceptorsInLungs/web/TOEFL/lame-3.99.5/libmp3lame/vector/.deps" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/mongodb/node_modules/bson/build/Release/.deps" />
+      <root url="file://$PROJECT_DIR$/../../golang/protobuf/proto/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/jade/node_modules/with/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/jade/node_modules/constantinople/node_modules/acorn-globals/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-stylus/node_modules/accord/node_modules/fobject/node_modules/.bin" />
@@ -153,6 +157,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/jade/node_modules/with/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/configstore/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/jade/node_modules/transformers/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/../../golang/protobuf/protoc-gen-go/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/websites/ReceptorsInLungs/web/TOEFL/lame-3.99.5/frontend/.deps" />
       <root url="file://$PROJECT_DIR$/ismu/.git" />
@@ -192,6 +197,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-livescript/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/gulp-util/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/onlinea_static_web/node_modules/karma/node_modules/socket.io/node_modules/socket.io-client/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/../../GoogleCloudPlatform/go-endpoints/.git" />
       <root url="file://$PROJECT_DIR$" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/tildify/node_modules/.bin" />
     </excluded>
