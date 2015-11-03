@@ -6,9 +6,11 @@ import (
 	"github.com/gorilla/sessions"
 	"github.com/jirkadanek/onlinea/ismu/bloky"
 	"github.com/jirkadanek/onlinea/secrets"
+	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/appengine"
+	"google.golang.org/appengine/user"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -20,17 +22,24 @@ var _ = ioutil.ReadAll
 var store = sessions.NewCookieStore(secrets.CookieSigningSecret, secrets.CookieEncryptionSecret)
 var sessionName = "session"
 
-var oauthconf = &oauth2.Config{
-	ClientID:     secrets.OAuthClientID,
-	ClientSecret: secrets.OAuthClientSecret,
-	RedirectURL:  "http://localhost:8080/oauth2callback",
-	Scopes: []string{
-		"email",
-	},
-	Endpoint: google.Endpoint,
+func newoauthconf(c context.Context) *oauth2.Config {
+	scheme := "https"
+	if appengine.IsDevAppServer() {
+		scheme = "http"
+	}
+	return &oauth2.Config{
+		ClientID:     secrets.OAuthClientID,
+		ClientSecret: secrets.OAuthClientSecret,
+		RedirectURL:  scheme + "://" + appengine.DefaultVersionHostname(c) + "/oauth2callback",
+		Scopes: []string{
+			"email",
+		},
+		Endpoint: google.Endpoint,
+	}
 }
 
 func init() {
+
 	// go gorilla!
 	router := mux.NewRouter()
 
@@ -43,6 +52,10 @@ func init() {
 
 	router.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		c := appengine.NewContext(r)
+		if !user.IsAdmin(c) {
+			return
+		}
+		panic(appengine.DefaultVersionHostname(c))
 		s := make([]Student, 0)
 		s = append(s, Student{"aa", "bb", "cc"})
 		err := dbPutStudents(c, s)
@@ -59,7 +72,8 @@ func readBlok(r io.Reader) ([]bloky.Record, error) {
 }
 
 func loginFailed(w http.ResponseWriter, r *http.Request) {
-	http.Error(w, "Log in failed. Click <a href=\"/login\">here</a> to try again.", http.StatusUnauthorized)
+	w.WriteHeader(http.StatusUnauthorized)
+	fmt.Fprint(w, "<!doctype html><html><body>Log in failed. Click <a href=\"/login.html\">here</a> to try again.</body></html>")
 }
 
 func ucoFromPerson(p Person) string {

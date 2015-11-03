@@ -2,7 +2,7 @@ package duo
 
 import (
 	"encoding/json"
-//     "strings"
+	//     "strings"
 	"fmt"
 	"github.com/jirkadanek/onlinea/secrets"
 	"io/ioutil"
@@ -28,6 +28,7 @@ func printResponse(res *http.Response) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	panic(fmt.Sprintf("%s", t))
 	fmt.Printf("%s", t)
 	fmt.Println(res.Status)
 }
@@ -96,7 +97,7 @@ func DoEventsGet(student_id, week string) (EventsResult, error) {
 	}
 	res, err := client.Get(addr + "?" + data.Encode())
 	if err != nil {
-		log.Print(err)
+		//log.Print(err)
 		return result, err
 	}
 
@@ -105,7 +106,7 @@ func DoEventsGet(student_id, week string) (EventsResult, error) {
 	defer res.Body.Close()
 	err = dec.Decode(&result)
 	if err != nil {
-		log.Panic(err)
+		return result, err
 	}
 	return result, nil
 }

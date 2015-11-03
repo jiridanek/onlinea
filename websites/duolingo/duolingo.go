@@ -39,10 +39,10 @@ func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	var student_id string
 
 	week := "2015-11-02"
-	report.Tyden = "06 (od " + week + ")"
+	report.Tyden = "07 (od " + week + ")"
 
 	if student.Uco == "" || student.Nick == "" {
-		report.Err = "Vaše přezdívka na Duolingo není v seznamu. Napište mi vaši přezdívku do diskuse a já vás do seznamu přidám."
+		report.Err = "Vaše přezdívka na Duolingo není v seznamu. Napište mi vaši přezdívku do vlákna v diskusi a já vás do seznamu přidám."
 		render(w, report)
 		return
 	}
@@ -63,8 +63,8 @@ func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	events, err := duo.DoEventsGet(student_id, week)
 	if err != nil {
 		log.Errorf(c, "Fetching Duolingo events (student_id: %s, week: %d)failed: %v", student_id, week, err)
-		report.Err = fmt.Sprintf("Načtení aktivit za týden %d selhalo\nasi mate Duolingo prepnute do jineho nez anglickeho kurzu\n")
-		fmt.Fprintf(w, "v takovem pripade bohuzel nevidim vase ziskane body\n\n:%v", week, err)
+		report.Err = fmt.Sprintf("Načtení aktivit za týden %s selhalo\nasi mate Duolingo prepnute do jineho nez anglickeho"+
+			"kurzu\nv takovem pripade bohuzel nevidim vase ziskane body:\n\n%v", week, err)
 		render(w, report)
 		return
 	}
@@ -132,15 +132,13 @@ func print_scores_student(w io.Writer, events []duo.Event) {
 	fmt.Fprintf(w, "\n")
 	fmt.Fprintf(w, "      Lesson                  Activity type     Points\n")
 	fmt.Fprintf(w, "----------------------------------------------------------\n")
+	fmt.Fprintf(w, "\n")
 	if len(events) == 0 {
+		fmt.Fprintf(w, "no activities were completed\n")
 		fmt.Fprintf(w, "\n")
-		if len(events) == 0 {
-			fmt.Fprintf(w, "no activities were completed\n")
-			fmt.Fprintf(w, "\n")
-		} else {
-			for _, event := range events {
-				fmt.Fprintf(w, "%30s %10s %5d\n", event.Skill_title, event.Type, score(event))
-			}
+	} else {
+		for _, event := range events {
+			fmt.Fprintf(w, "%30s %10s %5d\n", event.Skill_title, event.Type, score(event))
 		}
 	}
 	fmt.Fprintf(w, "--------------------------------------------------\n")

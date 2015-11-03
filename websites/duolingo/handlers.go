@@ -27,11 +27,14 @@ func authBody(w http.ResponseWriter, r *http.Request) {
 
 func oauth(w http.ResponseWriter, r *http.Request) {
 	//FIXME: for now ignore CRSS token as the site is read-only
+	c := appengine.NewContext(r)
+	oauthconf := newoauthconf(c)
 	url := oauthconf.AuthCodeURL("state", oauth2.SetAuthURLParam("hd", "mail.muni.cz"), oauth2.AccessTypeOnline)
 	http.Redirect(w, r, url, http.StatusFound) // FIXME: Found?
 }
 func oauthcallback(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
+	oauthconf := newoauthconf(c)
 	authcode := r.FormValue("code")
 	token, err := oauthconf.Exchange(c, authcode)
 	if err != nil {
@@ -79,19 +82,22 @@ func logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
+	//file in request becomes unavailable the moment anything is written to response
+	//https://groups.google.com/forum/#!topic/golang-nuts/Z3rnR-gC4TI
 	c := appengine.NewContext(r)
 	if !user.IsAdmin(c) {
 		http.Error(w, "This page is Admin-only.", http.StatusUnauthorized)
 		return
 	}
 
+	file, header, err := r.FormFile("file")
+	_ = header
+
 	fmt.Fprintf(w, `<html><body><form method="post" enctype="multipart/form-data">
                 <input type="file" name="file">
                 <input type="submit">
             </form><pre>`)
 
-	file, header, err := r.FormFile("file")
-	_ = header
 	if err == http.ErrMissingFile {
 		fmt.Fprintf(w, "no new file submitted\n")
 		students, err := dbGetStudents(c)
