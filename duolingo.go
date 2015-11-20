@@ -18,13 +18,14 @@ var (
 	first = time.Date(2015, time.September, 21, 23, 0, 0, 0, time.UTC) // first day of the semester
 )
 
-func date(i int) string {
-	d := first
+func dateString(i int) (string, string) {
+	begin_date := first
 	for ; i > 1; i-- {
-		d = d.AddDate(0, 0, 7)
+		begin_date = begin_date.AddDate(0, 0, 7)
 	}
+
 	format := "2006-01-02"
-	return d.Format(format)
+	return begin_date.Format(format), begin_date.AddDate(0, 0, 6).Format(format)
 }
 
 func Duolingo(args []string) {
@@ -52,24 +53,22 @@ func Duolingo(args []string) {
 		log.Fatal("specify exactly one of blok, nick")
 	}
 
+	begin_date, end_date := dateString(*week)
+
 	if *blok != "" {
 		records := readBlok(*blok)
 
-		students, events := duolingo(date(*week), "")
+		students, events := duolingo(begin_date, end_date, "")
 		print_scores(records, students, events)
 	}
 	if *nick != "" {
-		students, events := duolingo(date(*week), *nick)
+		students, events := duolingo(begin_date, end_date, *nick)
 		_ = students
 		record := bloky.Record{[]string{"", "", "", "", "", "", "", ""}}
-		var event EventsOrErr
 		if len(events) != 1 {
 			panic("len events is not 1")
 		}
-		for _, e := range events {
-			event = e
-			//break
-		}
+		var event EventsOrErr = events[0]
 		print_scores_student(os.Stdout, record, event, false)
 	}
 }
@@ -79,7 +78,7 @@ type EventsOrErr struct {
 	Err    string
 }
 
-func duolingo(week string, nick string) ([]duo.Observee, map[string]EventsOrErr) {
+func duolingo(begin_date, end_date, nick string) ([]duo.Observee, map[string]EventsOrErr) {
 	students := make([]duo.Observee, 0)
 	events := make(map[string]EventsOrErr)
 
@@ -102,13 +101,12 @@ func duolingo(week string, nick string) ([]duo.Observee, map[string]EventsOrErr)
 		// clear events
 		events := make(map[string]EventsOrErr)
 		for _, student := range students {
-			//             fmt.Println(student.User_name)
 			if !strings.EqualFold(nick, student.User_name) {
 				continue
 			}
 			user_id := fmt.Sprintf("%d", student.User_id)
 			for i := 0; i < 10; i++ {
-				res, err := duo.DoEventsGet(user_id, week)
+				res, err := duo.DoEventsGet(user_id, begin_date, end_date)
 				if err != nil {
 					continue
 				}
@@ -126,8 +124,7 @@ func duolingo(week string, nick string) ([]duo.Observee, map[string]EventsOrErr)
 		var err error
 		var res duo.EventsResult
 		for i := 0; i < 10; i++ {
-			//fmt.Println("aaa", user_id, week); panic("")
-			res, err = duo.DoEventsGet(user_id, week)
+			res, err = duo.DoEventsGet(user_id, begin_date, end_date)
 			if err == nil {
 				break
 			}

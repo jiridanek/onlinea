@@ -80,7 +80,7 @@ func DoLogin() LoginResult {
 
 var host = "https://dashboard.duolingo.com"
 
-func DoEventsGet(student_id, week string) (EventsResult, error) {
+func DoEventsGet(student_id, begin_date, end_date string) (EventsResult, error) {
 	var result EventsResult
 
 	addr := host + "/api/1/observers/detailed_events"
@@ -89,7 +89,8 @@ func DoEventsGet(student_id, week string) (EventsResult, error) {
 		"ui_language":       "en",
 		"learning_language": "en",
 		"from_language":     "cs",
-		"week":              week,
+		"begin_date":        begin_date,
+		"end_date":          end_date,
 	}
 	data := url.Values{}
 	for k, v := range params {
