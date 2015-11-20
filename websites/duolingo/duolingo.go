@@ -38,8 +38,8 @@ func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	var report Report
 	var student_id string
 
-	week := "2015-11-02"
-	report.Tyden = "07 (od " + week + ")"
+	week := "2015-11-09"
+	report.Tyden = "08 (od " + week + ")"
 
 	if student.Uco == "" || student.Nick == "" {
 		report.Err = "Vaše přezdívka na Duolingo není v seznamu. Napište mi vaši přezdívku do vlákna v diskusi a já vás do seznamu přidám."

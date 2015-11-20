@@ -78,11 +78,57 @@ type EventsOrErr struct {
 	Err    string
 }
 
-func duolingo(begin_date, end_date, nick string) ([]duo.Observee, map[string]EventsOrErr) {
+func fetch_activity_for_week(begin_date, end_date string) ([]duo.Observee, map[string]EventsOrErr) {
+	duo.DoLogin()
+	students, events := fetch_student_list_and_errors()
+	for _, student := range students {
+		user_id := fmt.Sprintf("%d", student.User_id)
+		res, err := fetch_activity_for_week_for_id(begin_date, end_date, user_id)
+		if err != nil {
+			log.Fatal(err)
+		}
+		events[user_id] = EventsOrErr{Events: res.Events}
+	}
+	return students, events
+}
+
+func fetch_activity_for_week_for_nick(begin_date, end_date, nick string) (duo.Observee, EventsOrErr) {
+	duo.DoLogin()
+	students, events := fetch_student_list_and_errors()
+
+	for _, student := range students {
+		if !strings.EqualFold(nick, student.User_name) {
+			continue
+		}
+		user_id := fmt.Sprintf("%d", student.User_id)
+		if events[user_id].Err != nil {
+			return student, events[user_id]
+		}
+		res, err := fetch_activity_for_week_for_id(begin_date, end_date, user_id)
+		if err != nil {
+			return student, EventsOrErr{Events: res.Events}
+		} else {
+			return student, EventsOrErr{Err: err}
+		}
+	}
+	log.Panic("nick not found, does not exist or not leaning en")
+	return nil, nil
+}
+
+func fetch_activity_for_week_for_id(begin_date, end_date, user_id string) (res duo.EventsResult, err error) {
+	for i := 0; i < 10; i++ {
+		res, err = duo.DoEventsGet(user_id, begin_date, end_date)
+		if err != nil {
+			continue
+		}
+		return
+	}
+}
+
+func fetch_student_list_and_errors() ([]duo.Observee, map[string]EventsOrErr) {
 	students := make([]duo.Observee, 0)
 	events := make(map[string]EventsOrErr)
 
-	duo.DoLogin()
 	dashboard := duo.DoDashboardGet()
 	for _, observee := range dashboard.Observees {
 		if observee.Learning_language != "en" {
@@ -96,45 +142,15 @@ func duolingo(begin_date, end_date, nick string) ([]duo.Observee, map[string]Eve
 		}
 		students = append(students, observee)
 	}
+	return students, events
+}
 
+func duolingo(begin_date, end_date, nick string) ([]duo.Observee, map[string]EventsOrErr) {
 	if nick != "" {
-		// clear events
-		events := make(map[string]EventsOrErr)
-		for _, student := range students {
-			if !strings.EqualFold(nick, student.User_name) {
-				continue
-			}
-			user_id := fmt.Sprintf("%d", student.User_id)
-			for i := 0; i < 10; i++ {
-				res, err := duo.DoEventsGet(user_id, begin_date, end_date)
-				if err != nil {
-					continue
-				}
-				events[user_id] = EventsOrErr{Events: res.Events}
-			}
-			return []duo.Observee{student}, events
-		}
-		log.Panic("nick not found, does not exist or not leaning en")
+		return fetch_activity_for_week(begin_date, end_date)
+	} else {
+		return fetch_activity_for_week_for_nick(begin_date, end_date, nick)
 	}
-
-	for _, student := range students {
-		//fmt.Printf("%+v", student); panic("")
-		user_id := fmt.Sprintf("%d", student.User_id)
-		// retry multiple times
-		var err error
-		var res duo.EventsResult
-		for i := 0; i < 10; i++ {
-			res, err = duo.DoEventsGet(user_id, begin_date, end_date)
-			if err == nil {
-				break
-			}
-		}
-		if err != nil {
-			log.Fatal(err)
-		}
-		events[user_id] = EventsOrErr{Events: res.Events}
-	}
-	return dashboard.Observees, events
 }
 
 func readBlok(fname string) []bloky.Record {
