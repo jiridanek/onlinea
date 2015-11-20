@@ -68,6 +68,8 @@ func oauthcallback(w http.ResponseWriter, r *http.Request) {
 	// 		contents, err := ioutil.ReadAll(response.Body)
 	// 		fmt.Fprintf(w, "%s", string(contents))
 
+	log.Infof(c, "uco = %v", uco)
+
 	session, _ := store.Get(r, sessionName)
 	session.Values["uco"] = uco
 	session.Save(r, w)

@@ -10,6 +10,7 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/appengine"
+	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/user"
 	"io"
 	"io/ioutil"
@@ -101,6 +102,7 @@ func ucoFromPerson(p Person) string {
 }
 
 func getSession(w http.ResponseWriter, r *http.Request) string {
+	c := appengine.NewContext(r)
 	session, _ := store.Get(r, sessionName)
 	// 	log.Println(session.IsNew)
 	//     fmt.Println(session.Values["uco"].(string))
@@ -108,6 +110,7 @@ func getSession(w http.ResponseWriter, r *http.Request) string {
 		return ""
 	} else {
 		uco := session.Values["uco"].(string)
+		log.Infof(c, "uco = %v", uco)
 		return uco
 	}
 }
