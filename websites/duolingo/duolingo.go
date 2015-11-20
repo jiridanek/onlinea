@@ -11,7 +11,34 @@ import (
 	"io"
 	"net/http"
 	"net/http/cookiejar"
+	"time"
 )
+
+func duoTime() time.Time {
+	location, err := time.LoadLocation("America/New_York")
+	if err != nil {
+		panic(err)
+	}
+	return time.Now().In(location)
+}
+
+func weekDateString(t time.Time) (int, string, string) {
+	i := 1
+
+	start_date := duo.First
+
+	next := start_date
+	for next.Before(t) {
+		i++
+		start_date = next
+		next = next.AddDate(0, 0, 7)
+	}
+
+	end_date := start_date.AddDate(0, 0, 6)
+
+	return i, start_date.Format(duo.Format), end_date.Format(duo.Format)
+
+}
 
 func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
@@ -38,11 +65,13 @@ func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	var report Report
 	var student_id string
 
-	week := "2015-11-09"
-	report.Tyden = "08 (od " + week + ")"
+	now := duoTime()
+	week, begin_date, end_date := weekDateString(now)
+
+	report.Tyden = fmt.Sprintf("%d (od %s do %s včetně), v New Yorku je nyní %v", week, begin_date, end_date, now)
 
 	if student.Uco == "" || student.Nick == "" {
-		report.Err = "Vaše přezdívka na Duolingo není v seznamu. Napište mi vaši přezdívku do vlákna v diskusi a já vás do seznamu přidám."
+		report.Err = "Vaše přezdívka na Duolingo není v seznamu. Pokud studujete ONLINE_A, napište mi vaši přezdívku do vlákna v diskusi a já vás do seznamu přidám."
 		render(w, report)
 		return
 	}
@@ -60,7 +89,7 @@ func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	duo.InjectClient(client)
 
 	duo.DoLogin()
-	events, err := duo.DoEventsGet(student_id, week)
+	events, err := duo.DoEventsGet(student_id, begin_date, end_date)
 	if err != nil {
 		log.Errorf(c, "Fetching Duolingo events (student_id: %s, week: %d)failed: %v", student_id, week, err)
 		report.Err = fmt.Sprintf("Načtení aktivit za týden %s selhalo\nasi mate Duolingo prepnute do jineho nez anglickeho"+

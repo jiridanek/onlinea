@@ -11,21 +11,15 @@ import (
 	"log"
 	"os"
 	"strings"
-	"time"
-)
-
-var (
-	first = time.Date(2015, time.September, 21, 23, 0, 0, 0, time.UTC) // first day of the semester
 )
 
 func dateString(i int) (string, string) {
-	begin_date := first
+	begin_date := duo.First
 	for ; i > 1; i-- {
 		begin_date = begin_date.AddDate(0, 0, 7)
 	}
 
-	format := "2006-01-02"
-	return begin_date.Format(format), begin_date.AddDate(0, 0, 6).Format(format)
+	return begin_date.Format(duo.Format), begin_date.AddDate(0, 0, 6).Format(duo.Format)
 }
 
 func Duolingo(args []string) {

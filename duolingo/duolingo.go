@@ -10,6 +10,12 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"time"
+)
+
+var (
+	First  = time.Date(2015, time.September, 21, 23, 0, 0, 0, time.UTC) // first day of the semester
+	Format = "2006-01-02"
 )
 
 // cookieJar is a global, per-server store for Duolingo session cookie
