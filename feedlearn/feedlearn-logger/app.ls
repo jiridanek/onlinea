@@ -723,20 +723,6 @@ app.get '/addlog_get', (req, res) ->
         res.send <| 'successful insertion'
       db.close()
 
-app.get '/addlogfb_get', (req, res) ->
-  username = req.query.username
-  if not username?
-    res.send 'need to provide username'
-    return
-  #console.log req.body
-  get-logs-fb-collection (logs, db) ->
-    logs.insert req.query, (err, docs) ->
-      if err?
-        res.send <| 'error upon insertion: ' + JSON.stringify(err)
-      else
-        res.send <| 'successful insertion'
-      db.close()
-
 #app.get '/getvar', (req, res) ->
 #  req.
 
@@ -758,69 +744,4 @@ addlog = (data, callback) ->
       else
         if callback?
           callback <| 'successful insertion'
-      db.close()
-
-addlogemail = (data, callback) ->
-  if not data.username?
-    callback 'need to provide username'
-    return
-  get-logs-email-collection (logs, db) ->
-    logs.insert data, (err, docs) ->
-      if err?
-        if callback?
-          callback <| 'error upon insertion: ' + JSON.stringify(err)
-      else
-        if callback?
-          callback <| 'successful insertion'
-      db.close()
-
-app.post '/addlog', (req, res) ->
-  username = req.body.username
-  if not username?
-    res.send 'need to provide username'
-    return
-  #console.log req.body
-  addlog req.body, (result) ->
-    res.send result
-
-app.post '/addlogfb', (req, res) ->
-  username = req.body.username
-  if not username?
-    res.send 'need to provide username'
-    return
-  #console.log req.body
-  get-logs-fb-collection (logs, db) ->
-    logs.insert req.body, (err, docs) ->
-      if err?
-        res.send <| 'error upon insertion: ' + JSON.stringify(err)
-      else
-        res.send <| 'successful insertion'
-      db.close()
-
-app.post '/addlogfblogin', (req, res) ->
-  username = req.body.username
-  if not username?
-    res.send 'need to provide username'
-    return
-  #console.log req.body
-  get-logs-fblogin-collection (logs, db) ->
-    logs.insert req.body, (err, docs) ->
-      if err?
-        res.send <| 'error upon insertion: ' + JSON.stringify(err)
-      else
-        res.send <| 'successful insertion'
-      db.close()
-
-app.post '/addlogquiz', (req, res) ->
-  username = req.body.username
-  if not username?
-    res.send 'need to provide username'
-    return
-  #console.log req.body
-  get-logs-quiz-collection (logs, db) ->
-    logs.insert req.body, (err, docs) ->
-      if err?
-        res.send <| 'error upon insertion: ' + JSON.stringify(err)
-      else
-        res.send <| 'successful insertion'
       db.close()

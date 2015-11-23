@@ -1,15 +1,15 @@
 doctype html
 html(lang='en')
   head
-    title FeedLearn - Learn basic Japanese words as you browse your Facebook feed
+    title FeedLearn /w Dril - Learn English words as you browse your Facebook feed
     meta(charset='utf-8')
-    meta(name='DESCRIPTION' content='FeedLearn is a Chrome extension that helps you learn Japanese vocabulary as you browse your Facebook feed.')
+    meta(name='DESCRIPTION' content='FeedLearn /w Dril is a browser extension that helps you learn English vocabulary as you browse your Facebook feed.')
     meta(name='viewport' content='user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1')
     link(href='index.css' rel='stylesheet')
     link(href='bower_components/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet')
     link(href='bower_components/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet')
     link(href='bower_components/toastr/toastr.min.css' rel='stylesheet')
-    link(href='https://chrome.google.com/webstore/detail/ebmjdfhplinmlajmdcmhkikideknlgkf' rel='chrome-webstore-item')
+    link(href='deknlgkf' rel='chrome-webstore-item')
   body
     script(src='bower_components/jquery/dist/jquery.min.js')
     script(src='bower_components/bootstrap/dist/js/bootstrap.min.js')
@@ -27,13 +27,13 @@ html(lang='en')
     #fb-root
     #fbloginpage(style='margin-left: 130px; margin-top: 10px')
       img(src='feedlearn-100px.png' style='position: absolute; left: 10px')
-      h1 FeedLearn
-      h3 Learn basic Japanese words as you browse your Facebook news feed
+      h1 FeedLearn w/ Dril
+      h3 Learn English words as you browse your Facebook news feed
       div(style='height: 15px')
       img(src='feedlearn-screenshot.png' style='border-radius: 15px')
       div(style='height: 15px')
-      h3 Start learning Japanese with FeedLearn!
-      div FeedLearn is a Chrome extension that teaches you basic Japanese words by showing you quizzes as you browse your Facebook feed.
+      h3 Start learning with FeedLearn!
+      div FeedLearn for Dril is a browser extension that teaches you English words by showing you Dril cards as you browse your Facebook feed.
       div
         b You do not need to know any Japanese
         span 
@@ -51,21 +51,29 @@ html(lang='en')
       div(style='padding-bottom: 10px')
       div.fb-login-button#fbloginbutton(data-max-rows='1' data-size='xlarge' data-show-faces='false' data-auto-logout-link='false' scope="public_profile,email" onlogin='fbButtonOnlogin()')
       div(style='padding-bottom: 10px')
-      h3 Study Description
-      div This is a study where we try to help you learn basic Japanese vocabulary as you browse your Facebook news feed.
+      h3 Activity Description
+      div This is an activity where we try to help you learn English vocabulary as you browse your Facebook news feed.
       div
         b You do not need to know any Japanese 
         span 
         span - it is designed for beginners.
-      div You will first install our Chrome extension, FeedLearn. This extension will show you vocabulary flashcards while you browse your Facebook news feed.
+      div You will first open up https://is.muni.cz/auth/dril and pick any "Textbook" from the "English" section. The recommended textbooks are
+      ul
+        li Everyone: Angličtina Online Slovíčka z odpovědníků
+        li Everyone: Angličtina Online 
+        li Beginners: Angličtina pro samouky 1 Angličtina pro samouky 2
+      Activate the first "Lesson" from your chosen "Textbook". Do not activate too many lessons at once, otherwise you will be overwhelmed by the amount of new vocabulary.
+      div Next, install our browser extension, FeedLearn4Dril. This extension will show you Dril cards while you browse your Facebook news feed.
       br
-      div The study lasts for 3 weeks. Each week, you will:
+      p getting points
+      div After clicking the link, you will see a funny picture. Every day there is a new picture so be sure to Dril every day not to miss any! At the end of every week you will get points into your notebook.
+      
       div(style='margin-left: 10px') 1) Take a vocabulary pre-test on the 50 new words you will be studying that week
       div(style='margin-left: 10px') 2) Study the words, using one of the following 3 approaches:
-      div(style='margin-left: 20px') • One week, you will be shown vocabulary quizzes directly in your feed
+      div(style='margin-left: 20px') •you will be shown vocabulary quizzes directly in your feed
       div(style='margin-left: 20px') • Another week, you will be shown links in your feed asking you to go to the FeedLearn site to do the quizzes.
       div(style='margin-left: 20px') • Another week, you will be sent daily email reminders to study Japanese on the FeedLearn site.
-      div(style='margin-left: 10px') 3) At the end of the week, you will take a vocabulary post-test to see what you have learned.
+      div(style='margin-left: 10px') 3) At the end of November, you will be mailed a survey about your learning experience with FeedLearn4Dril which we would greatly appretiate if you would fill out. In December you will be given a chance to fill a vocabulary ROPOT (for up to 30 points) to see what you have learned.
       br
       div
         span We
@@ -76,15 +84,15 @@ html(lang='en')
         span 
         b do not access
         span 
-        span any of your private data. You can leave the study at any time.
-      div To use FeedLearn, please login below using Facebook (we only use your account to keep track of your study progress):
+        span any of your private data. You can leave the activity at any time.
+      div To use FeedLearn4Dril, please login below using Facebook (we only use your account to keep track of your study progress):
       div(style='padding-bottom: 10px')
       div.fb-login-button#fbloginbutton2(data-max-rows='1' data-size='xlarge' data-show-faces='false' data-auto-logout-link='false' scope="public_profile,email" onlogin='fbButtonOnlogin()')
       div(style='padding-bottom: 10px')
       h3 Contact Information
-      div If you have questions, ask 
-        a(href='mailto:geza@cs.stanford.edu') Geza Kovacs
-        span , Computer Science Department, Stanford University
+      div If you have questions, ask in the Dril seminar group discussion forum or send an e-mail to
+        a(href='mailto:dnk@mail.muni.cz') Jirka Daněk
+        span , ONLINE_A teaching assistant
 
     #getfullname(style='margin-left: 10px; margin-top: 10px; display: none')
       div(style='font-size: 20px; margin-bottom: 10px') Welcome to the FeedLearn study! What is your name?

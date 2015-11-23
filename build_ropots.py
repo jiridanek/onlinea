@@ -8,7 +8,7 @@
 #          - put this dir name to file name
 #     - config files?
 
-# produce output: qdef, qref in tb; qref outside; audiofiles somewhere else
+# produce output: qdef, qref in tb; qref outside; audiofiles somewhere else # this is a TODO, as far as I can remember
 # make sure links all match
 
 import copy
@@ -22,7 +22,7 @@ from ismu.misc import escape_filename_is_mu_new
 
 ISPREFIX = "https://is.muni.cz/auth/"
 COURSENAME = "ONLINE_A"
-TERMNAME = "jaro2015"
+TERMNAME = "podzim2015"
 DEPLOYROOT = "/el/1441/{}/{}/".format(TERMNAME, COURSENAME)
 
 
@@ -258,7 +258,7 @@ for dirpath, dirnames, filenames in os.walk(ROOT, followlinks=True):
   for qdesc, outqdesc in hasqdesc:
     cc = c[-1].copy(qdesc)
     cc.add_file(os.path.join(dirpath, qdesc))
-    ISqdefdir = DEPLOYROOT + is_mangle_dirs(qdefdir) # not escape safe
+    ISqdefdir = DEPLOYROOT + is_mangle_dirs(os.path.join('odp/tb', outdirpath)) # not escape safe
     #ISqrefdir = DEPLOYROOT + is_mangle_dirs(qrefdir) # not escape safe
     root = cc.modules["qdesc"].to_xml(exercisename, os.path.join(DEPLOYROOT, qrefdir), ISqdefdir)
     reparsed = xml.dom.minidom.parseString(ET.tostring(root, encoding="unicode"))
@@ -271,9 +271,9 @@ for dirpath, dirnames, filenames in os.walk(ROOT, followlinks=True):
     # qref
     if qdesc == "_.qdesc":
       qdesc = is_mangle_file(exercisename + '.qdesc')
-    mangledfilename = is_mangle_file(qdesc) # the DayZ bug
+    mangledfilename = qdesc #is_mangle_file(qdesc) # the DayZ bug ## fuckdayz, doublemangle
     qref = ("<ISMU-EL-QUESTREF>\n"
-    "  <QDESC_URL>\n    " + '/' + ISqdefdir + '/' + mangledfilename + "\n"
+    "  <QDESC_URL>\n    " + ISqdefdir + '/' + mangledfilename + "\n"
     #"     /el/1441/podzim2014/ONLINE_A/odp/experiments/50542980/qdesc/4._I_can_swim.qdesc"
     "  </QDESC_URL>\n"
     "</ISMU-EL-QUESTREF>")
