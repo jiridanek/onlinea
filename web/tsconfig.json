@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"out": "ismu/web/out.js"
+	},
+	"files": [
+		"config.ts",
+		"groups.ts",
+		"page.ts",
+		"runner.ts",
+		"create_seminar_groups.ts",
+		"create_discussion_forums.ts",
+		"main.ts"
+	]
+}
