@@ -1,19 +1,20 @@
+PUB=~/Bin/dart-sdk/bin/pub
+
 rm -rf build
 
-#~/Bin/dart/dart-sdk/bin/pub build --mode debug
-~/Bin/dart/dart-sdk/bin/pub build
-
-rm build/web/*.dart.js
+#$PUB build --mode debug
+ $PUB build
 
 rm -rf dist
 mkdir dist
-
-cp -R web/images dist/
-cp build/web/*.html dist/
-cp build/web/*.precompiled.js dist/
-cp build/web/*.js dist/
-cp build/web/manifest.json dist/
 mkdir -p dist/packages/chrome/
 mkdir -p dist/packages/is/
-install packages/chrome/bootstrap.js dist/packages/chrome/
-install packages/is/xpath.js dist/packages/is/
+
+cp -R build/web/images dist/
+cp build/web/*.html dist/
+cp build/web/*.dart.js dist/
+cp build/web/*.js dist/
+cp build/web/manifest.json dist/
+
+install build/web/packages/chrome/bootstrap.js dist/packages/chrome/
+install build/web/packages/ismu/xpath.js dist/packages/is/

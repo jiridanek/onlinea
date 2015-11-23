@@ -17,16 +17,15 @@ class Popup {
     status = dom.querySelector('#status');
   }
 
-  updateStatus(/*Progress.progress*/
-      p) {
+  updateStatus(p) {
     var msg =
-        'Threads visited: ${p['thread']}<br>Posts processed: ${p['post']}<br>Ungraded: ${p['markedPost']}';
-    //print('status: $msg');
+        'Threads visited: ${p['thread']}<br>'
+        'Posts processed: ${p['post']}<br>'
+        '&nbsp;&nbsp;└&nbsp;not graded: ${p['markedPost']}';
     status.innerHtml = msg;
   }
 
   updateMessage(String errorMsg) {
-    //print('errorMsg: $errorMsg');
     if (errorMsg == null) {
       return;
     } else if (errorMsg == '') {
@@ -98,7 +97,6 @@ main() {
 
     chrome.runtime.onMessage.listen((chrome.OnMessageEvent e) {
       try {
-//        print(e);
         String url = e.message;
         processUrl(url);
       } catch (e) {

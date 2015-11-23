@@ -28,7 +28,7 @@ class App {
             .update(id, new chrome.WindowsUpdateParams(focused: true));
         //TODO: ? window = chrome.windows.get(id);
       } else {
-        int width = 300;
+        int width = 350;
         int left = math.max(10, tab.width - width - 100);
         window = openNewWindow(url, left: left, width: width);
       }
@@ -51,7 +51,7 @@ class App {
     chrome.windows
         .create(new chrome.WindowsCreateParams(
             url: 'popup.html',
-            type: 'popup',
+            type: chrome.CreateType.POPUP,
             top: 20,
             left: left,
             width: width,
