@@ -1,7 +1,11 @@
-name: is
+name: ismu
 description: A sample command-line application
+environment:
+  sdk: ">=0.13.0"
 dependencies:
+  html: any
   form_data:
     path: ../form_data
-#dev_dependencies:
-#  unittest: any
+  serialization: any
+dev_dependencies:
+  test: "^0.12.5+1"

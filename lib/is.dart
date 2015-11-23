@@ -1,11 +1,12 @@
 import 'dart:async' as async;
 //import 'dart:html' as dom;
-import 'package:html5lib/dom.dart' as dom;
-import 'package:html5lib/parser.dart' as dom;
+import 'package:html/dom.dart' as dom;
+import 'package:html/parser.dart' as dom;
 //import 'dart:js' as js;
 import 'dart:math' as math;
 
 var jsPrefix = 'xpath';
+
 List<dom.Element> xpathSelectorAll(query, element) {
   var context = js.context;
   var result = js.context[jsPrefix].callMethod('xpathSelectorAll', [query, element]);
@@ -14,7 +15,7 @@ List<dom.Element> xpathSelectorAll(query, element) {
 
 dom.Element xpathSelector(query, element) {
   var list = xpathSelectorAll(query, element);
-  if(list.isNotEmpty) {
+  if (list.isNotEmpty) {
     return list.first;
   }
   return null;
@@ -69,8 +70,12 @@ async.Future<String> get(String url, {bool shouldNotDelay: false}) {
 var random = new math.Random();
 
 class CONFIG {
-  static var postFormData = null; //dom.HttpRequest.postFormData;
-  static var request = null; //dom.HttpRequest.request;
+  static var postFormData = null;
+
+  //dom.HttpRequest.postFormData;
+  static var request = null;
+
+  //dom.HttpRequest.request;
   static var get = (String url, bool shouldNotDelay) {
     int maxDelay = 6;
     var completer = new async.Completer();
@@ -80,17 +85,20 @@ class CONFIG {
         try {
           body = request.body;
         } on NoSuchMethodError {
-          body = request.responseText; // would be responseText with dart:html
+          body = request.responseText;
+          // would be responseText with dart:html
         }
-        completer.complete(body); // would be responseText with dart:html
+        completer.complete(body);
+        // would be responseText with dart:html
       }//, //library:http always returns http.Response
 //          onError: (e) {
 //          var r = e.target;
 //          completer.completeError(r);
 //        }
-    );};
+      );
+    };
 
-    if(shouldNotDelay) {
+    if (shouldNotDelay) {
       ajax();
     } else {
       new async.Timer(new Duration(milliseconds: 500, seconds: random.nextInt(maxDelay)), () {
@@ -105,16 +113,19 @@ class CONFIG {
 //logout
 class LogInPage {
   static const url = 'https://is.muni.cz/system/login_form.pl';
-  static const expiration = '345600'; //1 hodině    8 hodinách    1 dni    4 dnech
-    
+  static const expiration = '345600';
+
+  //1 hodině    8 hodinách    1 dni    4 dnech
+
   static async.Future<dynamic> logIn(String username, String password, {destination: '/auth/'}) {
     var data = {'destination': destination,
-                'credential_0': username,
-                'credential_1': password,
-                'credential_2': expiration};
+      'credential_0': username,
+      'credential_1': password,
+      'credential_2': expiration};
     var completer = new async.Completer();
     CONFIG.postFormData(url, data).then((response) {
-      completer.complete(response); //i need cookies // dart:html would use request.responseText
+      completer.complete(response);
+      //i need cookies // dart:html would use request.responseText
     }, onError: (e) => completer.completeError(e));
     return completer.future;
   }

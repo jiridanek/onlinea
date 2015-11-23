@@ -1,4 +1,3 @@
-
 /*
  * statistika
  * kumulativní graf získaných bodů na čase pro studenta
@@ -6,12 +5,9 @@
  * shluknout průběhy
  */
 
-//import 'dart:html' as dom;
-import 'package:html5lib/dom.dart' as dom;
+import 'package:html/dom.dart' as dom;
 import 'dart:core';
 import 'dart:async' as async;
-import 'dart:core';
-//import 'dart:js' as js;
 
 import 'is.dart';
 import 'is.dart' as ismu;
@@ -31,7 +27,8 @@ import 'is.dart' as ismu;
 //}
 
 const idPrefixPost = 'pr_ce_';
-const allPostsXpath = "//*[starts-with(@id, '${idPrefixPost}')]"; // obsolete
+const allPostsXpath = "//*[starts-with(@id, '${idPrefixPost}')]";
+// obsolete
 const allPostsCssPath = "*[id^='${idPrefixPost}']";
 const newPostClass = 'df_pr_nect';
 
@@ -68,7 +65,7 @@ async.Future<List> fetchMySeminarGroup(int term, String course) {
   fetchMySeminarGroups(term).then((groups) {
     completer.complete(
         groups.where((g) => g.course == course)
-    ); 
+    );
   });
   return completer.future;
 }
@@ -111,11 +108,11 @@ console.log(window.JSON.stringify(out));
 
  */
 
-  var groupToGuzJaro2014 = {"A level /01":"46976735","A level /02":"46976742","A level /03":"46976747","A level /04":"46976750","A level /05":"46976756","A level /08":"46976766","A level /09":"46976937","A level /10":"46976969","B level /12":"46987544","B level /13":"46987546","B level /14":"46987548","B level /15":"46987550","B level /16":"46987552","B level /17":"46987554","B level /18":"46987658","B level /19":"46987763","B level /20":"46987765","B level /21":"46987767","B level /22":"46987769","B level /23":"46987771","B level /24":"46987774","B level /25":"46987776","B level /26":"46987778","B level /27":"46987780","B level /28":"46987782","B level /29":"46987784","B level /30":"46987786","B - C level /38":"46988210","C level /37":"46988212","C level /35":"46988214","C level /36":"46988216"};
+var groupToGuzJaro2014 = {"A level /01":"46976735", "A level /02":"46976742", "A level /03":"46976747", "A level /04":"46976750", "A level /05":"46976756", "A level /08":"46976766", "A level /09":"46976937", "A level /10":"46976969", "B level /12":"46987544", "B level /13":"46987546", "B level /14":"46987548", "B level /15":"46987550", "B level /16":"46987552", "B level /17":"46987554", "B level /18":"46987658", "B level /19":"46987763", "B level /20":"46987765", "B level /21":"46987767", "B level /22":"46987769", "B level /23":"46987771", "B level /24":"46987774", "B level /25":"46987776", "B level /26":"46987778", "B level /27":"46987780", "B level /28":"46987782", "B level /29":"46987784", "B level /30":"46987786", "B - C level /38":"46988210", "C level /37":"46988212", "C level /35":"46988214", "C level /36":"46988216"};
 
 //var groupToGuzPodzim2014 = {"A1":"50462366","C2":"50462399","C1":"50462402","BC1":"50462405","A2":"50462413","A3":"50462415","A4":"50462417","A5":"50462419","A6":"50462422","B1":"50462424","B2":"50462427","B3":"50462429","B4":"50462431","B5":"50462433","B6":"50462435","B7":"50462437","B8":"50462439","B9":"50462441","B10":"50462444","B11":"50462446","B12":"50462497","B13":"50462499","B14":"50462501","B15":"50462503","B16":"50462506","B17":"50462510"};
-  var groupToGuzPodzim2014 = {"A1":"50462366","C2":"50462399","C1":"50462402","BC1":"50462405","A2":"50462413","A3":"50462415","A4":"50462417","A5":"50462419","A6":"50462422","B1":"50462424","B2":"50462427","B3":"50462429","B4":"50462431","B5":"50462433","B6":"50462435","B7":"50462437","B8":"50462439","B9":"50462441","B10":"50462444","B11":"50462446","B12":"50462497","B13":"50462499","B14":"50462501","B15":"50462503","B16":"50462506","B17":"50462510","B18":"50802379","B19":"50802482","B20":"50802523","B21":"50802540","B22":"50802552","B23":"50802560","B24":"50980016","B25":"50980027","B26":"50980052"};
-  
+var groupToGuzPodzim2014 = {"A1":"50462366", "C2":"50462399", "C1":"50462402", "BC1":"50462405", "A2":"50462413", "A3":"50462415", "A4":"50462417", "A5":"50462419", "A6":"50462422", "B1":"50462424", "B2":"50462427", "B3":"50462429", "B4":"50462431", "B5":"50462433", "B6":"50462435", "B7":"50462437", "B8":"50462439", "B9":"50462441", "B10":"50462444", "B11":"50462446", "B12":"50462497", "B13":"50462499", "B14":"50462501", "B15":"50462503", "B16":"50462506", "B17":"50462510", "B18":"50802379", "B19":"50802482", "B20":"50802523", "B21":"50802540", "B22":"50802552", "B23":"50802560", "B24":"50980016", "B25":"50980027", "B26":"50980052"};
+
 async.Future postNewThread(String guz, String subject, String body, {bool isHtml:false}) {
   //var guz = '50462499';
   var urlsuffix = "/auth/diskuse/diskusni_forum_indiv.pl?guz=${guz};vl_zal=1;re=1" /*;lang=cs"*/;
@@ -123,60 +120,62 @@ async.Future postNewThread(String guz, String subject, String body, {bool isHtml
   return dom.HttpRequest.postFormData(url, {
     "guz": guz,
 //    _:5255808582
-      "dfos_vl": '',
-      "vyhl_ban_${guz}": '',
-      "dfos_pr": '',
-      "slo_test": '',
-      "upr":'',
+    "dfos_vl": '',
+    "vyhl_ban_${guz}": '',
+    "dfos_pr": '',
+    "slo_test": '',
+    "upr":'',
     "jn": 'v',
     "expar": '1',
     "vl_zal": '1',
     "re_za": 're',
     "SENAZEV_${guz}": subject,
-      "SEZKRA_${guz}": '',
+    "SEZKRA_${guz}": '',
     "SETEXT_${guz}": body,
     "SETETYP_${guz}": isHtml ? 'ht' : 'tf',
     "edsezav": 'Uložit',
-      "preves": '',
+    "preves": '',
   });
 }
-
 
 
 class ThreadPage {
   static const paginationDivQuery = '//*[@id="aplikace"]//div[@class="strankovani"]';
   static const paginationCssQuery = '#aplikace div.strankovani';
-  
-  var element; // Element Document
-  
+
+  var element;
+
+  // Element Document
+
   ThreadPage(this.element);
+
   static fromHtml(html) {
     return new ThreadPage(elementFromHtml(html));
   }
-  
+
   static String urlFromGuz(guz) {
     return "https://is.muni.cz/auth/diskuse/diskusni_forum_indiv.pl?lang=cs;jp=v;guz=$guz";
   }
-  
+
   Iterable<Post> get posts {
     var re = new RegExp('^${idPrefixPost}[0-9]*\$');
     // allPostsCssPath matches pr_ce_$id and also pr_ce_ajax_$id (the favorite stars)
     var elements = element.querySelectorAll(allPostsCssPath).where((e) => re.hasMatch(e.id));
-      //print(elements.length);
-      //print(elements.first);
-      //print(elements.first.innerHtml);
-      //throw('halt');
+    //print(elements.length);
+    //print(elements.first);
+    //print(elements.first.innerHtml);
+    //throw('halt');
     var posts = elements.map((e) => new Post(e));
     return posts;
   }
-  
+
   String next() {
     dom.Element paginationDiv = element.querySelector(paginationCssQuery);
     if (paginationDiv == null) {
       return '';
     }
     var a = paginationDiv.querySelector("a[title=další]");
-    if(a != null) {
+    if (a != null) {
       var url = a.attributes['href'];
       return baseUrl + url;
     }
@@ -189,13 +188,20 @@ dom.Element lastChild(dom.Element el) {
 }
 
 class ForumPage {
-  var paginationXpath = '//*[@id="aplikace"]/form/div[3]'; //obsolete
+  var paginationXpath = '//*[@id="aplikace"]/form/div[3]';
+
+  //obsolete
   var paginationCssPath = '#aplikace div.strankovani';
+
   static fromHtml(String html) {
     return new ForumPage(elementFromHtml(html));
   }
-  var element; //dom.Element dom.Document
+
+  var element;
+
+  //dom.Element dom.Document
   ForumPage(this.element);
+
   Iterable<Thread> get threads {
     var query = element.querySelectorAll(allPostsCssPath); //xpathSelectorAll(allPostsXpath, element);
     //print(element.innerHtml);
@@ -209,6 +215,7 @@ class ForumPage {
     //throw('halt');
     return threads;
   }
+
   String next() {
     var pagination = element.querySelector(paginationCssPath); //xpathSelector(paginationXpath, element);
     if (pagination == null) {
@@ -216,7 +223,7 @@ class ForumPage {
     }
     dom.Element a = pagination.querySelector('a[title=další]');
     if (a != null) {
-    //if (last is dom.AnchorElement && last.nodeName == 'A') {
+      //if (last is dom.AnchorElement && last.nodeName == 'A') {
       var link = baseUrl + a.attributes['href'];
       return link;
     }
@@ -226,43 +233,45 @@ class ForumPage {
 
 class ThreadInForumPage {
   dom.Element element;
-  
+
   ThreadInForumPage(this.element);
-  
+
   static nextNode(dom.Element e) {
-    var result;                                             
+    var result;
     var found = false;
     for (var n in e.parentNode.nodes) {
       if (found) {
         result = n;
         break;
       }
-      found = e.text == n.text; 
+      found = e.text == n.text;
     }
     return result;
   }
-  
+
   get postCount {
     var text;
-    
+
     var a = element.querySelector("div.operace + a");
     if (a != null) {
-      text = nextNode(a).text; //FIXME: a.nextNode.text
-    } else {  // have unread posts
+      text = nextNode(a).text;
+      //FIXME: a.nextNode.text
+    } else {
+      // have unread posts
       var span = element.querySelector("span.prep_vs");
       text = span.text;
     }
     var count = new RegExp(r'\d+').stringMatch(text);
     return int.parse(count);
-    
-    
+
+
   }
-  
+
   get unreadCount {
     var b = element.querySelector("span.prep_nv > b");
     return (b != null) ? int.parse(b.text) : 0;
   }
-  
+
   get unreadReactionCount {
     var b = element.querySelector("span.prep_nove").querySelector("b"); //FIXME: bug in html5lib
     return (b != null) ? int.parse(b.text) : 0;
@@ -272,7 +281,11 @@ class ThreadInForumPage {
 class Post {
   dom.Element element;
   var g;
-  Post.$(){} // creates uninicialized instance, to avoid creating abstract class to serve as an interface
+
+  Post.$(){
+  }
+
+  // creates uninicialized instance, to avoid creating abstract class to serve as an interface
   Post(this.element) {
     var msg = element.querySelector("span.pr_vloz_ret").firstChild.text; // get only the TextNode
     "6. 3. 2014 23:42, Iva Bandurová, " //absolventka
@@ -284,25 +297,26 @@ class Post {
     var moderator_jmeno = r"([^\(]+)";
     var pracoviste = r"\(([^\(]+)\)";
     var r = new RegExp(datum_cas
-        + "(?:" + zmena_datum_cas + ")?, "
-        + moderator_jmeno
-        + "(?:" + pracoviste + ")?"); // absolvent nemá fakultu/pracoviště
+    + "(?:" + zmena_datum_cas + ")?, "
+    + moderator_jmeno
+    + "(?:" + pracoviste + ")?"); // absolvent nemá fakultu/pracoviště
     var m = r.firstMatch(msg);
     this.g = m.group;
-    
-    for (var i = 0; i <= m.groupCount; i++) {
-      print("g($i): ${g(i)}");
-    }
+
+    //verbose printout
+//    for (var i = 0; i <= m.groupCount; i++) {
+//      print("g($i): ${g(i)}");
+//    }
   }
+
   num id() {
-   //print(element);
-   //print(element.innerHtml);
-   //print(element.id);
+    //print(element);
+    //print(element.innerHtml);
+    //print(element.id);
     return num.parse(element.id.substring(idPrefixPost.length));
   }
-  
-  
-  
+
+
   get text {
     var pre = element.querySelector('div.pr_te > pre');
     if (pre != null) {
@@ -310,32 +324,37 @@ class Post {
     }
     return element.querySelector('div.pr_te').text;
   }
-  
+
   get author {
-    String s = g(11).trim(); 
-    if (s.endsWith(",")) { // regex pridava absolventovi carku za jmeno
+    String s = g(11).trim();
+    if (s.endsWith(",")) {
+      // regex pridava absolventovi carku za jmeno
       return s.substring(0, s.length - 1);
     }
     return s;
   }
-  
+
   DateTime submitted() {
     return new DateTime(int.parse(g(3)), int.parse(g(2)), int.parse(g(1)), int.parse(g(4)), int.parse(g(5)));
   }
+
   /// @returns null if never
   DateTime editted() {
     try {
       return new DateTime(int.parse(g(8)), int.parse(g(7)), int.parse(g(6)), int.parse(g(9)), int.parse(g(10)));
-    } on ArgumentError catch(e) {
+    } on ArgumentError catch (e) {
       return submitted();
     }
   }
+
   async.Future<DateTime> graded() {
-    
+
   }
+
   bool unread() {
     return element.classes.contains(newPostClass);
   }
+
   bool notGraded() {
     var gradeArea = element.querySelector('.${gradeClass}');
     if (gradeArea == null) {
@@ -348,12 +367,14 @@ class Post {
     //print(gradeArea);
     return gradeArea.text.contains(StringsCs.hodnotitDoPoznamkovehoBloku);
   }
+
   markUnread() {
     ///auth/diskuse/diskuse_ajax.pl?fakulta=1433;obdobi=5984;predmet=721682;ts_0=20140326213043:46976735;guz=46976737;akce=vrat_neprec;cop=', 'vr_ne_46976737'
     return get('https://is.muni.cz/auth/diskuse/diskuse_ajax.pl?guz=${id()};akce=vrat_neprec', shouldNotDelay: true);
   }
+
   num points() {
-    
+
   }
 }
 
@@ -361,20 +382,20 @@ class StringsCs {
   static final hodnotitDoPoznamkovehoBloku = "Hodnotit do poznámkového bloku";
   final zmenitHodnoceni = "změnit hodnocení";
   final obsahBlokuNaposledyZmenen = "obsah bloku naposledy změněn: ";
-  //Mgr. Radek Vogel, Ph.D., 20. 3. 2014 23:06
-  //[a-zA-Z., ]*, [0-9]\. [0-9]\. [0-9]* [0-9]:[0-9]
+//Mgr. Radek Vogel, Ph.D., 20. 3. 2014 23:06
+//[a-zA-Z., ]*, [0-9]\. [0-9]\. [0-9]* [0-9]:[0-9]
 }
 
 evaluate(String query, html) {
   var element;
   if (html is String) {
     element = elementFromHtml(html);
-  } else if (html is dom.Element){
+  } else if (html is dom.Element) {
     element = html;
   } else {
     throw 'error';
   }
-  
+
   var context = js.context;
   var result = js.context.callMethod('evaluate', [query, element]);
   return result;
@@ -426,40 +447,41 @@ String forceCzechL10n(String oldurl) {
 
 markAllUngraded(String url, progress) {
 //  print(url);
-  url = forceCzechL10n(url);  
+  url = forceCzechL10n(url);
   get(url).then((html) {
     var forum = new Forum(ForumPage.fromHtml(html));
-    
+
     //throw('halt');
     var posts = new async.StreamController();
-    
+
     var t = 0;
     var t_done = false;
-    
+
     forum.streamThreads().forEach((Thread thread) {
       t++;
       progress.thread();
       thread.streamPosts().forEach(posts.add)
-        .catchError(()=>progress.failed("Some posts were not processed"))
-        .whenComplete(() {
-          t--;
-          if (t_done && t == 0) {
-            posts.close();
-          }
-      }).whenComplete(()=>t_done = true);
+      .catchError(() => progress.failed("Some posts were not processed"))
+      .whenComplete(() {
+        t--;
+        if (t_done && t == 0) {
+          posts.close();
+        }
+      }).whenComplete(() => t_done = true);
     }).catchError(() {
       progress.failed("Some discussion threads were not processed");
     });
-    
+
     posts.stream.forEach((post) {
       progress.post();
       if (post.notGraded() /*|| post.unread()*/) {
         progress.markedPost();
-        post.markUnread(); //can fail as well, and probably does from time to time
+        post.markUnread();
+        //can fail as well, and probably does from time to time
       }
-    }).catchError((){
+    }).catchError(() {
       progress.failed("Some posts were not processed");
-    }).whenComplete(()=>progress.succeeded());
+    }).whenComplete(() => progress.succeeded());
   });
 }
 
@@ -467,9 +489,9 @@ markAllUngradedTest(String html) {
   var forum = new Forum(ForumPage.fromHtml(html));
   //throw('halt');
   forum.streamThreads().forEach((Thread thread) {
-      thread.streamPosts()
-        .where((post)=>post.notGraded())
-        .forEach((post)=>post.markUnread());
+    thread.streamPosts()
+    .where((post) => post.notGraded())
+    .forEach((post) => post.markUnread());
   });
 }
 
@@ -478,24 +500,24 @@ markAllTest(String html) {
   forum.streamThreads().toList().then((threads) {
     print(threads);
   });
-  
+
   forum.streamThreads().forEach((Thread thread) {
     thread.streamPosts()
-      .forEach((e)=>null);
-      //.forEach((post)=> post.markUnread());
+    .forEach((e) => null);
+    //.forEach((post)=> post.markUnread());
   });
 }
 
 readAllInForum(String html) {
   var forum = new Forum(ForumPage.fromHtml(html));
   forum.streamPages()
-    .forEach((p)=>p.threads.forEach((t)=>t.streamPosts().drain()));
+  .forEach((p) => p.threads.forEach((t) => t.streamPosts().drain()));
 }
 
 readAllInThread(String html) {
   var thread = new Thread(new ThreadPage(elementFromHtml(html)));
-  thread.streamPosts().forEach((e)=>null);
-        //.forEach((post)=> post.markUnread());
+  thread.streamPosts().forEach((e) => null);
+  //.forEach((post)=> post.markUnread());
 }
 
 processForumTest(String html) {
@@ -507,24 +529,26 @@ processForumTest(String html) {
 
 abstract class PageStreamer<T> {
   T firstPage;
+
   ForumPage pageFromHtml(String html);
+
   async.Stream<T> streamPages() {
     var _pages = new async.StreamController<T>();
     var pages = new async.StreamController<T>();
     _pages.stream.listen((page) {
       String link = page.next();
-      if(link != '') {
+      if (link != '') {
         get(forceCzechL10n(link)).then((String html) {
-            var page = pageFromHtml(html);
-            _pages.add(page);
-            pages.add(page);
+          var page = pageFromHtml(html);
+          _pages.add(page);
+          pages.add(page);
         });
       } else {
         _pages.close();
         pages.close();
       }
     });
-    
+
     _pages.add(firstPage);
     pages.add(firstPage);
     return pages.stream;
@@ -534,13 +558,14 @@ abstract class PageStreamer<T> {
 class Thread {
   ThreadPage _firstPage;
   String url;
-  
+
   Thread(this._firstPage);
+
   Thread.fromUrl(this.url);
-  
+
   async.Future<ThreadPage> get firstPage {
     var completer = new async.Completer();
-    if(_firstPage == null) {
+    if (_firstPage == null) {
       get(forceCzechL10n(url)).then((html) {
         //print(url);
         //throw('halt');
@@ -552,7 +577,7 @@ class Thread {
     }
     return completer.future;
   }
-  
+
   async.Stream<ThreadPage> streamThreadPages() {
     var _threadPages = new async.StreamController<ThreadPage>();
     var threadPages = new async.StreamController<ThreadPage>();
@@ -560,18 +585,18 @@ class Thread {
       String link = page.next();
       //print(link);
       //safdasd(link);
-      if(link != '') {
+      if (link != '') {
         get(link).then((String html) {
-            var page = new ThreadPage(elementFromHtml(html));
-            _threadPages.add(page);
-            threadPages.add(page);
+          var page = new ThreadPage(elementFromHtml(html));
+          _threadPages.add(page);
+          threadPages.add(page);
         });
       } else {
         _threadPages.close();
         threadPages.close();
       }
     });
-    
+
     firstPage.then((p) {
       //print(p);
       //throw('halt');
@@ -581,13 +606,14 @@ class Thread {
 
     return threadPages.stream;
   }
+
   async.Stream<Post> streamPosts() {
     var posts = new async.StreamController<Post>();
     streamThreadPages().listen((ThreadPage tp) {
       for (var p in tp.posts) {
         posts.add(p);
       }
-    }, onDone:(()=>posts.close()));
+    }, onDone:(() => posts.close()));
     return posts.stream;
   }
 }
@@ -603,20 +629,19 @@ processThreadTest(String firstPage) {
   var posts = streamAllPosts(firstPage);
   posts.toList().then((l) {
     print('Have ${l.length} posts');
-    var notGraded = l.where((p)=>p.notGraded());
+    var notGraded = l.where((p) => p.notGraded());
     print('There is ${notGraded.length} ungraded posts');
   });
 //        var threadPage = new ThreadPage(elementFromHtml(firstPage));
 //        var html;
 //        var link;
 //        threadPages.add(threadPage);
-        
-        
-        
+
+
 //        while () {
-          
+
 //          html = get(link);
-          
+
 //          threadPages.add(threadPage);
 //        }
 //        print('#pages: ${threadPages.length}');
@@ -627,22 +652,26 @@ processThreadTest(String firstPage) {
 //      });
 }
 
-class Forum extends PageStreamer<ForumPage> { //mixin
+class Forum extends PageStreamer<ForumPage> {
+  //mixin
   ForumPage firstPage;
+
   Forum(this.firstPage);
+
   @override
   ForumPage pageFromHtml(String html) {
     return ForumPage.fromHtml(html);
   }
+
   async.Stream<Thread> streamThreads() {
     var threads = new async.StreamController();
     streamPages().listen((page) {
-      for(var t in page.threads) {
+      for (var t in page.threads) {
         threads.add(t);
         //print('adding thread');
         //throw('halt');
       }
-    }, onDone: ()=>threads.close());
+    }, onDone: () => threads.close());
     return threads.stream;
   }
 }
