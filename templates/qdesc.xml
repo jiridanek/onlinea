@@ -1,0 +1,27 @@
+<ISMU-EL-QUESTDESC>
+    <VERZE>1.1</VERZE>
+    <TEST_NAZEV>{{ quiz.name|e }}</TEST_NAZEV>
+    <TEST_POKYNY><![CDATA[<h4>Odpovědník v experimentálním režimu</h4>
+    <p>Za vyplnění tohoto odpovědníku nezískáte žádné body. Pokud nemáte zájem podílet se na úpravě odpovědníku pro účely jeho využití v Online A v budoucnosti, vůbec se do jeho vyplňování nepouštějte.</p>
+    <p>Odpovědník slouží pouze jako materiál k aktivitě Nová cvičení/Creating New Exercises. Pokud máte zájem na úpravě odpovědníku pracovat, požádejte si ve fóru <a href="https://is.muni.cz/auth/diskuse/diskusni_forum_indiv.pl?guz=50565298" target="_blank">Nová cvičení / Creating New Exercises</a>&nbsp;<img width="14" height="12" title="" alt="opens in a new window" src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsRAAALEQF/ZF+RAAAAB3RJTUUH1AIUABMIj/SukQAAAFZJREFUeJxj/P//PwMy6FjAgCqAAzARowgbYJk1axaqDWxpDBUJ+DV1LKDERgYGBoa0tDQU04gBZNtIf40s2ASJ8ufMmTP/EwOg6hhgmDKnzpo1i2SNAKMDQjIazaCkAAAAAElFTkSuQmCC" /> o právo odpovědník upravovat/vylepšit.</p>
+    <p>Při úpravě odpovědníku se soustřeďte na následující:</p>
+    <ol>
+        <li>Je video dostatečně kvalitní (jak po technické stránce, tak např. z hlediska výslovnosti/varianty angličtiny), aby mohlo být v Online A použito? Pokud si myslíte, že ne (nebo jste na pochybách), upozorněte nás na to.</li>
+        <li>Soustřeďte se na opravu chyb technických (nehraje video), gramatických, stylistických a jiných.</li>
+        <li>Zkuste odpovědník dále upravit – vylepšit a/nebo rozšířit otázky.</li>
+    </ol>
+    <p>Za první schválenou finální verzi Vámi vylepšeného odpovědníku získáte minimálně 50 bodů do Angličtiny online.</p>
+    <br></p><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Tento odpovědník</span>, jehož autorem je <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">[[zde uveďte svoje jméno]]</span>, podléhá licenci <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Uveďte autora-Zachovejte licenci 4.0 Mezinárodní </a><img width="14" height="12" title="" alt="opens in a new window" src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsRAAALEQF/ZF+RAAAAB3RJTUUH1AIUABMIj/SukQAAAFZJREFUeJxj/P//PwMy6FjAgCqAAzARowgbYJk1axaqDWxpDBUJ+DV1LKDERgYGBoa0tDQU04gBZNtIf40s2ASJ8ufMmTP/EwOg6hhgmDKnzpo1i2SNAKMDQjIazaCkAAAAAElFTkSuQmCC" />.<br />Vytvořeno na základě tohoto díla: <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.eslvideo.com/esl_video_view_quiz_inframe.php?id={{ quiz.id }}" rel="dct:source" target="_blank">eslvideo.com/…</a><img width="14" height="12" title="" alt="opens in a new window" src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsRAAALEQF/ZF+RAAAAB3RJTUUH1AIUABMIj/SukQAAAFZJREFUeJxj/P//PwMy6FjAgCqAAzARowgbYJk1axaqDWxpDBUJ+DV1LKDERgYGBoa0tDQU04gBZNtIf40s2ASJ8ufMmTP/EwOg6hhgmDKnzpo1i2SNAKMDQjIazaCkAAAAAElFTkSuQmCC" />]]></TEST_POKYNY>
+    <REZIM>cv</REZIM>
+    <PORADI_OTAZEK>zachovat</PORADI_OTAZEK>
+    <PORADI_ODPOVEDI>zachovat</PORADI_ODPOVEDI>
+    <NEBODOVAT>ano</NEBODOVAT>
+    <KDY_SPRAVNE_ODPOVEDI>ihned</KDY_SPRAVNE_ODPOVEDI>
+    <SKLADAT_OPAKOVANE>ano</SKLADAT_OPAKOVANE>
+    <SKLADAT_OD>201409151200</SKLADAT_OD>
+    <QREFSL>{{ qdef.qrefsl }}</QREFSL>
+    <SADY_OTAZEK URL="{{ qdef.url }}" POCET_OTAZEK="" BODY_VYNASOBIT="" PORADI_SADY="1"/>
+    <SADY_OTAZEK URL="/el/1441/podzim2014/ONLINE_A/odp/experiments/50542980/anketka.qdef" POCET_OTAZEK=""
+                 BODY_VYNASOBIT="" PORADI_SADY="2"/>
+    <PRAVA TYP="p" UPR="771131"/>
+</ISMU-EL-QUESTDESC>

@@ -1,0 +1,44 @@
+++<h3>Questionnaire Feedback</h3>
+<p>Tell us what you think about this questionnaire</p>
+--
+::Does the video play? Does the sound work?::
+ :r1 yes
+ :r2 no (please ignore the remaining questions)
+:r1:r2 ok
+--
+::How interesting was the topic for you?::
+ very interesting :r1 :r2 :r3 :r4 :r5 not interesting
+:r1:r2:r3:r4:r5 ok
+--
+::What have you learnt?::Please list three interesting English words, expressions, grammar facts or other realizations that the video and the questionnaire helped you to learn. If you cannot come up with three items, then list less.
+ :a(40x10)
+--
+::Keywords::Please provide a comma-separated list of words and short phrases that in your opinion characterize the video and the questionnaire.
+
+<b>Common keywords</b>
+<i>popular science, documentary, cartoon, travel, travel guide, fairy tale, movie trailer,</i>
+<i>music video, song, Coldplay, Steve Jobs,</i>
+<i>grammar, educational, present perfect, BBC, USA, UK, Canada, history, retro,</i>
+<i>American English, British English, silent,</i>
+<i>funny, boring, sad, romantic</i>
+ :a(80x5)
+--
+How many questions do you think you got right?
+
+
+ :n
+:n="0-100" ok
+--
+How difficult was the exercise for you?
+
+
+ very difficult :r1 :r2 :r3 :r4 :r5 very easy
+:r1:r2:r3:r4:r5 ok
+--
+For what Language Levels (<a href="http://www.deutsch-als-fremdsprache.org/en/faq/323-what-does-language-level-a1-a2-b1-b2-c1-and-c2-mean.html" target="_blank">definition</a> <img width="14" height="12" title="" alt="opens in a new window" src="data: image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsRAAALEQF/ZF+RAAAAB3RJTUUH1AIUABMIj/SukQAAAFZJREFUeJxj/P//PwMy6FjAgCqAAzARowgbYJk1axaqDWxpDBUJ+DV1LKDERgYGBoa0tDQU04gBZNtIf40s2ASJ8ufMmTP/EwOg6hhgmDKnzpo1i2SNAKMDQjIazaCkAAAAAElFTkSuQmCC" />) do you think is the exercise appropriate?
+
+
+ :c1 A    :c2 B    :c3 C    :c4 None
+:c1:c2:c3:c4 ok
+--
+Do you have any thoughts or suggestions regarding this exercise? (leave blank if none)<div id='otazka_8MvM34'>  :a(80x10) </div><p class="wordCounter" > </p><script type="text/javascript">installCounterWU('otazka_8MvM34'); countWordsUnlimited('otazka_8MvM34')</script>

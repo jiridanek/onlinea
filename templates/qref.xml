@@ -1,0 +1,5 @@
+<ISMU-EL-QUESTREF>
+    <QDESC_URL>
+        {{ qdesc.url }}
+    </QDESC_URL>
+</ISMU-EL-QUESTREF>
