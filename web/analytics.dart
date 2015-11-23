@@ -14,7 +14,8 @@ _ga(List args) {
   _context_ga.apply(args);
 }
 
-sendEvent({String category, String action, String label: null, num value: null}) {
+sendEvent(
+    {String category, String action, String label: null, num value: null}) {
   _ga(['send', 'event', category, action, label, value]);
 }
 
@@ -22,9 +23,13 @@ setLocation(String value) {
   _ga(['set', 'location', value]);
 }
 
-sendPageview({bool nonInteraction:false}) {
+sendPageview({bool nonInteraction: false}) {
   _ga(['send', 'pageview']);
-  if(nonInteraction) {
-    _ga(['send', 'pageview', new js.JsObject.jsify({"nonInteraction": true})]);
+  if (nonInteraction) {
+    _ga([
+      'send',
+      'pageview',
+      new js.JsObject.jsify({"nonInteraction": true})
+    ]);
   }
 }
