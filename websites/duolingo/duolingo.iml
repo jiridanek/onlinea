@@ -2,5 +2,7 @@
 <module version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="GOPATH &lt;duolingo&gt;" level="project" />
+    <orderEntry type="library" name="GOPATH &lt;onlinea&gt;" level="project" />
   </component>
 </module>

@@ -111,7 +111,6 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/jade/node_modules/transformers/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../golang/protobuf/protoc-gen-go/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
-      <root url="file://$PROJECT_DIR$/websites/duolingo" />
       <root url="file://$PROJECT_DIR$/opus_web_audio/src/CMakeFiles/encoder.dir/__" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/oracle/testdata" />
@@ -146,6 +145,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/node-sass/node_modules/pangyp/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/v8flags/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/gulp-util/node_modules/chalk/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/../oauth/.idea" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-stylus/node_modules/gulp-util/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/src/github.com/gorilla/mux/.git" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/pointer/testdata" />
