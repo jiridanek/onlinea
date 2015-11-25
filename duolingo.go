@@ -52,17 +52,13 @@ func Duolingo(args []string) {
 	if *blok != "" {
 		records := readBlok(*blok)
 
-		students, events := duolingo(begin_date, end_date, "")
+		students, events := fetch_activity_for_week(begin_date, end_date)
 		print_scores(records, students, events)
 	}
 	if *nick != "" {
-		students, events := duolingo(begin_date, end_date, *nick)
-		_ = students
+		student, event := fetch_activity_for_week_for_nick(begin_date, end_date, *nick)
+		_ = student
 		record := bloky.Record{[]string{"", "", "", "", "", "", "", ""}}
-		if len(events) != 1 {
-			panic("len events is not 1")
-		}
-		var event EventsOrErr = events[0]
 		print_scores_student(os.Stdout, record, event, false)
 	}
 }
@@ -95,18 +91,17 @@ func fetch_activity_for_week_for_nick(begin_date, end_date, nick string) (duo.Ob
 			continue
 		}
 		user_id := fmt.Sprintf("%d", student.User_id)
-		if events[user_id].Err != nil {
+		if events[user_id].Err != "" {
 			return student, events[user_id]
 		}
 		res, err := fetch_activity_for_week_for_id(begin_date, end_date, user_id)
 		if err != nil {
 			return student, EventsOrErr{Events: res.Events}
 		} else {
-			return student, EventsOrErr{Err: err}
+			return student, EventsOrErr{Err: fmt.Sprint(err)}
 		}
 	}
-	log.Panic("nick not found, does not exist or not leaning en")
-	return nil, nil
+	panic("nick not found, does not exist or not leaning en")
 }
 
 func fetch_activity_for_week_for_id(begin_date, end_date, user_id string) (res duo.EventsResult, err error) {
@@ -117,6 +112,7 @@ func fetch_activity_for_week_for_id(begin_date, end_date, user_id string) (res d
 		}
 		return
 	}
+	return
 }
 
 func fetch_student_list_and_errors() ([]duo.Observee, map[string]EventsOrErr) {
@@ -137,14 +133,6 @@ func fetch_student_list_and_errors() ([]duo.Observee, map[string]EventsOrErr) {
 		students = append(students, observee)
 	}
 	return students, events
-}
-
-func duolingo(begin_date, end_date, nick string) ([]duo.Observee, map[string]EventsOrErr) {
-	if nick != "" {
-		return fetch_activity_for_week(begin_date, end_date)
-	} else {
-		return fetch_activity_for_week_for_nick(begin_date, end_date, nick)
-	}
 }
 
 func readBlok(fname string) []bloky.Record {
