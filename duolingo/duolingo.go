@@ -136,3 +136,19 @@ func DoDashboardGet() DashboardResult {
 	}
 	return students
 }
+
+func Score(event Event) int {
+	switch event.Type {
+	case "lesson":
+		return 10
+	case "test":
+		return 10
+	case "practice":
+		if event.Skill_title == "" {
+			return 15
+		}
+		return 0
+	default:
+		return 0
+	}
+}

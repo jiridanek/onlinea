@@ -23,10 +23,9 @@ func duoTime() time.Time {
 }
 
 func weekDateString(t time.Time) (int, string, string) {
-	i := 1
-
 	start_date := duo.First
 
+	i := 0
 	next := start_date
 	for next.Before(t) {
 		i++
@@ -37,7 +36,6 @@ func weekDateString(t time.Time) (int, string, string) {
 	end_date := start_date.AddDate(0, 0, 6)
 
 	return i, start_date.Format(duo.Format), end_date.Format(duo.Format)
-
 }
 
 func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
@@ -111,22 +109,6 @@ func render(w io.Writer, report Report) {
 	tmpl.Execute(w, report)
 }
 
-func score(event duo.Event) int {
-	switch event.Type {
-	case "lesson":
-		return 10
-	case "test":
-		return 10
-	case "practice":
-		if event.Skill_title == "" {
-			return 15
-		}
-		return 0
-	default:
-		return 0
-	}
-}
-
 func print_scores_student(w io.Writer, events []duo.Event) {
 	nlessons := 0
 	plessons := 0
@@ -137,13 +119,13 @@ func print_scores_student(w io.Writer, events []duo.Event) {
 		switch event.Type {
 		case "lesson", "test":
 			nlessons++
-			plessons += score(event)
+			plessons += duo.Score(event)
 		case "practice":
 			if event.Skill_title != "" { // practicing a concrete skill
 				continue
 			}
 			npractices++
-			ppractices += score(event)
+			ppractices += duo.Score(event)
 		}
 	}
 
@@ -167,7 +149,7 @@ func print_scores_student(w io.Writer, events []duo.Event) {
 		fmt.Fprintf(w, "\n")
 	} else {
 		for _, event := range events {
-			fmt.Fprintf(w, "%30s %10s %5d\n", event.Skill_title, event.Type, score(event))
+			fmt.Fprintf(w, "%30s %10s %5d\n", event.Skill_title, event.Type, duo.Score(event))
 		}
 	}
 	fmt.Fprintf(w, "--------------------------------------------------\n")

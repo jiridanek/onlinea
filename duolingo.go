@@ -173,22 +173,6 @@ func print_scores(records []bloky.Record, students []duo.Observee, events map[st
 	}
 }
 
-func score(event duo.Event) int {
-	switch event.Type {
-	case "lesson":
-		return 10
-	case "test":
-		return 10
-	case "practice":
-		if event.Skill_title == "" {
-			return 15
-		}
-		return 0
-	default:
-		return 0
-	}
-}
-
 func printBlokRecordHeader(w io.Writer, id string) {
 	fmt.Fprintf(w, "\t\t\t\t\t\t%s\t", id)
 }
@@ -208,13 +192,13 @@ func print_scores_student(w io.Writer, student bloky.Record, eventsOrErr EventsO
 			switch event.Type {
 			case "lesson", "test":
 				nlessons++
-				plessons += score(event)
+				plessons += duo.Score(event)
 			case "practice":
 				if event.Skill_title != "" { // practicing a concrete skill
 					continue
 				}
 				npractices++
-				ppractices += score(event)
+				ppractices += duo.Score(event)
 			}
 		}
 
@@ -243,7 +227,7 @@ func print_scores_student(w io.Writer, student bloky.Record, eventsOrErr EventsO
 		} else {
 			for _, event := range events {
 				if !brief {
-					fmt.Fprintf(w, "|%30s %10s %5d\n", event.Skill_title, event.Type, score(event))
+					fmt.Fprintf(w, "|%30s %10s %5d\n", event.Skill_title, event.Type, duo.Score(event))
 				}
 			}
 		}
