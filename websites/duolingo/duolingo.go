@@ -8,9 +8,9 @@ import (
 	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/urlfetch"
 	"google.golang.org/appengine/user"
+	"html/template"
 	"io"
 	"net/http"
-	"net/http/cookiejar"
 	"time"
 )
 
@@ -69,29 +69,28 @@ func showDuolingoActivity(uco string, w http.ResponseWriter, r *http.Request) {
 	report.Tyden = fmt.Sprintf("%d (od %s do %s včetně), v New Yorku je nyní %v", week, begin_date, end_date, now)
 
 	if student.Uco == "" || student.Nick == "" {
-		report.Err = "Vaše přezdívka na Duolingo není v seznamu. Pokud studujete ONLINE_A, napište mi vaši přezdívku do vlákna v diskusi a já vás do seznamu přidám."
+		report.Err = "Vaše přezdívka na Duolingo není v seznamu.<br>Pokud studujete ONLINE_A, napište mi vaši přezdívku do vlákna v diskusi a já vás do seznamu přidám."
 		render(w, report)
 		return
 	}
 	if student.Id == "" {
-		report.Err = "Nepodařilo se načíst váš profil na Duolingu. Klikli jste na odkaz v Úvodních instrukcích?"
+		report.Err = "Nepodařilo se načíst váš profil na Duolingu.<br>Klikli jste na odkaz v Úvodních instrukcích?"
 		render(w, report)
 		return
 	}
 
 	student_id = student.Id
 
-	cookieJar, _ := cookiejar.New(nil)
 	client := urlfetch.Client(c)
-	client.Jar = cookieJar
-	duo.InjectClient(client)
-
-	duo.DoLogin()
-	events, err := duo.DoEventsGet(student_id, begin_date, end_date)
+	client.Jar = duo.Session.Jar
+	if duo.DoLoginIfNecessary(client) != nil {
+		log.Infof(c, "Logging into Duolingo")
+	}
+	events, err := duo.DoEventsGet(client, student_id, begin_date, end_date)
 	if err != nil {
 		log.Errorf(c, "Fetching Duolingo events (student_id: %s, week: %d)failed: %v", student_id, week, err)
-		report.Err = fmt.Sprintf("Načtení aktivit za týden %s selhalo\nasi mate Duolingo prepnute do jineho nez anglickeho"+
-			"kurzu\nv takovem pripade bohuzel nevidim vase ziskane body:\n\n%v", week, err)
+		report.Err = template.HTML(fmt.Sprintf("Načtení aktivit za týden %d selhalo.<br>Asi mate Duolingo prepnute do jineho nez anglickeho"+
+			" kurzu.<br>V takovem pripade bohuzel nevidim vase ziskane body:<br><br>%s", week, template.HTMLEscaper(err)))
 		render(w, report)
 		return
 	}

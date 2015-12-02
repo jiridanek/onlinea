@@ -8,7 +8,7 @@ import (
 var tmpl = template.Must(template.ParseGlob("templates/amp.html"))
 
 type Report struct {
-	Err              string
+	Err              template.HTML
 	Uco, Jmeno, Nick string
 	Tyden, Tabulka   string
 }

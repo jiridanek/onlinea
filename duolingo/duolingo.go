@@ -2,7 +2,6 @@ package duo
 
 import (
 	"encoding/json"
-	//     "strings"
 	"fmt"
 	"github.com/jirkadanek/onlinea/secrets"
 	"io/ioutil"
@@ -10,6 +9,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"sync"
 	"time"
 )
 
@@ -18,16 +18,18 @@ var (
 	Format = "2006-01-02"
 )
 
-// cookieJar is a global, per-server store for Duolingo session cookie
-//FIXME: timeout?
-var cookieJar, _ = cookiejar.New(nil)
-var client = &http.Client{
-	Jar: cookieJar,
+type session struct {
+	mu       sync.Mutex
+	deadline time.Time
+	isSet    bool
+	Jar      http.CookieJar // has own mutex and can be accessed regardless of mu
 }
 
-func InjectClient(c *http.Client) {
-	client = c
-}
+var jar, _ = cookiejar.New(nil)
+var DefaultClient = &http.Client{Jar: jar}
+
+// Session is a per-server store for Duolingo session data
+var Session = session{isSet: false, Jar: jar}
 
 func printResponse(res *http.Response) {
 	t, err := ioutil.ReadAll(res.Body)
@@ -39,7 +41,19 @@ func printResponse(res *http.Response) {
 	fmt.Println(res.Status)
 }
 
-func DoLogin() LoginResult {
+// Do not ever use DoLogin when using this function
+func DoLoginIfNecessary(client *http.Client) *LoginResult {
+	Session.mu.Lock()
+	defer Session.mu.Unlock()
+	if !Session.isSet || time.Now().After(Session.deadline) {
+		Session.isSet = false
+		loginResult := DoLogin(client)
+		return &loginResult
+	}
+	return nil
+}
+
+func DoLogin(client *http.Client) LoginResult {
 	auth := map[string]string{
 		"came_from": "",
 		"login":     secrets.DuolingoLogin,
@@ -64,29 +78,29 @@ func DoLogin() LoginResult {
 		log.Fatal(err)
 	}
 
+	updateDeadline(res.Cookies())
+
 	return result
+}
 
-	// robots, err := ioutil.ReadAll(res.Body)
-	// 	res.Body.Close()
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
-	// 	fmt.Printf("%s", robots)
-
-	//     d := json.NewDecoder(res.Body)
-	//     var result LoginResult
-	//     err = d.Decode(&result)
-	//     if err != nil {
-	//         log.Fatal(err)
-	//     }
-	//     log.Println(res.Status)
-	//     log.Printf("%v %v %v", result.response, result.username, result.user_id)
-	// }
+func updateDeadline(cookies []*http.Cookie) {
+	var deadline time.Time
+	for _, cookie := range cookies {
+		if cookie.Name == "auth_tkt" {
+			deadline = cookie.Expires
+			break
+		}
+	}
+	if !deadline.IsZero() {
+		deadline = deadline.AddDate(0, 0, -1)
+	}
+	Session.isSet = true
+	Session.deadline = deadline
 }
 
 var host = "https://dashboard.duolingo.com"
 
-func DoEventsGet(student_id, begin_date, end_date string) (EventsResult, error) {
+func DoEventsGet(client *http.Client, student_id, begin_date, end_date string) (EventsResult, error) {
 	var result EventsResult
 
 	addr := host + "/api/1/observers/detailed_events"
@@ -118,7 +132,7 @@ func DoEventsGet(student_id, begin_date, end_date string) (EventsResult, error) 
 	return result, nil
 }
 
-func DoDashboardGet() DashboardResult {
+func DoDashboardGet(client *http.Client) DashboardResult {
 	addr := host + "/api/1/observers/progress_dashboard"
 	res, err := client.Get(addr)
 	if err != nil {

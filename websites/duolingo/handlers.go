@@ -11,7 +11,6 @@ import (
 	"google.golang.org/appengine/urlfetch"
 	"google.golang.org/appengine/user"
 	"net/http"
-	"net/http/cookiejar"
 	"strings"
 )
 
@@ -123,12 +122,10 @@ func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	cookieJar, _ := cookiejar.New(nil)
 	client := urlfetch.Client(c)
-	client.Jar = cookieJar
-	duo.InjectClient(client)
-	duo.DoLogin()
-	dashboard := duo.DoDashboardGet()
+	client.Jar = duo.Session.Jar
+	duo.DoLogin(client)
+	dashboard := duo.DoDashboardGet(client)
 	observees := dashboard.Observees
 
 	students := make([]Student, 0)

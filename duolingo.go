@@ -69,7 +69,7 @@ type EventsOrErr struct {
 }
 
 func fetch_activity_for_week(begin_date, end_date string) ([]duo.Observee, map[string]EventsOrErr) {
-	duo.DoLogin()
+	duo.DoLogin(duo.DefaultClient)
 	students, events := fetch_student_list_and_errors()
 	for _, student := range students {
 		user_id := fmt.Sprintf("%d", student.User_id)
@@ -83,7 +83,7 @@ func fetch_activity_for_week(begin_date, end_date string) ([]duo.Observee, map[s
 }
 
 func fetch_activity_for_week_for_nick(begin_date, end_date, nick string) (duo.Observee, EventsOrErr) {
-	duo.DoLogin()
+	duo.DoLogin(duo.DefaultClient)
 	students, events := fetch_student_list_and_errors()
 
 	for _, student := range students {
@@ -106,7 +106,7 @@ func fetch_activity_for_week_for_nick(begin_date, end_date, nick string) (duo.Ob
 
 func fetch_activity_for_week_for_id(begin_date, end_date, user_id string) (res duo.EventsResult, err error) {
 	for i := 0; i < 10; i++ {
-		res, err = duo.DoEventsGet(user_id, begin_date, end_date)
+		res, err = duo.DoEventsGet(duo.DefaultClient, user_id, begin_date, end_date)
 		if err != nil {
 			continue
 		}
@@ -119,7 +119,7 @@ func fetch_student_list_and_errors() ([]duo.Observee, map[string]EventsOrErr) {
 	students := make([]duo.Observee, 0)
 	events := make(map[string]EventsOrErr)
 
-	dashboard := duo.DoDashboardGet()
+	dashboard := duo.DoDashboardGet(duo.DefaultClient)
 	for _, observee := range dashboard.Observees {
 		if observee.Learning_language != "en" {
 			user_id := fmt.Sprintf("%d", observee.User_id)
