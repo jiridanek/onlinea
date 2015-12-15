@@ -2,8 +2,13 @@
 <module type="GO_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Python" name="Python">
-      <configuration sdkName="Python 3.5.0 (/usr/bin/python3.5)" />
+      <configuration sdkName="" />
     </facet>
+  </component>
+  <component name="GoLibraries">
+    <option name="urls">
+      <set />
+    </option>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -112,6 +117,5 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="GOPATH &lt;onlinea&gt;" level="project" />
-    <orderEntry type="library" name="Python 3.5.0 (/usr/bin/python3.5) interpreter library" level="application" />
   </component>
 </module>
