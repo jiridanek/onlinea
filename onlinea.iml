@@ -2,13 +2,8 @@
 <module type="GO_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Python" name="Python">
-      <configuration sdkName="" />
+      <configuration sdkName="Python 3.5.1 (/usr/bin/python3)" />
     </facet>
-  </component>
-  <component name="GoLibraries">
-    <option name="urls">
-      <set />
-    </option>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -114,8 +109,9 @@
       <excludeFolder url="file://$MODULE_DIR$/websites/translations/web/images/touch/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/translations/web/packages" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.5.1 (/usr/bin/python3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="GOPATH &lt;onlinea&gt;" level="project" />
+    <orderEntry type="library" name="Python 3.5.1 (/usr/bin/python3) interpreter library" level="application" />
   </component>
 </module>

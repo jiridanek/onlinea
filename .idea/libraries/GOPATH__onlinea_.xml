@@ -21,6 +21,7 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/net/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/jade/node_modules/transformers/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/qansw" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/latest-version/node_modules/package-json/node_modules/registry-url/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/express/node_modules/send/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/.git" />
@@ -46,6 +47,7 @@
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/oauth2/.git" />
       <root url="file://$PROJECT_DIR$/src/google.golang.org/cloud/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/chalk/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/qansw/__pycache__" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/oauth2/google/testdata" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/ssa/interp/testdata" />
       <root url="file://$PROJECT_DIR$/../../golang/protobuf/.git" />

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/onlinea.iml" filepath="$PROJECT_DIR$/onlinea.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qansw/qansw.iml" filepath="$PROJECT_DIR$/qansw/qansw.iml" />
     </modules>
   </component>
 </project>
