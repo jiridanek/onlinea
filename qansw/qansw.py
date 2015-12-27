@@ -3,6 +3,8 @@ import json
 import os
 import xml.etree.ElementTree as ET
 
+import sys
+
 
 def parsexml(f):
     result = []
@@ -90,47 +92,84 @@ def parse_cas():
     with open(os.path.join(file_dir, '..', 'json', 'casy.json'), 'w') as fp:
         json.dump(result, fp)
 
+class Question:
+    def __init__(self, idmd5, text):
+        self.idmd5 = idmd5
+        self.text = text
 
-def parse_t_answers(file_dir):
-    file_path = '01_L21.xml'
 
-    odpovednik = {'otazky': [], 'pruchody': []}
+def merge_t_answers_by_idmd5(answers):
+    merged = {}
+    for answer in answers:
+        if not answer['idmd5'] in merged:
+            merged[answer['idmd5']] = answer
+        else:
+            merged[answer['idmd5']]['odpovedi'].extend(answer['odpovedi'])
+    return merged
 
-    with open(os.path.join(file_dir, file_path)) as fp:
-        tree = ET.fromstring(fp.read())
-        for prochazejici in tree.findall('.//PROCHAZEJICI'):
-            uco = prochazejici.attrib['UCO']
-            jmeno = prochazejici.attrib['UCO']
-            for pruchod in prochazejici.findall('./PRUCHOD'):
-                otazky = {}
-                for otazka in pruchod.findall('./OTAZKA'):
-                    poradi = otazka.attrib['PORADI']
-                    idmd5 = otazka.find('./IDMD5').text
-                    sada = otazka.find('./SADA').text
+class QANSW:
+    def __init__(self, file_path):
+        fp = open(file_path)
+        self.tree = ET.fromstring(fp.read())
 
-                    otazky[poradi] = {'idmd5': idmd5, 'sada': sada, 'odpovedi': [], 'body': None}
-                for akce_c in pruchod.findall('./AKCE[@TYP="c"]'):
-                    cas = akce_c.attrib['CAS']
-                    for odpoved in akce_c.findall('./ODP'):
-                        poradi = odpoved.attrib['POR']
-                        id = odpoved.attrib['ID']
-                        hodnota = odpoved.attrib['HOD']
+    def t_answers_unmerged(self):
+        result = []
+        for pruchod in self.tree.findall('.//PROCHAZEJICI/PRUCHOD'):
+            otazky = {}
 
-                        otazky[poradi]['odpovedi'].append({'id': id, 'hodnota': hodnota})
-                    for bod in akce_c.findall('./BOD'):
-                        poradi = bod.attrib['POR']
-                        pocet = bod.attrib['POC']
+            for otazka in pruchod.findall('./OTAZKA'):
+                poradi = otazka.attrib['PORADI']
+                idmd5 = otazka.find('./IDMD5').text
+                sada = otazka.find('./SADA').text
 
-                        otazky[poradi]['body'] = {'pocet': pocet}
-                odpovednik['pruchody'].append({'otazky': otazky})
+                otazky[poradi] = {'idmd5': idmd5, 'sada': sada, 'odpovedi': []}
 
-        for otazka in tree.findall('.//TEXTREG/TEXT'):
+            for akce in pruchod.findall('./AKCE'):
+                odpovedi = {}
+                for odpoved in akce.findall('./ODP'):
+                    poradi = odpoved.attrib['POR']
+                    id = odpoved.attrib['ID']
+                    hodnota = odpoved.attrib['HOD']
+
+                    if not poradi in odpovedi:
+                        odpovedi[poradi] = []
+                    odpovedi[poradi].append({'id': id, 'hodnota': hodnota})
+
+                for bod in akce.findall('./BOD'):
+                    poradi = bod.attrib['POR']
+                    pocet = bod.attrib['POC']
+
+                    if poradi in odpovedi:
+                        # skip last word and nulls
+                        for i, ok in enumerate([x for x in pocet.split() if x != 'null'][:-1]):
+                            try:
+                                odpovedi[poradi][i]['body'] = ok
+                            except IndexError:
+                                continue
+                                idmd5 = otazky[poradi]['idmd5']
+                                q = None
+                                for qq in self.questions():
+                                    if qq.idmd5 == idmd5:
+                                        q = qq.text
+
+                                print(pocet, odpovedi[poradi], file=sys.stderr)
+                                print("overlapping options in question: ", q, file=sys.stderr)
+                                #raise('halt')
+
+                for poradi in otazky.keys():
+                    if poradi in odpovedi:
+                        otazky[poradi]['odpovedi'].extend(odpovedi[poradi])
+
+            result.extend(list(otazky.values()))
+        return result
+
+    def questions(self):
+        result = []
+        for otazka in self.tree.findall('.//TEXTREG/TEXT'):
             idmd5 = otazka.attrib['IDMD5']
             text = otazka.text
-
-            odpovednik['otazky'].append({'idmd5': idmd5, 'text': text})
-
-    return odpovednik
+            result.append(Question(idmd5, text))
+        return result
 
 
 
