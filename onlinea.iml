@@ -109,7 +109,7 @@
       <excludeFolder url="file://$MODULE_DIR$/websites/translations/web/images/touch/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/translations/web/packages" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.5.1 (/usr/bin/python3)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Go 1.5.1" jdkType="Go SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="GOPATH &lt;onlinea&gt;" level="project" />
     <orderEntry type="library" name="Python 3.5.1 (/usr/bin/python3) interpreter library" level="application" />
