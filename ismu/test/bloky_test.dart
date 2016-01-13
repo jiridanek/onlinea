@@ -5,9 +5,19 @@ import 'package:html/dom.dart' as dom;
 
 import "data_notebooks.dart" as data;
 
+// https://is.muni.cz/auth/student/poznamkove_bloky_nahled?studium=vse;obdobi=6184
+
 main() {
   $.group('', () {
-    var b = new notebooks.Blok();
+    $.test('', () {
+      $.expect(notebooks.escapeNblokus(['a']), 'nbloku=a');
+      $.expect(notebooks.escapeNblokus(['a', 'b']), 'nbloku=a;nbloku=b');
+      $.expect(notebooks.escapeNblokus(['a', 'b', 'c']), 'nbloku=a;nbloku=b;nbloku=c');
+      $.expect(notebooks.escapeNblokus(['Discussion Forum for Points (Bg19)']), 'nbloku=Discussion%20Forum%20for%20Points%20(Bg19)');
+    });
+  });
+  $.group('', () {
+    var b = new notebooks.RegularBlok();
     $.test('', () {
       var tt = [
         ['', 0],
@@ -62,6 +72,15 @@ main() {
         var id = course.id;
         records[id] = bloky.bloky(id);
       }
+    });
+    var onlinea = bloky.bloky(bloky.courses.firstWhere((notebooks.Predmet p) => p.code == 'ONLINE_A').id);
+    $.test("discussion", () {
+      var b2 = onlinea.firstWhere((notebooks.Blok b) => b.name == 'PdF:ONLINE_A/BC1 Discussion For Points');
+      var sum =  onlinea.firstWhere((notebooks.Blok b) => b.name == 'Sum of Points from Discussion');
+
+      $.expect(sum.totalPoints, 160);
+
+      $.expect(b2.totalPoints, 115);
     });
   });
 }
