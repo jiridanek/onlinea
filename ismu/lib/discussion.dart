@@ -70,48 +70,23 @@ async.Future<List> fetchMySeminarGroup(int term, String course) {
   return completer.future;
 }
 
-/*
-
- * https://is.muni.cz/auth/ucitel/ucitel_diskusni_fora.pl?fakulta=1441;predmet=771131;obdobi=5846 
-
-var out = {};
-
-var nastavenis = document.querySelectorAll("#aplikace > ul:nth-child(14) > li > ul:nth-child(3) > li > a:nth-child(2)");
-for(var i = 0; i <  nastavenis.length; i++) {
-  var a = nastavenis[i].previousElementSibling;
-  if (/For points/.test(a.text)) {
-    console.log(a.text);
-    var name = /For points (.*)/.exec(a.text)[1];
-    var guz = /guz=([0-9]*)/.exec(a.href)[1];
-    out[name] = guz;
+// https://is.muni.cz/auth/ucitel/ucitel_diskusni_fora.pl?fakulta=1441;predmet=771131;obdobi=5846
+Map getGroupGuzs(document, Pattern namePattern) {
+  var guzs = {};
+  //"#aplikace > ul:nth-child(14) > li > ul:nth-child(3) > li > a:nth-child(2)") // does not work with html5lib
+  var nastavenis = document.querySelectorAll("#aplikace a").where((a) => a.text == 'nastavení');
+  for (var nastaveni in nastavenis) {
+    var a = nastaveni.previousElementSibling;
+    var m = namePattern.matchAsPrefix(a.text);
+    if (m != null) {
+      var name = m.group(1);
+      var guz = new RegExp(r'guz=(\d+)').firstMatch(a.attributes['href']).group(1);
+      guzs[name] = guz;
+    }
   }
+  return guzs;
 }
 
-console.log(window.JSON.stringify(out));
-
- * https://is.muni.cz/auth/ucitel/ucitel_diskusni_fora.pl?fakulta=1441;obdobi=6084;predmet=771131
- 
-var out = {};
-
-var nastavenis = document.querySelectorAll("#aplikace > ul:nth-child(14) > li > ul:nth-child(3) > li > a:nth-child(2)");
-for(var i = 0; i <  nastavenis.length; i++) {
-  var a = nastavenis[i].previousElementSibling;
-  if (/Discussion For Points/.test(a.text)) {
-    console.log(a.text);
-    var name = /PdF:ONLINE_A\/([A-Z]*[0-9]*)/.exec(a.text)[1];
-    var guz = /guz=([0-9]*)/.exec(a.href)[1];
-    out[name] = guz;
-  }
-}
-
-console.log(window.JSON.stringify(out));
-
- */
-
-var groupToGuzJaro2014 = {"A level /01":"46976735", "A level /02":"46976742", "A level /03":"46976747", "A level /04":"46976750", "A level /05":"46976756", "A level /08":"46976766", "A level /09":"46976937", "A level /10":"46976969", "B level /12":"46987544", "B level /13":"46987546", "B level /14":"46987548", "B level /15":"46987550", "B level /16":"46987552", "B level /17":"46987554", "B level /18":"46987658", "B level /19":"46987763", "B level /20":"46987765", "B level /21":"46987767", "B level /22":"46987769", "B level /23":"46987771", "B level /24":"46987774", "B level /25":"46987776", "B level /26":"46987778", "B level /27":"46987780", "B level /28":"46987782", "B level /29":"46987784", "B level /30":"46987786", "B - C level /38":"46988210", "C level /37":"46988212", "C level /35":"46988214", "C level /36":"46988216"};
-
-//var groupToGuzPodzim2014 = {"A1":"50462366","C2":"50462399","C1":"50462402","BC1":"50462405","A2":"50462413","A3":"50462415","A4":"50462417","A5":"50462419","A6":"50462422","B1":"50462424","B2":"50462427","B3":"50462429","B4":"50462431","B5":"50462433","B6":"50462435","B7":"50462437","B8":"50462439","B9":"50462441","B10":"50462444","B11":"50462446","B12":"50462497","B13":"50462499","B14":"50462501","B15":"50462503","B16":"50462506","B17":"50462510"};
-var groupToGuzPodzim2014 = {"A1":"50462366", "C2":"50462399", "C1":"50462402", "BC1":"50462405", "A2":"50462413", "A3":"50462415", "A4":"50462417", "A5":"50462419", "A6":"50462422", "B1":"50462424", "B2":"50462427", "B3":"50462429", "B4":"50462431", "B5":"50462433", "B6":"50462435", "B7":"50462437", "B8":"50462439", "B9":"50462441", "B10":"50462444", "B11":"50462446", "B12":"50462497", "B13":"50462499", "B14":"50462501", "B15":"50462503", "B16":"50462506", "B17":"50462510", "B18":"50802379", "B19":"50802482", "B20":"50802523", "B21":"50802540", "B22":"50802552", "B23":"50802560", "B24":"50980016", "B25":"50980027", "B26":"50980052"};
 
 async.Future postNewThread(String guz, String subject, String body, {bool isHtml:false}) {
   //var guz = '50462499';
@@ -342,7 +317,7 @@ class Post {
   DateTime editted() {
     try {
       return new DateTime(int.parse(g(8)), int.parse(g(7)), int.parse(g(6)), int.parse(g(9)), int.parse(g(10)));
-    } on ArgumentError catch (e) {
+    } on ArgumentError {
       return submitted();
     }
   }
@@ -415,11 +390,12 @@ evaluate(String query, html) {
 
 void _run(url, func) {
   LogInPage.logIn('dnk', 'password')
-    .then((r) => get(url))
-    .then((r) {
-      func(r);
-    }
+      .then((r) => get(url))
+      .then((r) {
+    func(r);
+  }
   );
+}
 
 //void _run(url, func) {
 //  LogInPage.logIn(USERNAME, PASSWORD)
@@ -442,7 +418,6 @@ String forceCzechL10n(String oldurl) {
   var url = uri.replace(queryParameters: query).toString();
 //  print(url);
   return url;
->>>>>>> 0ce1a81... force czech locales; in marking ungraded messages unread messages are now not kept unerad (it was flaky at best); some methods for fetching students own seminar/discussion group for Speaking exercise
 }
 
 markAllUngraded(String url, progress) {
