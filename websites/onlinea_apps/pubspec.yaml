@@ -1,0 +1,8 @@
+name: online_a_app
+description: A sample Chrome packaged application
+dependencies:
+  chrome: any
+  ismu:
+    path: ../../ismu
+transformers:
+- chrome

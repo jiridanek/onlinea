@@ -118,6 +118,9 @@
       <excludeFolder url="file://$MODULE_DIR$/websites/online_a_app/web/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/online_a_ropot_description/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/online_a_ropot_description/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/onlinea_apps/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/onlinea_apps/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/onlinea_apps/web/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/songquizui/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/songquizui/web/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/transcribe/packages" />
