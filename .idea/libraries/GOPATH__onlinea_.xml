@@ -38,7 +38,9 @@
       <root url="file://$PROJECT_DIR$/../../gorilla/sessions/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-livescript/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/gulp-util/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/websites/homepage/.pub" />
       <root url="file://$PROJECT_DIR$/../../GoogleCloudPlatform/go-endpoints/.git" />
+      <root url="file://$PROJECT_DIR$/websites/homepage/.idea" />
       <root url="file://$PROJECT_DIR$/duolingo/API/swagger/__pycache__" />
       <root url="file://$PROJECT_DIR$/../../gorilla/securecookie/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/tildify/node_modules/.bin" />
@@ -80,6 +82,7 @@
       <root url="file://$PROJECT_DIR$/../../../google.golang.org/cloud/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/jade/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/src/golang.org/x/net/.git" />
+      <root url="file://$PROJECT_DIR$/../../llgcode/draw2d/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/jade/node_modules/with/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/go/callgraph/rta/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/configstore/node_modules/js-yaml/node_modules/.bin" />
@@ -106,6 +109,7 @@
       <root url="file://$PROJECT_DIR$/NotGradedPostsExtension/.pub" />
       <root url="file://$PROJECT_DIR$/onlinea_static_web/node_modules/karma/node_modules/http-proxy/node_modules/utile/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/NotGradedPostsExtension/.idea" />
+      <root url="file://$PROJECT_DIR$/ismu/.pub" />
       <root url="file://$PROJECT_DIR$/src/google.golang.org/cloud/datastore/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-zip/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp/node_modules/gulp-util/node_modules/.bin" />
@@ -129,6 +133,7 @@
       <root url="file://$PROJECT_DIR$/../pandoc/data/docx/_rels" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/mongodb/node_modules/bson/build/Release/.deps" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/jade/node_modules/transformers/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/websites/homepage_/.pub" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-clean/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../pandoc/data/docx/word/_rels" />
       <root url="file://$PROJECT_DIR$/websites/ReceptorsInLungs/web/TOEFL/lame-3.99.5/frontend/.deps" />
@@ -147,7 +152,12 @@
       <root url="file://$PROJECT_DIR$/websites/ReceptorsInLungs/web/TOEFL/lame-3.99.5/mpglib/.deps" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-zip/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sourcemaps/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/websites/homepage_/web/styles/components/_modules" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/websites/homepage_/web/styles/components/_pages" />
+      <root url="file://$PROJECT_DIR$/../../golang/freetype/.git" />
+      <root url="file://$PROJECT_DIR$/../../golang/freetype/testdata" />
+      <root url="file://$PROJECT_DIR$/websites/homepage_/web/styles/components/_components" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/node-sass/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/websites/grabposts/.pub" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
@@ -158,15 +168,11 @@
       <root url="file://$PROJECT_DIR$/../../../google.golang.org/appengine/.git" />
       <root url="file://$PROJECT_DIR$/websites/ReceptorsInLungs/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/gulp-util/node_modules/.bin" />
-      <root url="file://$PROJECT_DIR$/websites/homepage/.pub" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp/node_modules/vinyl-fs/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/cmd/stringer/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/node-sass/node_modules/meow/node_modules/.bin" />
-      <root url="file://$PROJECT_DIR$/websites/homepage/web/styles/components/_components" />
-      <root url="file://$PROJECT_DIR$/websites/homepage/web/styles/components/_modules" />
-      <root url="file://$PROJECT_DIR$/websites/homepage/web/styles/components/_pages" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-jade/node_modules/jade/node_modules/monocle/node_modules/readdirp/examples/node_modules/event-stream/node_modules/optimist/test/_" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-clean/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/express/node_modules/send/node_modules/.bin" />
@@ -176,7 +182,9 @@
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/mongodb/node_modules/kerberos/build/Release/.deps" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-livescript/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp/node_modules/chalk/node_modules/.bin" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/image/testdata" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/cmd/bundle/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/image/.git" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/gulp-sass/node_modules/node-sass/node_modules/chalk/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-livescript/node_modules/gulp-util/node_modules/dateformat/node_modules/meow/node_modules/indent-string/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-chrome/node_modules/nib/node_modules/.bin" />
@@ -189,6 +197,7 @@
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/cmd/callgraph/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/ps-tree/node_modules/event-stream/node_modules/optimist/test/_" />
       <root url="file://$PROJECT_DIR$/src/golang.org/x/net/http2/testdata" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org/x/image/font/testdata" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/gulp-nodemon/node_modules/nodemon/node_modules/update-notifier/node_modules/latest-version/node_modules/package-json/node_modules/registry-url/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/feedlearn/feedlearn-logger/node_modules/express/node_modules/send/node_modules/.bin" />
       <root url="file://$PROJECT_DIR$/../../../golang.org/x/tools/.git" />

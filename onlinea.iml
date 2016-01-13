@@ -13,7 +13,10 @@
       <excludeFolder url="file://$MODULE_DIR$/NotGradedPostsExtension/packages" />
       <excludeFolder url="file://$MODULE_DIR$/NotGradedPostsExtension/web/images/packages" />
       <excludeFolder url="file://$MODULE_DIR$/NotGradedPostsExtension/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/bota" />
+      <excludeFolder url="file://$MODULE_DIR$/bota_imap" />
       <excludeFolder url="file://$MODULE_DIR$/form_data/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/ismu/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ismu/bin/packages" />
       <excludeFolder url="file://$MODULE_DIR$/ismu/packages" />
       <excludeFolder url="file://$MODULE_DIR$/ismu/test/packages" />
@@ -57,6 +60,18 @@
       <excludeFolder url="file://$MODULE_DIR$/websites/ReceptorsInLungs/web/TOEFL/speaking/resources/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/ReceptorsInLungs/web/TOEFL/vocabulary/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/ReceptorsInLungs/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/build" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/fragments/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/images/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/images/touch/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/styles/components/_components/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/styles/components/_modules/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/styles/components/_pages/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/styles/components/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/styles/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/_homepage/web/templates/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/grabposts/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/websites/grabposts/bin/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/grabposts/packages" />
@@ -67,18 +82,21 @@
       <excludeFolder url="file://$MODULE_DIR$/websites/historiepoznbloku/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/historiepoznbloku/test/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/homepage/.pub" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/build" />
       <excludeFolder url="file://$MODULE_DIR$/websites/homepage/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/fragments/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/images/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/images/touch/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/styles/components/_components/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/styles/components/_modules/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/styles/components/_pages/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/styles/components/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/styles/packages" />
-      <excludeFolder url="file://$MODULE_DIR$/websites/homepage/web/templates/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/build" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/fragments/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/images/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/images/touch/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/styles/components/_components/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/styles/components/_modules/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/styles/components/_pages/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/styles/components/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/styles/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/websites/homepage_/web/templates/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/lyricsquizzing/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/lyricsquizzing/web/packages" />
       <excludeFolder url="file://$MODULE_DIR$/websites/lyricsquizzing/web/songs/Basnici_ticha/packages" />
@@ -113,5 +131,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="GOPATH &lt;onlinea&gt;" level="project" />
     <orderEntry type="library" name="Python 3.5.1 (/usr/bin/python3) interpreter library" level="application" />
+    <orderEntry type="library" name="Dart SDK" level="application" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
   </component>
 </module>
