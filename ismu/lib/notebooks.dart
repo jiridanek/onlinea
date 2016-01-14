@@ -258,21 +258,30 @@ class HistorieRecord {
   var uco;
   var event;
   var text;
+  DateTime date;
+  String osoba;
+
+  String toString() {
+    return [name, uco, event, text, date, osoba].toString();
+  }
+
 }
 
 class BlokHistorie {
   List _lis;
 
-  static String URL(List<String> nblokus, {fakulta, obdobi, zuv}) {
+  static String URL(List<String> nblokus, {fakulta, obdobi, predmet}) {
     var bloky = escapeNblokus(nblokus);
-    return 'https://is.muni.cz/auth/ucitel/blok_historie?fakulta=${fakulta};obdobi=${obdobi};zuv=${zuv};${bloky};razeni=cas;vc_zrusenych=';
+    return 'https://is.muni.cz/auth/ucitel/blok_historie?fakulta=${fakulta};obdobi=${obdobi};predmet=${predmet};${bloky};razeni=cas;vc_zrusenych=';
   }
 
   BlokHistorie.fromDom(dom) {
     var ol = dom.querySelector('*[id=aplikace] > form > ol');
-    _lis = ol.querySelectorAll('li');
+    _lis = ol?.querySelectorAll('li') ?? [];
   }
 
+  /// This method is always wrong in case the date in blok are messy: unescaped HTML
+  /// (see tests)
   List<HistorieRecord> parse() {
     return _lis.map(_parseLi).where((e) => e != null).toList();
   }
@@ -280,18 +289,137 @@ class BlokHistorie {
   HistorieRecord _parseLi(li) {
     List<String> lines = li.innerHtml.split('\n');
     var header = lines[0];
-    var body = lines.sublist(1);
+    var body = lines.sublist(1, lines.length - 1); // skip last empty line
+    var date;
+    var name;
 
-    var regex = new RegExp(r'^<b>(.*)</b> \(učo (\d+)\)<br>ONLINE_A <i>(\S+)</i>:?$');
-    var m = regex.firstMatch(header);
+    var list = parseTimestamp(body.last);
+    if (list.length == 2) {
+      date = list[0];
+      name = list[1];
+    } else {
+      print('parseTimestamp failed to parse a li');
+    }
+
+    var re = parseHeader(header);
+    var r = re[0];
+    var end = re[1];
+    if (re != null) {
+      r
+        ..text = body.join('\n')
+        ..date = date
+        ..osoba = name;
+    }
+    return r;
+  }
+
+  static List parseHeader(String line) {
+    var regex = new RegExp(r'^<b>(.*)</b> \(učo (\d+)\)<br>ONLINE_A <i>(\S+)</i>:?\s*', caseSensitive: false);
+    var m = regex.firstMatch(line);
     if (m != null) {
       var r = new HistorieRecord()
           ..name = m.group(1)
           ..uco = m.group(2)
-          ..event = m.group(3)
-          ..text = body.join('\n');
-      return r;
+          ..event = m.group(3);
+      return [r, m.end];
     }
+    print('parseHeader: failed to parse a li');
     return null;
+  }
+
+  static List parseTimestamp(String line) {
+        var regexp = new RegExp(r'\((\d+)\. (\d+)\. (\d+) (\d+):(\d+).(\d+), (.*)\)$', caseSensitive: false);
+    var n = regexp.firstMatch(line);
+    if (n != null) {
+      var args = n.groups([3, 2, 1, 4, 5, 6]).map(int.parse).toList();
+      var date = Function.apply(new DateTime#, args);
+      var name = n.group(7);
+      return [date, name];
+    }
+
+    return null;
+  }
+
+  static List<HistorieRecord> parsePlain(String text) {
+    var lines = text.split('\n');
+    var start;
+    var end;
+    var i = 0;
+    for (var line in lines) {
+      if (line.startsWith(r'<input type="hidden" name="razeni" value="cas">Řadit dle změny')) {
+        start = i;
+      } else if (line.startsWith(r'</div> <!-- aplikace -->')) {
+        if (lines[i-1] != '</form>') {
+          if (lines [i-2].endsWith(r'</script>')) {
+            print('parsePlain: blok does not exist');
+            return [];
+          }
+          print('parsePlain: parser got lost (1)');
+          return null;
+        }
+        end = i - 3;
+      }
+      i++;
+    }
+
+    if (start == null || end == null) {
+      print('parsePlain: parser got lost (2)');
+      return null;
+    }
+    if (end < start) {
+      return [];
+    }
+    lines[start] = lines[start].split(r'<OL>')[1];
+
+    var result = [];
+
+    for (var i = start; i <= end; i++) {
+      var ri = parsePlainRecord(lines, i, end);
+      var r = ri[0];
+      i = ri[1];
+
+      result.add(r);
+    }
+    return result;
+  }
+
+  static List parsePlainRecord(lines, i, end) {
+    var date;
+    var name;
+
+      if (!lines[i].startsWith(r'<LI>')) {
+        print('parsePlain: parser got lost (3)');
+        return null;
+      }
+      var header = lines[i].substring(r'<LI>'.length);
+      var bodystart = i + 1;
+
+      for (; i <= end; i++) {
+        var m = parseTimestamp(lines[i]);
+        if (m != null) {
+            date = m[0];
+            name = m[1];
+          break;
+        }
+      }
+
+      var re = parseHeader(header);
+      var r = re[0];
+      var headerend = re[1];
+      String rest = header.substring(headerend);
+      if (rest.trim() == '') {
+        rest = '';
+      } else {
+        rest = rest + '\n';
+      }
+      if (re != null) {
+        r
+          ..text = rest + lines.sublist(bodystart, i + 1).join('\n')
+          ..date = date
+          ..osoba = name;
+      } else {
+        print('adding null to result');
+      }
+      return [r, i];
   }
 }

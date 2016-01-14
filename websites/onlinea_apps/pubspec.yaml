@@ -1,8 +1,11 @@
-name: online_a_app
+name: onlinea_apps
 description: A sample Chrome packaged application
 dependencies:
   chrome: any
   ismu:
     path: ../../ismu
+  http: any
+  postgresql:
+    path: /home/jirka/IdeaProjects/dart_postgresql
 transformers:
 - chrome

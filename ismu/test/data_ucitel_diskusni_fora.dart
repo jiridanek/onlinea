@@ -760,3 +760,374 @@ $('#ohrefhead').hide(0);
 </body>
 </html>
 """;
+
+var podzim2015 = r"""
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Diskusní fóra předmětů</title>
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+<link rel="icon" type="image/png" href="/favicon-192x192.png" sizes="192x192" />
+<link rel="stylesheet" type="text/css" href="/css/14/prvky.css" />
+<link rel="stylesheet" type="text/css" href="/css/14/zu.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/14/b.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/14/b-menu.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/css/14/b-tisk.css" media="print" />
+<script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="/js/is-lib.js"></script>
+<script type="text/javascript" src="/js/ui-vyber.js"></script>
+</head>
+
+<body class="cs" bgcolor="white">
+
+<div id="o2">
+
+<div id="obalka">
+
+<ul class="pristupnost">
+
+<li><a href="#menu">Skočit na navigaci</a></li><!-- Skip to navigation -->
+</ul>
+
+<div id="oblibene" class="left-off-canvas-menu">
+<ul class="off-canvas-list">
+<li><img src="/zalozky/icon?id=129320" alt="Rozvrh jaro2014" title="Rozvrh jaro2014" width="16" height="16"> <a href="https://is.muni.cz/auth/rozvrh/rozvrh_zobrazeni.pl?fakulta=1433;studium=519037;kod=PV080;typ=msu;format=html;obdobi=5984" title="Rozvrh jaro2014">Rozvrh jar&hellip;</a></li>
+<li><img src="/zalozky/icon?id=129322" alt="Známky jaro2014" title="Známky jaro2014" width="16" height="16"> <a href="https://is.muni.cz/auth/student/poznamkove_bloky_nahled.pl?fakulta=1433;studium=519037;obdobi=5984" title="Známky jaro2014">Známky jar&hellip;</a></li>
+<li><img src="/zalozky/icon?id=129324" alt="Materiály jaro2014" title="Materiály jaro2014" width="16" height="16"> <a href="https://is.muni.cz/auth/student/studijni_materialy.pl?fakulta=1433;studium=519037;obdobi=5984" title="Materiály jaro2014">Materiály &hellip;</a></li>
+<li><img src="/zalozky/icon?id=129326" alt="Odpovědníky jaro2014" title="Odpovědníky jaro2014" width="16" height="16"> <a href="https://is.muni.cz/auth/elearning/test_pruchod_el_student.pl?obdobi=5984&fakulta=1433&studium=519037" title="Odpovědníky jaro2014">Odpovědník&hellip;</a></li>
+<li><img src="/zalozky/icon?id=11902" alt="video.muni" title="video.muni" width="16" height="16"> <a href="https://www.video.muni.cz/ssl/" title="video.muni">video.muni</a></li>
+<li><img src="/zalozky/icon?id=111645" alt="Události" title="Události" width="16" height="16"> <a href="https://is.muni.cz/auth/udalosti/zobraz_log.pl?studium=519037" title="Události">Události</a></li>
+</ul>
+</div>
+
+<div id="hlavicka">
+
+<div id="logo"><a href="/auth/?fakulta=1441;obdobi=6343"><img src="/pics/design/14/b/logotyp-is-m.png" width="95" height="95" alt="Informační systém Masarykovy univerzity" title="Informační systém Masarykovy univerzity" /></a></div><div id="nadpis-drobecky">
+
+<h2><a href="/auth/?fakulta=1441;obdobi=6343" title="Informační systém Masarykovy univerzity">Informační systém Masarykovy univerzity<span>&nbsp;</span></a></h2>
+<h1 id="nadpis">Diskusní fóra předmětů</h1>
+
+<div class="drobecky">
+
+<a href="https://is.muni.cz/?fakulta=1441" accesskey="1" title="Informační systém MU">IS MU</a>
+&gt; <a href="/auth/?fakulta=1441" accesskey="2" title="Autentizovaná část IS">Osobní administrativa</a>
+&gt; <a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600" accesskey="3" title="Záznamník učitele">Záznamník učitele</a></div>
+
+</div>
+
+<div id="identita">
+
+<div id="id-jazyk"><p><b>česky</b>&nbsp;| <a href="/auth/ucitel/ucitel_diskusni_fora?lang=en;setlang=en;fakulta=1441;predmet=775322;obdobi=6343;save_obd_pref=1" title="switches IS into English">in English</a></p></div>
+
+<div id="id-odhlaseni"><a href="/auth/system/logout.pl?fakulta=1441;obdobi=6343;predmet=835600"><img alt="Odhlášení ze systému" title="Odhlášení ze systému" src="/pics/design/14/b/ico/odhlaseni.png" width="16" height="16"></a></div>
+
+<div id="id-uzivatel"><b>Jiří Daněk</b> (učo&nbsp;<a href='/auth/osoba/374368'>374368</a>)</div>
+
+<!-- Vyber obdobi -->
+<a id="id-link-obdobi" href="./ucitel_diskusni_fora?fakulta=1441;predmet=775322;obdobi=-"><img onmouseover="this.src='/pics/design/14/b/ico/obdobi-s_o.png'" onmouseout="this.src='/pics/design/14/b/ico/obdobi-s.png'" src="/pics/design/14/b/ico/obdobi-s.png" alt="Změnit období" title="Změnit období" /></a>
+<script type="text/javascript">
+document.getElementById("id-link-obdobi").style.display='none'
+document.write('<img onclick="uiVyber(\'obdobi\')" src="/pics/design/14/b/ico/obdobi-m.png" alt="Změnit období" title="Změnit období" />')
+</script>
+<div id="id-vyber-obdobi" class="id-vyber">
+<img onclick="uiVyber('obdobi')" src="/pics/design/14/b/ico/obdobi_o.png" alt="Změnit období" title="Změnit období" />
+<h3 onclick="uiVyber('obdobi')">Změnit období</h3>
+<form action="./ucitel_diskusni_fora?fakulta=1441;obdobi=6343;predmet=835600" method="get" name="id-f-obdobi" id="id-f-obdobi"><INPUT TYPE=hidden NAME="obdobi" VALUE="-"><INPUT TYPE=hidden NAME="fakulta" VALUE="1441"><INPUT TYPE=hidden NAME="predmet" VALUE="835600">
+<label><input type="checkbox" name="save_obd_pref" value="1" checked="checked" />Zvolené období příště opět použít</label><hr />
+<ul>
+<li><a href="#" onclick="uiPosli('obdobi', '6344')">jaro 2016</a></li>
+<li><b>podzim 2015</b></li>
+<li><a href="#" onclick="uiPosli('obdobi', '6085')">jaro 2015</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '6084')">podzim 2014</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '5846')">jaro 2014</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '5845')">podzim 2013</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '5704')">jaro 2013</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '5703')">podzim 2012</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '5306')">jaro 2012</a></li>
+<li><a href="#" onclick="uiPosli('obdobi', '-')">vybrat i ze starších období</a></li>
+</ul>
+</form>
+<div class="id-vyber-zavrit"><a href="#" onclick="uiVyber('obdobi')">Zavřít výběr</a></div>
+</div>
+<div id="id-obdobi"><a href="./ucitel_diskusni_fora?fakulta=1441;predmet=835600;obdobi=6085;save_obd_pref=1" title="Změnit na předchozí období">&minus;1</a> | <b onclick="uiVyber('obdobi')" title="Změnit období">podzim 2015</b> | <a href="./ucitel_diskusni_fora?fakulta=1441;predmet=835600;obdobi=6344;save_obd_pref=1" title="Změnit na následující období">+1</a></div>
+<!-- Konec vyberu obdobi -->
+
+</div> <!-- identita -->
+
+</div> <!-- hlavicka -->
+
+<div id="obsah">
+
+<div id="aplikace">
+
+<a id="FAQico" href="#" onClick="$('#FAQdata').toggle(); return false;"><img src="/pics/design/14/b/ico/help.png" alt="Nápověda" title="Aplikace umožňuje založit nová tematická fóra do předmětů/seminářů, také zobrazuje přehled stávajích předmětových fór a nových příspěvků v&nbsp;nich." width="20" height="20" />
+</a><div id="FAQdata" style="display:none">
+<img src="/pics/design/14/b/ico/skryt.png" width="16" height="16" alt="Zavřít" align="right" onclick="$('#FAQdata').toggle(); return false;"/>
+<p class="navodek" title="Popis aplikace">Aplikace umožňuje založit nová tematická fóra do předmětů/seminářů, také zobrazuje přehled stávajích předmětových fór a nových příspěvků v&nbsp;nich.</p>
+<p>Hledejte v Nápovědě:</p>
+<div id="vyhledavani">
+<FORM ACTION="/auth/vyhledavani/" METHOD='GET'>
+<INPUT TYPE=hidden NAME="agenda" VALUE="help"><INPUT TYPE=hidden NAME="fakulta" VALUE="1441"><INPUT TYPE=hidden NAME="obdobi" VALUE="6343"><INPUT TYPE=hidden NAME="predmet" VALUE="835600"><INPUT TYPE=text NAME="search" VALUE="" SIZE=10 MAXLENGTH=200 CLASS="dotaz"> <input type="submit" name="vyhledat" value="Vyhledat"/></FORM></div>
+</div>
+
+<!-- DSearch -->
+
+<div id="DSearch">
+<form method="get" action="/auth/vyhledavani/" enctype="application/x-www-form-urlencoded">
+
+<INPUT TYPE=hidden NAME="fakulta" VALUE="1441"><INPUT TYPE=hidden NAME="obdobi" VALUE="6343"><INPUT TYPE=hidden NAME="predmet" VALUE="835600"><INPUT TYPE=text NAME="search" VALUE="" SIZE=15 MAXLENGTH=200 CLASS="dotaz" placeholder="Vyhledat"><input class="tlacitko" type="submit" title="Vyhledat" value="">
+</form>
+</div>
+
+
+
+<div id="ohrefhead">
+
+<h3>Rozvrh</h3>
+
+<ul>
+<li><span class="hlight on red"><a href="/auth/rozvrh/rozvrh_zobrazeni?fakulta=1441;obdobi=6343;predmet=835600;typ=msu;vypsat=1;format=html" title="Rozvrh / Můj rozvrh">Můj rozvrh</a></span></li>
+</ul><br>
+
+<h3>Personální</h3>
+
+<ul>
+<li><span class="hlight on red"><a href="/auth/pers/studijni_pobyt?fakulta=1441;obdobi=6343;predmet=835600" title="Personální / Evidence údajů o stážích, studijních a pracovních pobytech">Evidence údajů o stážích, studijních a pracovních pobytech</a></span></li>
+</ul>
+
+<div class="oper"><a href="/auth/system/zvyrazneno?fakulta=1441;obdobi=6343;predmet=835600" id="tedzvyraz">Vše zvýrazněné v ISu</a> | <a href="/auth/ucitel/ucitel_diskusni_fora?fakulta=1441;obdobi=6343;predmet=835600;uzo=1">Zapnout zvýrazňování</a></div>
+
+<script type="text/javascript"><!--
+$(document).ready(function(){
+	var edmod = 0
+	var callback2 = function (e) {
+		if (edmod == 0) {
+			$(".ZZX").show(0);
+			$(this).text('Vypnout zvýrazňování');
+			edmod = 1;
+		} else {
+			$(".ZZX").hide(0);
+			$(this).text('Zapnout zvýrazňování');
+			$('#tedmodi').attr('href', '/auth/ucitel/ucitel_diskusni_fora?fakulta=1441;obdobi=6343;predmet=835600;uzo=1');
+			$('#tedmodi').unbind();
+			edmod = 0;
+		}
+		return false;
+	}
+	$("#tedmodi").bind('click', callback2);
+	$(".ZZX").hide(0);
+});
+//--></script>
+</div>
+
+
+
+<script type="text/javascript"><!--
+$('#ohrefhead').hide(0);
+//--></script>
+<div id="n-posta" class="panel radius"><h3 class="cs">Nová pošta<span>&nbsp;</span></h3><ul><li><a href="/auth/mail/?one-new-mail=1">Lucie Pekarkova</a> &ndash; Re: V e-mailu "IS MU Oznámení změny v zápisu" jsou jiné ter ...</li></ul></div>
+<h3 class="zu_h3_predm">PdF: <B>ONLINE_A</B> Angličtina Online (podzim 2015) &nbsp; &nbsp; &nbsp; <A HREF="./ucitel_diskusni_fora?fakulta=1441;obdobi=6343;predmet=">jiné předměty</A></h3><a class="zu_aplodkaz rozbal" href="#">Aplikace</a>
+<div class="zu_odkazy" id="zu_aplodkazy"><script type="text/javascript">$('.zu_aplodkaz').click(function(event) { event.preventDefault(); $('#zu_aplodkazy').toggle(); $(this).toggleClass('sbal').toggleClass('rozbal'); })</script>Aplikace: <a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600#stud"><img src="/pics/design/14/b/zu/zu-stud-m.png" alt="Sekce Studenti Záznamníku učitele" title="Sekce Studenti Záznamníku učitele" width="13" height="13" ></a>
+<a href="/auth/ucitel/seznam?fakulta=1441;obdobi=6343;predmet=835600">Studenti</a> |
+<a href="/auth/ucitel/posli_dopisy?fakulta=1441;obdobi=6343;predmet=835600;bez_bloku=1">Dopis</a> |
+<a href="/auth/ucitel/dochazka?fakulta=1441;obdobi=6343;predmet=835600">Docházka</a> |
+<a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600#hodnoc"><img src="/pics/design/14/b/zu/zu-hodnoc-m.png" alt="Sekce Hodnocení Záznamníku učitele" title="Sekce Hodnocení Záznamníku učitele" width="13" height="13" ></a>
+<a href="/auth/ucitel/znamky?fakulta=1441;obdobi=6343;predmet=835600;bez_bloku=1">Známky</a> |
+<a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600#zkousky"><img src="/pics/design/14/b/zu/zu-zkousky-m.png" alt="Sekce Zkoušení Záznamníku učitele" title="Sekce Zkoušení Záznamníku učitele" width="13" height="13" ></a>
+<a href="/auth/ucitel/terminy?fakulta=1441;obdobi=6343;predmet=835600">Zkoušky</a> |
+<a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600#poznbl"><img src="/pics/design/14/b/zu/zu-poznbl-m.png" alt="Sekce Poznámkové bloky Záznamníku učitele" title="Sekce Poznámkové bloky Záznamníku učitele" width="13" height="13" ></a>
+<a href="/auth/ucitel/blok_edit?fakulta=1441;obdobi=6343;predmet=835600">Bloky</a> |
+<a href="/auth/ucitel/student_info?fakulta=1441;obdobi=6343;predmet=835600">Individuální info</a> |
+<a href="/auth/el/1441/podzim2015/ONLINE_A/?fakulta=1441;obdobi=6343;predmet=835600">Studijní materiály</a>
+ | <a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600#etesty"><img src="/pics/design/14/b/zu/zu-etesty-m.png" alt="Sekce Odpovědníky Záznamníku učitele" title="Sekce Odpovědníky Záznamníku učitele" width="13" height="13" ></a>
+<a href="/auth/elearning/test_desc_edit_el_ucitel?fakulta=1441;obdobi=6343;predmet=835600">Odpovědníky</a> |
+<a href="/auth/ucitel/odevzd_zjednodusena?fakulta=1441;obdobi=6343;predmet=835600">Odevzdávárny</a> |
+<a href="/auth/ucitel/ucitel_diskusni_fora?fakulta=1441;obdobi=6343;predmet=835600">Diskuse</a> |
+<a href="/auth/ucitel/souhlas?fakulta=1441;obdobi=6343;predmet=835600">Souhlas se&nbsp;zápisem</a> |
+<a href="/auth/predmety/sylaby_plneni?fakulta=1441;obdobi=6343;predmet=835600">Sylabus</a>
+</div><hr><H2>Nové diskusní příspěvky ve vybraných předmětech</H2>
+<UL>
+<li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866392;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Cg1)</A> (475 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866394;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (BCg1)</A> (647 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866395;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (BCg3)</A> (748 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866439;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (BCg2)</A> (596 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866443;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (BCg5)</A> (520 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866444;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg1)</A> (448 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866448;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg2)</A> (565 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866449;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg3)</A> (674 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866451;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg4)</A> (719 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866463;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg5)</A> (647 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866526;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg6)</A> (455 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866532;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg7)</A> (642 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866535;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg8)</A> (24 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866536;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg9)</A> (611 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866537;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg10)</A> (676 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866540;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg11)</A> (566 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866541;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg12)</A> (601 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866542;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg13)</A> (423 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866543;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg14)</A> (734 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866544;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg15)</A> (579 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866546;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg16)</A> (661 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866548;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg17)</A> (728 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866550;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg18)</A> (637 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866554;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg19)</A> (684 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866560;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg20)</A> (651 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866562;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg21)</A> (596 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866565;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg22)</A> (750 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866566;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg23)</A> (240 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866569;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg24)</A> (619 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866572;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg25)</A> (595 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866573;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Ag1)</A> (678 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866574;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Ag2)</A> (656 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866578;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Ag3)</A> (412 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866604;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Ag6)</A> (495 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866608;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Ag7)</A> (12 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607736;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg26)</A> (547 nových)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607762;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg27)</A> (1 nový)</li><li> <A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607799;jn=n;jp=p">PdF:ONLINE_A Discussion Forum for Points (Bg28)</A> (1 nový)</li></UL>
+<H2>Fóra vybraných předmětů a seminářů</H2>
+<UL>
+<li><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58153024;jp=v">PdF:ONLINE_A Angličtina Online</A>
+  <UL>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866075;jp=v">PdF:ONLINE_A/Cg1</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866076;jp=v">PdF:ONLINE_A/BCg1</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866077;jp=v">PdF:ONLINE_A/BCg2</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866078;jp=v">PdF:ONLINE_A/BCg3</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866079;jp=v">PdF:ONLINE_A/BCg4</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866080;jp=v">PdF:ONLINE_A/BCg5</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866081;jp=v">PdF:ONLINE_A/Bg1</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866082;jp=v">PdF:ONLINE_A/Bg2</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866083;jp=v">PdF:ONLINE_A/Bg3</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866084;jp=v">PdF:ONLINE_A/Bg4</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866085;jp=v">PdF:ONLINE_A/Bg5</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866086;jp=v">PdF:ONLINE_A/Bg6</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866087;jp=v">PdF:ONLINE_A/Bg7</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866088;jp=v">PdF:ONLINE_A/Bg8</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866089;jp=v">PdF:ONLINE_A/Bg9</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866090;jp=v">PdF:ONLINE_A/Bg10</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866091;jp=v">PdF:ONLINE_A/Bg11</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866092;jp=v">PdF:ONLINE_A/Bg12</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866093;jp=v">PdF:ONLINE_A/Bg13</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866094;jp=v">PdF:ONLINE_A/Bg14</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866095;jp=v">PdF:ONLINE_A/Bg15</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866096;jp=v">PdF:ONLINE_A/Bg16</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866097;jp=v">PdF:ONLINE_A/Bg17</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866098;jp=v">PdF:ONLINE_A/Bg18</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866099;jp=v">PdF:ONLINE_A/Bg19</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866100;jp=v">PdF:ONLINE_A/Bg20</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866101;jp=v">PdF:ONLINE_A/Bg21</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866102;jp=v">PdF:ONLINE_A/Bg22</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866103;jp=v">PdF:ONLINE_A/Bg23</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866104;jp=v">PdF:ONLINE_A/Bg24</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866105;jp=v">PdF:ONLINE_A/Bg25</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=59607332;jp=v">PdF:ONLINE_A/Bg26</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=59607333;jp=v">PdF:ONLINE_A/Bg27</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=59607334;jp=v">PdF:ONLINE_A/Bg28</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=59607335;jp=v">PdF:ONLINE_A/Bg29</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866106;jp=v">PdF:ONLINE_A/Ag1</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866107;jp=v">PdF:ONLINE_A/Ag2</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866108;jp=v">PdF:ONLINE_A/Ag3</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866109;jp=v">PdF:ONLINE_A/Ag4</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866110;jp=v">PdF:ONLINE_A/Ag5</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866111;jp=v">PdF:ONLINE_A/Ag6</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866112;jp=v">PdF:ONLINE_A/Ag7</A></LI>
+  <LI><A HREF="../diskuse/diskusni_forum_predmet?fakulta=1441;obdobi=6343;predmet=835600;guz=58866113;jp=v">PdF:ONLINE_A/DUO</A></LI>
+  </UL>
+
+  <UL>
+<li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866392;jp=v">Discussion Forum for Points (Cg1)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866392">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866394;jp=v">Discussion Forum for Points (BCg1)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866394">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866395;jp=v">Discussion Forum for Points (BCg3)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866395">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866439;jp=v">Discussion Forum for Points (BCg2)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866439">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866441;jp=v">Discussion Forum for Points (BCg4)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866441">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866443;jp=v">Discussion Forum for Points (BCg5)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866443">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866444;jp=v">Discussion Forum for Points (Bg1)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866444">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866448;jp=v">Discussion Forum for Points (Bg2)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866448">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866449;jp=v">Discussion Forum for Points (Bg3)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866449">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866451;jp=v">Discussion Forum for Points (Bg4)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866451">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866463;jp=v">Discussion Forum for Points (Bg5)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866463">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866526;jp=v">Discussion Forum for Points (Bg6)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866526">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866532;jp=v">Discussion Forum for Points (Bg7)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866532">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866535;jp=v">Discussion Forum for Points (Bg8)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866535">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866536;jp=v">Discussion Forum for Points (Bg9)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866536">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866537;jp=v">Discussion Forum for Points (Bg10)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866537">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866540;jp=v">Discussion Forum for Points (Bg11)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866540">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866541;jp=v">Discussion Forum for Points (Bg12)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866541">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866542;jp=v">Discussion Forum for Points (Bg13)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866542">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866543;jp=v">Discussion Forum for Points (Bg14)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866543">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866544;jp=v">Discussion Forum for Points (Bg15)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866544">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866546;jp=v">Discussion Forum for Points (Bg16)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866546">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866548;jp=v">Discussion Forum for Points (Bg17)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866548">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866550;jp=v">Discussion Forum for Points (Bg18)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866550">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866554;jp=v">Discussion Forum for Points (Bg19)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866554">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866560;jp=v">Discussion Forum for Points (Bg20)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866560">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866562;jp=v">Discussion Forum for Points (Bg21)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866562">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866565;jp=v">Discussion Forum for Points (Bg22)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866565">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866566;jp=v">Discussion Forum for Points (Bg23)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866566">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866569;jp=v">Discussion Forum for Points (Bg24)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866569">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866572;jp=v">Discussion Forum for Points (Bg25)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866572">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866573;jp=v">Discussion Forum for Points (Ag1)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866573">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866574;jp=v">Discussion Forum for Points (Ag2)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866574">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866578;jp=v">Discussion Forum for Points (Ag3)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866578">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866579;jp=v">Discussion Forum for Points (Ag4)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866579">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866587;jp=v">Discussion Forum for Points (Ag5)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866587">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866604;jp=v">Discussion Forum for Points (Ag6)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866604">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58866608;jp=v">Discussion Forum for Points (Ag7)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58866608">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58873286;jp=v">Lang-8</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58873286">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58873314;jp=v">Amara</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58873314">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58873382;jp=v">EnglishCentral.com</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58873382">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=58926076;jp=v">Speaking practice</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=58926076">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59369482;jp=v">New Exercises</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=59369482">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607736;jp=v">Discussion Forum for Points (Bg26)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=59607736">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607762;jp=v">Discussion Forum for Points (Bg27)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=59607762">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607799;jp=v">Discussion Forum for Points (Bg28)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=59607799">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=59607874;jp=v">Discussion Forum for Points (Bg29)</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=59607874">nastavení</A>)</li><li><A HREF="../diskuse/diskusni_forum_indiv?fakulta=1441;obdobi=6343;predmet=835600;guz=60776906;jp=v">Discussion forum for points for latecomers</A> (<A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=edit;predmet_id=835600;guz=60776906">nastavení</A>)</li>  </UL>
+</li></UL>
+<p />
+<H2>Založit tematické fórum ve vybraných předmětech</H2>
+<UL>
+<li>PdF:ONLINE_A <A HREF="../diskuse/diskusni_forum_nastaveni?fakulta=1441;obdobi=6343;predmet=835600;akce=new;predmet_id=835600">Angličtina Online</A></li>
+</UL>
+<p />
+<p />
+<H2>Nové diskusní příspěvky v&nbsp;předmětech/seminářích</H2>
+<div class="zdurazneni upozorneni"  ><h3>Žádné nové příspěvky.</h3></div>
+<H2>Fóra předmětů a seminářů v&nbsp;tomto semestru</H2>
+<div class="zdurazneni upozorneni"  ><h3>Žádné předměty nebo semináře.</h3></div>
+<p />
+<br><ul><li><A HREF="/auth/cd/?fakulta=1441;obdobi=6343;predmet=835600">Všechna předmětová diskusní fóra</A></li>
+<li><A HREF="/auth/diskuse/prehled_cteni_disk_for?fakulta=1441;obdobi=6343;predmet=835600">Přehled mých čtení diskusních fór</A></li>
+</ul><p />
+
+</div> <!-- aplikace -->
+</div> <!-- obsah -->
+
+<div id="menu"><span id="fixa"><a href="/auth/system/zvyrazneno" onclick="$('#ohrefhead').toggle();$('#statoap').show(0);return false;">ZVÝRAZNĚNÍ</a></span>
+<div class="obsah">
+<h2 class="pristupnost">Hlavní navigace</h2>
+<ul>
+<li class="lmindex"><a href="/auth/">IS.MUNI.CZ</a></li>
+</ul>
+<ul>
+<li class="dril"><a href="/auth/dril/" title="Ještě máte na dnešek kartičky k opakování">DRIL</a></li>
+<li class="lmposta"><a href="/auth/mail/">POŠTA</a></li>
+<li class="lmlide"><a href="/auth/lide/">LIDÉ</a></li>
+</ul>
+<ul>
+<li class="aktivni lmucitel"><a href="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600">UČITEL</a></li>
+<li class="lmpublikace"><a href="/auth/publikace/">PUBLIKACE</a></li>
+<li class="lmrepozitar"><a href="/auth/repozitar/">REPOZITÁŘ</a></li>
+</ul>
+<ul>
+<li class="lmstudent"><a href="/auth/student/">STUDENT</a></li>
+</ul>
+<ul>
+<li class="lmrozvrh"><a href="/auth/rozvrh/">ROZVRH</a></li>
+<li class="lmpredmety"><a href="/auth/predmety/">PŘEDMĚTY</a></li>
+<li class="lmstudium"><a href="/auth/studium_spolec/">STUDIUM</a></li>
+<li class="lmuradovna"><a href="/auth/uradovna/">ÚŘADOVNA</a></li>
+<li class="lmprijimacky"><a href="/auth/prihlaska/rozcesti">PŘIJÍMAČKY</a></li>
+</ul>
+<ul>
+<li class="lmvyveska"><a href="/auth/vyveska/">VÝVĚSKA</a></li>
+<li class="lmdiskuse"><a href="/auth/diskuse/">DISKUSE</a></li>
+</ul>
+<ul>
+<li class="lmpersonalni"><a href="/auth/pers/">PERSONÁLNÍ</a></li>
+<li class="lmkontakty"><a href="/auth/kontakty/">KONTAKTY</a></li>
+<li class="lmpracoviste"><a href="/auth/lide/pracoviste">PRACOVIŠTĚ</a></li>
+<li class="lmzivotopisy"><a href="/auth/zivotopisy/?deuco=374368">ŽIVOTOPISY</a></li>
+</ul>
+<ul>
+<li class="lmsetkavani-spoluzaci"><a href="/auth/setkavani/">SETKÁVÁNÍ</a></li>
+<li class="lmkruhy"><a href="/auth/kruh/">KRUHY</a></li>
+<li class="lmblogy"><a href="/auth/blog/">BLOGY</a></li>
+<li class="lmzalozky"><a href="/auth/ln/">ZÁLOŽKY</a></li>
+</ul>
+<ul>
+<li class="lmuschovna"><a href="/auth/de/374368/">ÚSCHOVNA</a></li>
+<li class="lmmujweb"><a href="/auth/www/374368/?info=1">MŮJ WEB</a></li>
+<li class="lmspravce"><a href="/auth/dok/fmgr">SPRÁVCE</a></li>
+<li class="lmdokumenty"><a href="/auth/do/">DOKUMENTY</a></li>
+<li class="lmhledani"><a href="/auth/vyhledavani/">HLEDÁNÍ</a></li>
+</ul>
+<ul>
+<li class="lmelportal"><a href="/auth/elportal/">ELPORTÁL</a></li>
+</ul>
+<ul>
+<li class="lmoc"><a href="/auth/obchod/">OBCHODNÍ CENTRUM</a></li>
+<li class="lmstipendia"><a href="/auth/stipendia/">STIPENDIA</a></li>
+<li class="lmkoleje"><a href="/auth/student/koleje_index">UBYTOVÁNÍ</a></li>
+</ul>
+<ul>
+<li class="lmkarty"><a href="/auth/karty/">KARTY</a></li>
+<li class="lmskupiny"><a href="/auth/skupiny/">SKUPINY</a></li>
+<li class="lmevolby"><a href="/auth/volby/">E-VOLBY</a></li>
+<li class="lmprojekty"><a href="/auth/projekty/projekt">PROJEKTY</a></li>
+<li class="lmtisk"><a href="/auth/tiskarny/">TISK</a></li>
+</ul>
+<ul>
+<li class="lmhry"><a href="/auth/hry/">HRY</a></li>
+</ul>
+<ul>
+<li class="lmudalosti"><a href="/auth/udalosti/">UDÁLOSTI</a></li>
+<li class="lmsystem"><a href="/auth/system/">SYSTÉM</a></li>
+<li class="lmdesign"><a href="/auth/design/?deuco=374368">DESIGN</a></li>
+<li class="lmprava"><a href="/auth/prava/">PRÁVA</a></li>
+<li class="lmnapoveda"><a href="/auth/help/">NÁPOVĚDA</a></li>
+</ul>
+<p>uživatelů 3499<br/>operací 23823</p>
+</div> <!-- menu/obsah -->
+</div> <!-- menu -->
+
+<div id="paticka">
+  <div id="paticka-obsah">
+    <div id="odkazy-rel">
+      <h3>Relevantní odkazy<span>&nbsp;</span></h3>
+<UL>
+<li> <A HREF="/auth/ucitel/?fakulta=1441;obdobi=6343;predmet=835600">Záznamník učitele</A>
+<li> <A HREF="/auth/?fakulta=1441;obdobi=6343">Osobní administrativa</A>
+</UL>
+
+    </div><!-- odkazy-rel -->
+    <div id="odkazy-vlastni">
+      <h3>Oblíbené záložky<span>&nbsp;</span></h3>
+
+      <p><a href="/auth/zalozky/favourite?fakulta=1441">Upravit oblíbené záložky</a></p>
+
+    </div><!-- odkazy-vlastni -->
+    <hr />
+
+    <div id="paticka-odkazy">
+<a href="#hlavicka" class="nahoru" TITLE="Skočit na začátek stránky">Nahoru</a> | <a href="/auth/help/?fakulta=1441;obdobi=6343;predmet=835600" target="_blank" class="okno">Nápověda</a> | <A HREF="http://is.muni.cz/system/cas" target="_blank" class="okno">Aktuální datum a čas:</A> 13. 1. 2016 13:00, 2. (<A HREF="/auth/rozvrh/sl_tyden?fakulta=1441;obdobi=6343;predmet=835600">sudý</A>) kalendářní týden | <a href="/auth/system/posledni_operace.pl">Poslední operace</a> | <a href="/auth/system/logout.pl?fakulta=1441;obdobi=6343;predmet=835600" class="ico"><img alt="Odhlášení ze systému" title="Odhlášení ze systému" src="/pics/design/14/b/ico/logoff-16.png" width="16" height="16"></a> <a href="/auth/system/logout.pl?fakulta=1441;obdobi=6343;predmet=835600" title="Odhlášení ze systému">Odhlášení</a>
+<p id="kontakty">Kontakty: <A HREF="/auth/mail/mail_posli?fakulta=1441;obdobi=6343;predmet=835600;to=istech%40fi.muni.cz">istech@fi.muni.cz</A>, <A HREF="/auth/studium/studijni?fakulta=1441;obdobi=6343;predmet=835600">studijní odd.</A>, <A HREF="/auth/spravci/?fakulta=1441;obdobi=6343;predmet=835600">správci práv</A>, <A HREF="/auth/istech/?fakulta=1441;obdobi=6343;predmet=835600">is-technici</A>, <A HREF="/auth/etech/?fakulta=1441;obdobi=6343;predmet=835600">e-technici</A>, <A HREF="/auth/lvt/?fakulta=1441;obdobi=6343;predmet=835600">IT podpora</A> | <A HREF="http://is.muni.cz/nas_system/" target="_blank" class="okno">Více o Informačním systému</a></p>
+
+    </div><!-- paticka-odkazy -->
+  </div><!-- paticka-obsah -->
+</div><!-- paticka -->
+
+</div> <!-- obalka -->
+</div> <!-- o2 -->
+</body>
+</html>
+""";

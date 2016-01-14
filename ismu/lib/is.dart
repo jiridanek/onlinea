@@ -7,12 +7,14 @@ import 'dart:math' as math;
 
 var jsPrefix = 'xpath';
 
+@deprecated
 List<dom.Element> xpathSelectorAll(query, element) {
   var context = js.context;
   var result = js.context[jsPrefix].callMethod('xpathSelectorAll', [query, element]);
   return result;
 }
 
+@deprecated
 dom.Element xpathSelector(query, element) {
   var list = xpathSelectorAll(query, element);
   if (list.isNotEmpty) {
@@ -121,7 +123,9 @@ class LogInPage {
     var data = {'destination': destination,
       'credential_0': username,
       'credential_1': password,
-      'credential_2': expiration};
+      'credential_2': expiration,
+      'submit': 'Přihlásit se'
+    };
     var completer = new async.Completer();
     CONFIG.postFormData(url, data).then((response) {
       completer.complete(response);

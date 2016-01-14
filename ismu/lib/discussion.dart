@@ -420,6 +420,7 @@ String forceCzechL10n(String oldurl) {
   return url;
 }
 
+// TODO: try to improve this somehow
 markAllUngraded(String url, progress) {
 //  print(url);
   url = forceCzechL10n(url);
@@ -593,7 +594,7 @@ class Thread {
   }
 }
 
-/// may (if multiple pages probably always will) give some duplicates
+/// may (if multiple pages probably always will) give some duplicates // TODO: Why????
 async.Stream<Post> streamAllPosts(String firstPageHtml) {
   var firstPage = new ThreadPage(elementFromHtml(firstPageHtml));
   var thread = new Thread(firstPage);
