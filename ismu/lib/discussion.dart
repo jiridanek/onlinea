@@ -421,8 +421,11 @@ String forceCzechL10n(String oldurl) {
 }
 
 // TODO: try to improve this somehow
+// e.g. refactor
+// it got stuck on me. Why? now if a request gets stuck, everything gets stuck.. maybe not...
 markAllUngraded(String url, progress) {
-//  print(url);
+  var outercompleter = new async.Completer();
+  print(url);
   url = forceCzechL10n(url);
   get(url).then((html) {
     var forum = new Forum(ForumPage.fromHtml(html));
@@ -437,15 +440,21 @@ markAllUngraded(String url, progress) {
       t++;
       progress.thread();
       thread.streamPosts().forEach(posts.add)
-      .catchError(() => progress.failed("Some posts were not processed"))
+      .catchError((e) => progress.failed("Some posts were not processed: $e"))
       .whenComplete(() {
         t--;
         if (t_done && t == 0) {
           posts.close();
         }
-      }).whenComplete(() => t_done = true);
-    }).catchError(() {
-      progress.failed("Some discussion threads were not processed");
+      }).whenComplete(() {
+        t_done = true;
+        if (t == 00) {
+          posts.close();
+          posts.close();
+        }
+      });
+    }).catchError((e) {
+      progress.failed("Some discussion threads were not processed: $e");
     });
 
     posts.stream.forEach((post) {
@@ -457,8 +466,14 @@ markAllUngraded(String url, progress) {
       }
     }).catchError(() {
       progress.failed("Some posts were not processed");
-    }).whenComplete(() => progress.succeeded());
+    }).whenComplete(() {
+    progress.succeeded();
+      outercompleter.complete();
   });
+
+  });
+
+  return outercompleter.future;
 }
 
 markAllUngradedTest(String html) {

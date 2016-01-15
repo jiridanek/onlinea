@@ -270,6 +270,7 @@ class HistorieRecord {
 class BlokHistorie {
   List _lis;
 
+  //TODO: add lang=cs and vc_zrusenych = 1
   static String URL(List<String> nblokus, {fakulta, obdobi, predmet}) {
     var bloky = escapeNblokus(nblokus);
     return 'https://is.muni.cz/auth/ucitel/blok_historie?fakulta=${fakulta};obdobi=${obdobi};predmet=${predmet};${bloky};razeni=cas;vc_zrusenych=';
