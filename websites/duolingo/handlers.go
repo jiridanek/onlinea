@@ -21,7 +21,6 @@ func authBody(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	showDuolingoActivity(uco, w, r)
-	return
 }
 
 func oauth(w http.ResponseWriter, r *http.Request) {
@@ -134,6 +133,7 @@ func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
 		nick := misc.NickFromBlokText(r.Value())
 		if nick == "" {
 			students = append(students, Student{Uco: r.Uco()})
+			fmt.Fprintf(w, "%v, nick was not found in Notebook\n", r.Uco())
 			continue
 		}
 		found := false
@@ -146,6 +146,7 @@ func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		if !found {
+			students = append(students, Student{Uco: r.Uco(), Nick: nick})
 			fmt.Fprintf(w, "%v, %v was not found in Dashboard\n", r.Uco(), nick)
 		}
 	}
@@ -159,3 +160,8 @@ func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, `<pre></body></html>`)
 
 }
+
+//func index(w http.ResponseWriter, r *http.Request) {
+//	c := appengine.NewContext(r)
+//
+//}

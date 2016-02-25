@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	First  = time.Date(2015, time.September, 21, 23, 0, 0, 0, time.UTC) // first day of the semester
+	First  = time.Date(2016, time.February, 22, 23, 0, 0, 0, time.UTC) // first day of the semester
 	Format = "2006-01-02"
 )
 
@@ -159,7 +159,7 @@ func Score(event Event) int {
 		return 10
 	case "practice":
 		if event.Skill_title == "" {
-			return 15
+			return 10
 		}
 		return 0
 	default:

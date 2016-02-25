@@ -3,8 +3,6 @@ version: 1
 runtime: go
 api_version: go1
 
-threadsafe: true
-
 instance_class: F1
 automatic_scaling:
   min_idle_instances: 0
@@ -18,7 +16,7 @@ handlers:
   upload: static/index.html
   secure: always
 
-- url: /((index|login|googled9bcb567fbea804d)\.html)$
+- url: /((login|googled9bcb567fbea804d)\.html)$
   static_files: static/\1
   upload: static/.*\.html$
   secure: always
