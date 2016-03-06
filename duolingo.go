@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/jirkadanek/onlinea/duolingo"
 	"github.com/jirkadanek/onlinea/ismu/bloky"
+	"github.com/jirkadanek/onlinea/mailing"
 	"github.com/jirkadanek/onlinea/misc"
 	"io"
 	"log"
@@ -23,13 +24,12 @@ func dateString(i int) (string, string) {
 }
 
 func Duolingo(args []string) {
-	//     fmt.Println("Duolingo")
-
 	flagset := flag.NewFlagSet("duolingo", flag.PanicOnError)
 	week := flagset.Int("week", 0, "week number of the semester, starting from 1")
 	blok := flagset.String("blok", "", "filepath to csv exported Duolingo blok")
 	nick := flagset.String("nick", "", "week number of the semester, starting from 1")
-	//format := flagset.Int("week", 0, "blok, text")
+	mail := flagset.String("mail", "", "dry, wet; send reminder e-mails, either dry or wet run")
+
 	flagset.Parse(args)
 
 	if *week <= 0 {
@@ -52,8 +52,62 @@ func Duolingo(args []string) {
 	if *blok != "" {
 		records := readBlok(*blok)
 
-		students, events := fetch_activity_for_week(begin_date, end_date)
-		print_scores(records, students, events)
+		if *mail != "" {
+			duo.DoLogin(duo.DefaultClient)
+			dstudents, _ := fetch_student_list_and_errors("")
+
+			mails := make([]mailing.DuolingoFailure, 0)
+
+			// student is on Duolingo, but not in blok
+			for _, dstudent := range dstudents {
+				found := false
+				email := dstudent.Email
+				dusername := dstudent.User_name
+				if dstudent.Section != "Jaro2016" {
+					continue
+				}
+				if misc.UcoFromMuniMail(email) != "" {
+					found = true
+				}
+				for _, rstudent := range records {
+					rusername := misc.NickFromBlokText(rstudent.Value())
+					if strings.EqualFold(dusername, rusername) {
+						found = true
+					}
+				}
+				if !found {
+					mails = append(mails, mailing.DuolingoFailure{Email: email, Post: true})
+				}
+			}
+
+			// student is in blok, but not on Duolingo
+			for _, rstudent := range records {
+				found := false
+				email := fmt.Sprintf("%s@mail.muni.cz", rstudent.Uco())
+				rusername := misc.NickFromBlokText(rstudent.Value())
+				for _, dstudent := range dstudents {
+					dusername := dstudent.User_name
+					if strings.EqualFold(dusername, rusername) {
+						found = true
+					}
+				}
+				if !found {
+					mails = append(mails, mailing.DuolingoFailure{Email: email, Click: true})
+				}
+			}
+
+			msgs := mailing.DuolingoDokonceteRegistraci(mails)
+			if *mail == "dry" {
+				for _, mail := range mails {
+					fmt.Printf("%+v\n", mail)
+				}
+			} else if *mail == "wet" {
+				mailing.SendMessages(msgs...)
+			}
+		} else {
+			students, events := fetch_activity_for_week(begin_date, end_date)
+			print_scores(records, students, events)
+		}
 	}
 	if *nick != "" {
 		student, event := fetch_activity_for_week_for_nick(begin_date, end_date, *nick)
@@ -70,7 +124,7 @@ type EventsOrErr struct {
 
 func fetch_activity_for_week(begin_date, end_date string) ([]duo.Observee, map[string]EventsOrErr) {
 	duo.DoLogin(duo.DefaultClient)
-	students, events := fetch_student_list_and_errors()
+	students, events := fetch_student_list_and_errors("")
 	for _, student := range students {
 		user_id := fmt.Sprintf("%d", student.User_id)
 		res, err := fetch_activity_for_week_for_id(begin_date, end_date, user_id)
@@ -84,7 +138,7 @@ func fetch_activity_for_week(begin_date, end_date string) ([]duo.Observee, map[s
 
 func fetch_activity_for_week_for_nick(begin_date, end_date, nick string) (duo.Observee, EventsOrErr) {
 	duo.DoLogin(duo.DefaultClient)
-	students, events := fetch_student_list_and_errors()
+	students, events := fetch_student_list_and_errors("")
 
 	for _, student := range students {
 		if !strings.EqualFold(nick, student.User_name) {
@@ -115,11 +169,11 @@ func fetch_activity_for_week_for_id(begin_date, end_date, user_id string) (res d
 	return
 }
 
-func fetch_student_list_and_errors() ([]duo.Observee, map[string]EventsOrErr) {
+func fetch_student_list_and_errors(classroom string) ([]duo.Observee, map[string]EventsOrErr) {
 	students := make([]duo.Observee, 0)
 	events := make(map[string]EventsOrErr)
 
-	dashboard := duo.DoDashboardGet(duo.DefaultClient)
+	dashboard := duo.DoDashboardGet(duo.DefaultClient, classroom)
 	for _, observee := range dashboard.Observees {
 		if observee.Learning_language != "en" {
 			user_id := fmt.Sprintf("%d", observee.User_id)
@@ -149,95 +203,111 @@ func readBlok(fname string) []bloky.Record {
 }
 
 func print_scores(records []bloky.Record, students []duo.Observee, events map[string]EventsOrErr) {
+	set := make(map[int]bool)
 	for _, r := range records {
 		found := false
 		for _, s := range students {
 			nick := misc.NickFromBlokText(r.Value())
 			if strings.EqualFold(nick, s.User_name) {
+				set[s.User_id] = true
 				found = true
-				user_id := fmt.Sprintf("%d", s.User_id)
-				var b bytes.Buffer
-				print_scores_student(&b, r, events[user_id], false)
-				if b.Len() > 4000 {
-					b.Reset()
-					print_scores_student(&b, r, events[user_id], true)
-				}
-				fmt.Printf(b.String())
+				print_score(r, s, events)
+				break
 			}
 		}
 		if !found {
 			// student is in block but is not in dashboard, studying en
-			//TODO the other direction
 			log.Printf("student %s je v bloku ale není na duolingu!!!", r.Uco()) //FIXME: write something better
 		}
 	}
+	for _, s := range students {
+		if _, ok := set[s.User_id]; ok {
+			continue
+		}
+		uco := misc.UcoFromMuniMail(s.Email)
+		if s.Section == "Jaro2016" {
+			if uco != "" {
+				r := bloky.Record{R: make([]string, 9)}
+				r.R[6] = fmt.Sprintf("%s/%s", uco, strings.SplitN(records[0].Id(), "/", 2)[1])
+				//for _, r := range records {
+				//	if r.Uco() == uco {
+				set[s.User_id] = true
+				print_score(r, s, events)
+				//		break
+				//	}
+				//}
+			} else {
+				log.Printf("student %s je na duolingu ale není v bloku!!!", s.User_name) //FIXME: write something better
+			}
+		}
+	}
+}
+
+func print_score(r bloky.Record, s duo.Observee, events map[string]EventsOrErr) {
+	user_id := fmt.Sprintf("%d", s.User_id)
+	var b bytes.Buffer
+	print_scores_student(&b, r, events[user_id], false)
+	if b.Len() > 4000 {
+		b.Reset()
+		print_scores_student(&b, r, events[user_id], true)
+	}
+	fmt.Printf(b.String())
+}
+
+type blokWriter struct {
+	w io.Writer
+}
+
+func (w *blokWriter) Write(buf []byte) (n int, err error) {
+	nbuf := bytes.Replace(buf, []byte("\n"), []byte("\n|"), -1)
+	return w.w.Write(nbuf)
+}
+
+func print_scores_student(w io.Writer, student bloky.Record, eventsOrErr EventsOrErr, brief bool) {
+	bw := &blokWriter{w: w}
+	printBlokRecordHeader(bw, student.Id())
+	printBlokRecordContent(bw, eventsOrErr, brief)
+	fmt.Fprintf(w, "\n")
 }
 
 func printBlokRecordHeader(w io.Writer, id string) {
 	fmt.Fprintf(w, "\t\t\t\t\t\t%s\t", id)
 }
 
-func print_scores_student(w io.Writer, student bloky.Record, eventsOrErr EventsOrErr, brief bool) {
-	printBlokRecordHeader(w, student.Id())
-
+func printBlokRecordContent(w io.Writer, eventsOrErr EventsOrErr, brief bool) {
 	if eventsOrErr.Err == "" {
 		events := eventsOrErr.Events
 
-		nlessons := 0
-		plessons := 0
-		npractices := 0
-		ppractices := 0
+		s := duo.CalculatePoints(events)
 
-		for _, event := range events {
-			switch event.Type {
-			case "lesson", "test":
-				nlessons++
-				plessons += duo.Score(event)
-			case "practice":
-				if event.Skill_title != "" { // practicing a concrete skill
-					continue
-				}
-				npractices++
-				ppractices += duo.Score(event)
-			}
-		}
-
-		ptotal := plessons
-		if ppractices < ptotal {
-			ptotal = ppractices
-		}
-		if 70 < ptotal {
-			ptotal = 70
-		}
-
-		fmt.Fprintf(w, "Lessons:   %3d ... %4d points\n", nlessons, plessons)
-		fmt.Fprintf(w, "|Practices: %3d ... %4d points\n", npractices, ppractices)
-		fmt.Fprintf(w, "|Total: *%d points (calculated as min( min(Lessons,Practices), 70))\n", ptotal)
-		fmt.Fprintf(w, "|\n")
-		fmt.Fprintf(w, "|      Lesson                  Activity type     Points\n")
-		fmt.Fprintf(w, "|----------------------------------------------------------\n")
+		fmt.Fprintf(w, "Lessons:   %3d ... %4d points\n", s.Nlessons, s.Plessons)
+		fmt.Fprintf(w, "Practices: %3d ... %4d points\n", s.Npractices, s.Ppractices)
+		fmt.Fprintf(w, "Total: *%d points (calculated as min( min(Lessons,Practices), 70))\n", s.Ptotal)
+		fmt.Fprintf(w, "\n")
+		fmt.Fprintf(w, "      Lesson                  Activity type     Points\n")
+		fmt.Fprintf(w, "----------------------------------------------------------\n")
 		if len(events) == 0 || brief {
-			fmt.Fprintf(w, "|\n")
+			fmt.Fprintf(w, "\n")
 			if len(events) == 0 {
-				fmt.Fprintf(w, "|no activities were completed\n")
+				fmt.Fprintf(w, "no activities were completed\n")
 			} else if brief {
-				fmt.Fprintf(w, "|a lot of activities were completed\n")
+				fmt.Fprintf(w, "a lot of activities were completed\n")
 			}
-			fmt.Fprintf(w, "|\n")
+			fmt.Fprintf(w, "\n")
 		} else {
 			for _, event := range events {
 				if !brief {
-					fmt.Fprintf(w, "|%30s %10s %5d\n", event.Skill_title, event.Type, duo.Score(event))
+					fmt.Fprintf(w, "%30s %10s %5d\n", event.Skill_title, event.Type, duo.Score(event))
 				}
 			}
 		}
 	} else {
-		fmt.Fprintf(w, "|\n")
-		fmt.Fprintf(w, "|asi mate Duolingo prepnute do jineho nez anglickeho kurzu\n")
-		fmt.Fprintf(w, "|v takovem pripade bohuzel nevidim vase ziskane body\n")
-		fmt.Fprintf(w, "|\n")
-		fmt.Fprintf(w, "|%s\n", eventsOrErr.Err)
-		fmt.Fprintf(w, "|\n")
+		fmt.Fprintf(w, "\n")
+		fmt.Fprintf(w, "asi mate Duolingo prepnute do jineho nez anglickeho kurzu\n")
+		fmt.Fprintf(w, "v takovem pripade bohuzel nevidim vase ziskane body\n")
+		fmt.Fprintf(w, "\n")
+		fmt.Fprintf(w, "%s\n", eventsOrErr.Err)
+		fmt.Fprintf(w, "\n")
 	}
-	fmt.Fprintf(w, "|--------------------------------------------------\n")
+	fmt.Fprintf(w, "--------------------------------------------------")
 }

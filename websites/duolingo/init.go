@@ -5,6 +5,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/sessions"
 	"github.com/jirkadanek/onlinea/ismu/bloky"
+	"github.com/jirkadanek/onlinea/misc"
 	"github.com/jirkadanek/onlinea/secrets"
 	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
@@ -15,7 +16,6 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http"
-	"strings"
 )
 
 var _ = ioutil.ReadAll
@@ -82,20 +82,9 @@ func ucoFromPerson(p Person) string {
 		return ""
 	}
 	for _, email := range p.Emails {
-		vs := strings.Split(email.Value, "@")
-		muni := vs[1] == "mail.muni.cz"
-		numeric := vs[0] != ""
-		for _, c := range vs[0] {
-			switch {
-			case '0' <= c && c <= '9':
-				continue
-			default:
-				numeric = false
-				break
-			}
-		}
-		if muni && numeric {
-			return vs[0]
+		uco := misc.UcoFromMuniMail(email.Value)
+		if uco != "" {
+			return uco
 		}
 	}
 	return ""

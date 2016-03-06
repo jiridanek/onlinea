@@ -109,36 +109,11 @@ func render(w io.Writer, report Report) {
 }
 
 func print_scores_student(w io.Writer, events []duo.Event) {
-	nlessons := 0
-	plessons := 0
-	npractices := 0
-	ppractices := 0
+	s := duo.CalculatePoints(events)
 
-	for _, event := range events {
-		switch event.Type {
-		case "lesson", "test":
-			nlessons++
-			plessons += duo.Score(event)
-		case "practice":
-			if event.Skill_title != "" { // practicing a concrete skill
-				continue
-			}
-			npractices++
-			ppractices += duo.Score(event)
-		}
-	}
-
-	ptotal := plessons
-	if ppractices < ptotal {
-		ptotal = ppractices
-	}
-	if 70 < ptotal {
-		ptotal = 70
-	}
-
-	fmt.Fprintf(w, "Lessons:   %3d ... %4d points\n", nlessons, plessons)
-	fmt.Fprintf(w, "Practices: %3d ... %4d points\n", npractices, ppractices)
-	fmt.Fprintf(w, "Total: *%d points (calculated as min( min(Lessons,Practices), 70))\n", ptotal)
+	fmt.Fprintf(w, "Lessons:   %3d ... %4d points\n", s.Nlessons, s.Plessons)
+	fmt.Fprintf(w, "Practices: %3d ... %4d points\n", s.Npractices, s.Ppractices)
+	fmt.Fprintf(w, "Total: *%d points (calculated as min( min(Lessons,Practices), 70))\n", s.Ptotal)
 	fmt.Fprintf(w, "\n")
 	fmt.Fprintf(w, "      Lesson                  Activity type     Points\n")
 	fmt.Fprintf(w, "----------------------------------------------------------\n")

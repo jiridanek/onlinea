@@ -8,9 +8,9 @@ type Event struct {
 	Localized_dt_string, Timestamp string
 	User_tz_datetime               int
 	//     Skill_lessons int //FIXME: int or string? it is all null....
-	Num_skills_learned, Xp         int
-	Skill_title, Type              string
-	Lesson_number, Datetime        int
+	Num_skills_learned, Xp  int
+	Skill_title, Type       string
+	Lesson_number, Datetime int
 }
 
 type EventsResult struct {
@@ -24,10 +24,10 @@ type Week struct {
 }
 
 type Observee struct {
-	User_id                int
-	Tree_depth             int
-	From_language_name     string
-	Skills                 []struct {
+	User_id            int
+	Tree_depth         int
+	From_language_name string
+	Skills             []struct {
 		Completed       bool
 		Completion_date string
 		Locked          bool
@@ -36,17 +36,17 @@ type Observee struct {
 	Learning_language      string
 	Learning_language_name string
 	Summary                struct {
-							   Total_lessons      int
-							   Attendance         int
-							   Total_xps          int
-							   Num_skills_learned int
-						   }
-	Email                  string
-	Avatar_url             string
-	Section                string
-	Display_name           string
-	From_language          string
-	Id                     string
+		Total_lessons      int
+		Attendance         int
+		Total_xps          int
+		Num_skills_learned int
+	}
+	Email         string
+	Avatar_url    string
+	Section       string
+	Display_name  string
+	From_language string
+	Id            string
 }
 
 // Keys I do not need are commented out. This makes this code
@@ -76,7 +76,7 @@ type DashboardResult struct {
 	//         //Tree_view bool
 	//         //Enable_mature_words bool
 	//     }
-	Observees               []Observee
+	Observees []Observee
 	//Has_old_students bool
 	//Email string
 	//Has_students bool

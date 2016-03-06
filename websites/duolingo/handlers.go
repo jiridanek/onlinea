@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/jirkadanek/onlinea/duolingo"
 	"github.com/jirkadanek/onlinea/misc"
+	"github.com/jirkadanek/onlinea/src/golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/log"
@@ -12,6 +13,7 @@ import (
 	"google.golang.org/appengine/user"
 	"net/http"
 	"strings"
+	"time"
 )
 
 func authBody(w http.ResponseWriter, r *http.Request) {
@@ -121,10 +123,11 @@ func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	client := urlfetch.Client(c)
+	dc, _ := context.WithTimeout(c, 30*time.Second)
+	client := urlfetch.Client(dc)
 	client.Jar = duo.Session.Jar
 	duo.DoLogin(client)
-	dashboard := duo.DoDashboardGet(client)
+	dashboard := duo.DoDashboardGet(client, "")
 	observees := dashboard.Observees
 
 	students := make([]Student, 0)
@@ -148,6 +151,14 @@ func adminUploadDuolingo(w http.ResponseWriter, r *http.Request) {
 		if !found {
 			students = append(students, Student{Uco: r.Uco(), Nick: nick})
 			fmt.Fprintf(w, "%v, %v was not found in Dashboard\n", r.Uco(), nick)
+		}
+	}
+
+	// add observees with @mail.muni.cz email
+	for _, s := range observees {
+		uco := misc.UcoFromMuniMail(s.Email)
+		if s.Section == "934175" && uco != "" {
+			students = append(students, Student{Uco: uco, Nick: s.User_name, Id: fmt.Sprintf("%d", s.User_id)})
 		}
 	}
 

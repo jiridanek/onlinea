@@ -13,11 +13,6 @@ import (
 	"time"
 )
 
-var (
-	First  = time.Date(2016, time.February, 22, 23, 0, 0, 0, time.UTC) // first day of the semester
-	Format = "2006-01-02"
-)
-
 type session struct {
 	mu       sync.Mutex
 	deadline time.Time
@@ -31,6 +26,7 @@ var DefaultClient = &http.Client{Jar: jar}
 // Session is a per-server store for Duolingo session data
 var Session = session{isSet: false, Jar: jar}
 
+// printResponse is useful for debugging this package
 func printResponse(res *http.Response) {
 	t, err := ioutil.ReadAll(res.Body)
 	if err != nil {
@@ -132,8 +128,12 @@ func DoEventsGet(client *http.Client, student_id, begin_date, end_date string) (
 	return result, nil
 }
 
-func DoDashboardGet(client *http.Client) DashboardResult {
+func DoDashboardGet(client *http.Client, classroom string) DashboardResult {
+
 	addr := host + "/api/1/observers/progress_dashboard"
+	if classroom != "" {
+		addr += "?classroom_id=" + classroom
+	}
 	res, err := client.Get(addr)
 	if err != nil {
 		log.Panic(err)
@@ -149,20 +149,4 @@ func DoDashboardGet(client *http.Client) DashboardResult {
 		log.Panic(err)
 	}
 	return students
-}
-
-func Score(event Event) int {
-	switch event.Type {
-	case "lesson":
-		return 10
-	case "test":
-		return 10
-	case "practice":
-		if event.Skill_title == "" {
-			return 10
-		}
-		return 0
-	default:
-		return 0
-	}
 }
