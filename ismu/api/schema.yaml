@@ -1,0 +1,446 @@
+swagger: '2.0'
+
+info:
+  version: "0.0.0"
+  title: API poznámkových bloků IS MU
+  description: Neoficialní dokumentace API poznámkových bloků, vytvořená za účelem automatického generování klientských knihoven. K datu vytvoření (březen 2016) popisuje celé nabízené API.
+
+schemes: ["https"]
+host: is.muni.cz
+#basePath: "/export/"
+produces: ["application/xml; charset=utf-8", "text/html; charset=utf-8"]
+
+externalDocs:
+  description: API poznámkových bloků v nápovědě IS MU
+  url: https://is.muni.cz/auth/napoveda/ucitel/bloky_api
+
+parameters:
+  klic:
+    name: klic
+    in: query
+    description: unikátní autentizační řetězec
+    required: true
+    type: string
+  fakulta:
+    name: fakulta
+    in: query
+    description: identifikační číslo fakulty dle číselníku
+    required: true
+    type: string
+    #format: integer
+  kod:
+    name: kod
+    in: query
+    description: kód zpracovávaného předmětu
+    required: true
+    type: string
+
+definitions:
+  Seminar:
+    title: SEMINAR
+    type: object
+    properties:
+      LIMIT_ID:
+        type: string
+        format: integer
+        example: 374367
+      LIMIT_LZE_SDILET:
+        type: string
+        example: ne
+      MAX_STUDENTU:
+        type: number
+        format: integer
+        example: 32
+      NASOBNE_PRIHLASENI:
+        type: string
+        example: ne
+      ODHLASIT_DO:
+        type: string
+        format: date-time
+        #exmaple: 20160316000000
+      OZNACENI:
+        type: string
+        example: Ag1
+      POCET_STUDENTU_VE_SKUPINE:
+        type: number
+        format: integer
+        example: 35
+      PORADI:
+        type: number
+        format: integer
+        example: 401
+      POZNAMKA:
+        type: string
+        #exmaple: "Discussion Group for Points. Recommended for students at levels &lt;A1, A1 and A2 in the Placement Test."
+      PRIHLASIT_DO:
+        type: string
+        format: date-time
+        #exmaple: 20160316000000
+      PRIHLASIT_OD:
+        type: string
+        format: date-time
+        example: 20160222170000
+      SEMINAR_ID:
+        type: string
+        format: integer
+        example: 374367
+      VCETNE_NEAKTIVNICH:
+        type: string
+        example: ne
+      ZMENENO:
+        type: string
+        format: date-time
+        example: 20160306023449
+      ZMENIL:
+        type: string
+        format: integer
+        example: 2227
+  PredmetInfo:
+    title: PREDMET_INFO
+    type: object
+    properties:
+      FAKULTA_ID:
+        type: string
+        format: integer
+        example: 1441
+      FAKULTA_ZKRATKA_DOM:
+        type: string
+        example: ped
+      KOD_PREDMETU:
+        type: string
+        example: ONLINE_A
+      KRATKY_NAZEV_PREDMETU:
+        type: string
+        example: Angličtina online
+      KRATKY_NAZEV_PREDMETU_ANGL:
+        type: string
+        example: English Online
+      NAZEV_PREDMETU:
+        type: string
+        example: Angličtina Online
+      NAZEV_PREDMETU_ANGL:
+        type: string
+        example: English Online
+      NEVYPISUJE_SE:
+        type: boolean
+        format: integer
+        example: 0
+      OBDOBI_ID:
+        type: string
+        format: integer
+        example: 6344
+      OBDOBI_NAZEV:
+        type: string
+        example: Spring 2016
+      OBDOBI_ZKRATKA_PRO_URL:
+        type: string
+        example: jaro2016
+      OBDOBI_ZKRATKA_PRO_URL_ANGL:
+        type: string
+        example: spring2016
+      POCET_ZAPSANYCH_STUDENTU:
+        type: number
+        format: integer
+        example: 1264
+      POCET_ZAREG_STUDENTU:
+        type: number
+        format: integer
+        example: 1270
+      PREDMET_ID:
+        type: string
+        format: integer
+        example: 831581
+      SEMINARE:
+        type: array
+        items:
+          $ref: "#/definitions/Seminar"
+      URL_PREDMETU:
+        type: string
+        example: https://is.muni.cz/el/1441/jaro2016/ONLINE_A/
+  PoznBlok:
+    title: POZN_BLOK
+    type: object
+    properties:
+      BLOK_ID:
+        type: string
+        format: integer
+        example: 428498
+      JMENO:
+        type: string
+        example: Discussion Points (from Discussion Forum for Points)
+      NEDOPLNOVAT_CHYBEJICI_STUDIA:
+        type: string
+        example: n
+      STUDENTOVI_ZOBRAZIT_STATISTIKU:
+        type: string
+        example: a
+      STUDENT_SMI_NAHLIZET:
+        type: string
+        example: a
+      TYP_ID:
+        type: string
+        format: integer
+        example: 1
+      TYP_NAZEV:
+        type: string
+        example: obecný blok
+      ZKRATKA:
+        type: string
+        example: asumadisk
+      ZMENENO:
+        type: string
+        format: date-time
+        example: 20151028193041
+      ZMENIL:
+        type: string
+        format: integer
+        example: 374368
+  StudentBlok:
+    title: STUDENT
+    type: object
+    properties:
+      OBSAH:
+        type: string
+        example: 10 | *10
+      UCO:
+        type: string
+        format: integer
+        example: 7973
+      ZMENENO:
+        type: string
+        format: date-time
+        example: 20160306004025
+      ZMENIL:
+        type: string
+        format: integer
+        example: 7973
+  StudentPredmet:
+    title: STUDENT
+    type: object
+    properties:
+      CELE_JMENO:
+        type: string
+        example: Mgr. Zuzana Plesková
+      JMENO:
+        type: string
+        example: Zuzana
+      PRIJMENI:
+        type: string
+        example: Pleskov
+      SEMINARE:
+        type: array
+        items:
+          title: SEMINAR
+          type: object
+          properties:
+            OZNACENI:
+              type: string
+              example: BCg7
+            SEMINAR_ID:
+              type: string
+              example: 374386
+      STAV_STUDIA:
+        type: string
+        example: aktivní
+      STAV_ZAPISU:
+        type: string
+        example: zapsáno
+      STUDENT_NEMA_SEMINAR:
+        type: string
+        example: 0
+      STUDIA:
+        type: array
+        items:
+          type: object
+          properties:
+            STUDIUM_IDENTIFIKACE:
+              type: string
+              example: PřF D-BI4 BOTA kombin. [sem 12, roč 6]
+      UCO:
+        type: string
+        format: integer
+        example: 106141
+      UKONCENI:
+        type: string
+        example: k
+  StudentSeminar:
+    title: STUDENT
+    type: object
+    properties:
+      CELE_JMENO:
+        type: string
+        example: Bára Skorkovská
+      JMENO:
+        type: string
+        example: Bára
+      PRIJMENI:
+        type: string
+        example: Skorkovská
+      STAV_STUDIA:
+        type: string
+        example: aktivní
+      STUDIA:
+        type: array
+        items:
+          type: string
+          example: FF B-FI AJ [sem 2, cyk 1]
+          xml:
+            name: STUDIUM_IDENTIFIKACE
+            wrapped: true
+# TODO: consider changing it to nested struct like
+#          properties:
+#            STUDIUM_IDENTIFIKACE:
+#              type: string
+#              example: FF B-FI AJ [sem 2, cyk 1]
+      UCO:
+        type: string
+        format: integer
+        example: 438416
+      UKONCENI:
+        type: string
+        example: k
+  PoznBlokyInfo:
+    title: POZN_BLOKY_INFO
+    type: array
+    items:
+      $ref: "#/definitions/PoznBlok"
+  BlokyObsah:
+    title: BLOKY_OBSAH
+    type: array
+    items:
+      $ref: "#/definitions/StudentBlok"
+  PredmetStudentiInfo:
+    title: PREDMET_STUDENTI_INFO
+    type: array
+    items:
+      $ref: "#/definitions/StudentPredmet"
+  SeminarStudentiInfo:
+    title: SEMINAR_STUDENTI_INFO
+    type: array
+    items:
+      type: object
+      properties:
+        OZNACENI:
+          type: string
+          example: BCg1
+        SEMINAR_ID:
+          type: string
+          format: integer
+          #example: 374414
+        STUDENT:
+          type: array
+          items:
+            $ref: "#/definitions/StudentSeminar"
+
+paths:
+  "/export/pb_blok_api?operace=predmet-info":
+    get:
+      description: Vrátí XML s informacemi o předmětu, včetně seminárních skupin, pokud existují.
+      parameters:
+        -
+          name: operace
+          in: query
+          default: predmet-info
+          required: true
+          type: string
+        - $ref: "#/parameters/klic"
+        - $ref: "#/parameters/fakulta"
+        - $ref: "#/parameters/kod"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/PredmetInfo"
+  "/pb_blok_api?operace=bloky-seznam":
+    get:
+      description: Vrátí XML s informacemi o všech poznámkových blocích předmětu.
+      parameters:
+        - $ref: "#/parameters/klic"
+        - $ref: "#/parameters/fakulta"
+        - $ref: "#/parameters/kod"
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/PoznBlokyInfo"
+
+  "/pb_blok_api?blok-dej-obsah":
+    get:
+      description: Vrátí XML s obsahem vybraného poznámkového bloku.
+      parameters:
+        - $ref: "#/parameters/klic"
+        - $ref: "#/parameters/fakulta"
+        - $ref: "#/parameters/kod"
+        -
+          name: zkratka
+          in: query
+          description: zkratka poznámkového bloku, jehož obsah chcete získat.
+          required: true
+          type: string
+        -
+          name: uco
+          in: query
+          description: Omezí obsah poznámkového bloku na konkrétního studenta. Pro omezení na více studentů lze zadat více hodnot parametru uco, např. ?uco=72873;uco=139544.
+          type: string
+          format: integer
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/BlokyObsah"
+  "/pb_blok_api?operace=predmet-seznam":
+    get:
+      description: Vrátí XML se seznamem studentů, kteří mají předmět zapsaný. Seznam lze rozšířit i na studenty, kteří mají předmět pouze zaregistrovaný nebo mají ukončené či neaktivní studium.
+      parameters:
+        - $ref: "#/parameters/klic"
+        - $ref: "#/parameters/fakulta"
+        - $ref: "#/parameters/kod"
+        -
+          name: zareg
+          in: query
+          description: Pokud je nastaveno na „a“, do výstupu budou zahrnuti i studenti, kteří mají předmět pouze zaregistrovaný (nemají jej zapsaný).
+          type: string
+        -
+          name: vcukonc
+          in: query
+          description: Pokud je nastaveno na „a“, do výstupu budou zahrnuti i studenti, kteří mají ukončené studium.
+          type: string
+        -
+          name: vcneaktiv
+          in: query
+          description: Pokud je nastaveno na „a“, do výstupu budou zahrnuti i studenti, kteří mají neaktivní studium.
+          type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/PredmetStudentiInfo"
+  "/pb_blok_api?operace=seminar-seznam":
+    get:
+      description: Vrátí XML se studenty, kteří jsou zapsáni ve vybraném semináři.
+      parameters:
+        - $ref: "#/parameters/klic"
+        - $ref: "#/parameters/fakulta"
+        - $ref: "#/parameters/kod"
+        -
+          name: seminar
+          in: query
+          description: označení semináře.
+          required: true
+          type: string
+        -
+          name: vcukonc
+          in: query
+          description: Pokud je nastaveno na „a“, do výstupu budou zahrnuti i studenti, kteří mají ukončené studium.
+          type: string
+        -
+          name: vcneaktiv
+          in: query
+          description: Pokud je nastaveno na „a“, do výstupu budou zahrnuti i studenti, kteří mají neaktivní studium.
+          type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            #$ref: "#/definitions/SeminarStudentiInfo"
+
