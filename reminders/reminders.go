@@ -14,24 +14,6 @@ import (
 	"strings"
 )
 
-//import (
-//	"github.com/jirkadanek/onlinea/bc"
-//	"io/ioutil"
-//"strings"
-//	"github.com/jirkadanek/onlinea/mailing"
-//)
-//
-//func PointsForStudent(block map[string]string) map[string]int {
-//
-//}
-//
-//func Program() (string, string) {
-//	program, err := ioutil.ReadFile("first.bc")
-//	names := blocknames(program)
-//	return program, names
-//}
-//
-
 func blockName(v string) string {
 	p := "ma_body_"
 	if strings.HasPrefix(v, p) {
@@ -40,65 +22,6 @@ func blockName(v string) string {
 	return v
 }
 
-//
-//func variables(blocksstudentpoints, student) map[string]string {
-//		vars := make(map[string]string)
-//		for block, studentpoints := range blockstudentpoints {
-//			vars[block], ma_body := studentpoints[student]
-//			vars["ma_body_" + block] = 0
-//			if ma_body {
-//				vars["ma_body_" + block] = 1
-//			}
-//		}
-//
-//	}
-//}
-//
-//
-//
-//
-//func blockNamesToFetch(variables map[string]string) []string {
-//	blocknames := getBlockNames()
-//	blocks := []string{"asumtotal", "asumdisk"}
-//	for _, variable := range variables {
-//		if _, found := blocknames[variable]; found {
-//			blocks = append(blocks, variable)
-//		}
-//	}
-//	return blocks
-//}
-//
-//func fetchBlockData() {
-//		blockstudentpoints := make(map[string]map[string]int)
-//	for _, block := range nblocks {
-//		blockstudentpoints[block] = PointsForStudent(block)
-//	}
-//}
-//
-//func createReminders() map[string]mailing.ReminderData {
-//	reminders := make(map[string]mailing.ReminderData, 0)
-//	for _, student := range students {
-//		reminders[student] = mailing.ReminderData{Email: student + "@mail.muni.cz"}
-//	}
-//
-//	for _, student := range students {
-//		reminder := &reminders[student]
-//
-//		vars := variables(blockstudentpoints, student)
-//		output, err := bc.Run(program, vars)
-//		reminders[student].DeadlinePrintout = output
-//
-//		completed := strings.Index(output, "@N") == -1
-//
-//		reminder.DeadlineCompleted = completed
-//
-//		reminder.Discussion = blockstudentpoints["asumdiscussion"][student]
-//		reminder.Total = blockstudentpoints["asumatotal"][student]
-//		reminder.DeadlinesMissed = blocksstudentpoints["missed"][student]
-//	}
-//	return reminders
-//}
-//
 type WeeklyProgressReminders struct {
 	client     *api.Client
 	parameters api.Parameters
@@ -108,8 +31,7 @@ type WeeklyProgressReminders struct {
 	variables  []string
 	students   []api.CourseStudent
 	notebooks  map[string][]api.Notebook
-	//	reminders map[string]mailing.ReminderData
-	Err error
+	Err        error
 }
 
 func NewWeeklyProgressReminders(client *api.Client, parameters api.Parameters) WeeklyProgressReminders {
@@ -186,6 +108,7 @@ func (r *WeeklyProgressReminders) Reminders() []mailing.ReminderData {
 				defs["ma_body_"+k] = "1"
 			}
 		}
+		defs["preview"] = "1" // TODO: make it so I can render without it too
 		printout, err := bc.Run(r.program, defs)
 		if err != nil {
 			log.Fatal(err)
@@ -215,7 +138,6 @@ func (r *WeeklyProgressReminders) Perform(name string, number int, skript string
 
 func points(s string) float64 {
 	sum := 0.0
-	//regexp.MustCompile(`\*(\d+(?:[\.,]\d+))`)
 	r := regexp.MustCompile(`\*(-?\d+(?:[\.,]\d+)?)`)
 	for _, m := range r.FindAllStringSubmatch(s, -1) {
 		if len(m) == 2 {
@@ -253,14 +175,3 @@ func WetRun() {
 	}
 	log.Printf("%+v", reminders)
 }
-
-//func (self *Reminders) loadProgram() {
-//
-//}
-//
-//func (self *Reminders) buildReminders(client api.client) {
-//	blocknames := client.blockNamesToFetch(variables)
-//	blockstudentpoints := fetchBlockData(blocknames)
-//	reminders := createreminders(blockstudentpoints)
-//	return reminders
-//}

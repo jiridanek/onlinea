@@ -1,0 +1,36 @@
+Pěkný den!
+
+Toto je stručný přehled vašich dosažených výsledků v kurzu Angličtina online. {{/*Čtete plaintextovou verzi e-mailu, ve které nejsou grafy. Přepněte si na HTML verzi, pokud je chcete vidět.*/}}
+
+## Body
+
+V bloku Total Points máte k dnešnímu dni {{.Total}} bodů a v bloku Discussion Points máte {{.Discussion}} bodů.
+
+## Dedlajny
+
+Nadcházející {{.DeadlineName}} (do ) {{if .DeadlineCompleted}}máte již splněn. Tak to má být!{{else}}ještě nemáte splněný. Tak s chutí do práce!{{end}}
+
+{{.DeadlinePrintout}}
+{{- if (not .DeadlineCompleted) and .DeadlineNumber eq 4 -}}
+Upozornění: Myslete na to, že poslední den výuky v semestru se zavírá Discussion Forum for Points. Do té doby musíte napsat všechny diskusní příspěvky.
+{{- end}}
+
+### Předchozí dedlajny
+
+Doposud jste včas nesplnili {{.DeadlinesMissed}} dedlajnů. {{if eq .DeadlinesMissed 0 -}}
+    Jen tak dál!
+{{- else if eq .DeadlinesMissed 1 -}}
+    To se ještě toleruje. Pokud předmět opakujete poté, co jste jej ukončíli naposledy neúspěšně, musíte všechny další dedlajny splnit včas.
+{{- else if eq .DeadlinesMissed 2 -}}
+    pokud předmět opakujete po neúspěšném ukončení, právě jste předmět ukončili napodruhé neúspěšně. Pokud máte předmět zapsaný poprve, nebo znovu po úspěšném ukončení, jste v pohodě, jen nesmíte zaváhat znova
+{{- else -}}
+    to už je příliš, předmět jste ukončili neúspěšně.{{end}}
+
+Požadavky ukončení předmětu najdete v interaktivní osnově ( https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp ).
+--
+Jiří Daněk
+https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/
+ONLINE_A Angličtina Online
+
+
+
