@@ -20,28 +20,28 @@ const (
 	UkonceneStudium
 )
 
-type client struct {
-	Client *http.Client
-	Klic   string // ApiKey
+type Client struct {
+	client *http.Client
+	klic   string // ApiKey
 }
 
 var ResponseError = errors.New("Server responded with code != 200")
 
-func NewClient(apikey string, altclient *http.Client) *client {
+func NewClient(apikey string, altclient *http.Client) *Client {
 	if altclient == nil {
 		altclient = http.DefaultClient
 	}
-	return &client{Client: altclient, Klic: apikey}
+	return &Client{client: altclient, klic: apikey}
 }
 
-func (c client) get(params url.Values) (response *http.Response, err error) {
-	params.Add("klic", c.Klic)
+func (c Client) get(params url.Values) (response *http.Response, err error) {
+	params.Add("klic", c.klic)
 	request, err := http.NewRequest("GET", "https://is.muni.cz/export/pb_blok_api", nil)
 	if err != nil {
 		return nil, err
 	}
 	request.URL.RawQuery = params.Encode()
-	response, err = c.Client.Do(request)
+	response, err = c.client.Do(request)
 	if err != nil {
 		return
 	}
@@ -52,7 +52,7 @@ func (c client) get(params url.Values) (response *http.Response, err error) {
 }
 
 // operace=predmet-seznam
-func (c client) GetCourseStudents(p Parameters, f flag) (result []CourseStudent, err error) {
+func (c Client) GetCourseStudents(p Parameters, f flag) (result []CourseStudent, err error) {
 	operace := "predmet-seznam"
 	params := p.Values()
 	if f&Zaregistrovani != 0 {
@@ -93,7 +93,7 @@ func (c client) GetCourseStudents(p Parameters, f flag) (result []CourseStudent,
 }
 
 // operace=blok-dej-obsah
-func (c client) GetNotebook(p Parameters, nb string, us []string) (result []Notebook, err error) {
+func (c Client) GetNotebook(p Parameters, nb string, us []string) (result []Notebook, err error) {
 	operace := "blok-dej-obsah"
 	params := p.Values()
 	params.Add("zkratka", nb)
@@ -127,7 +127,7 @@ func (c client) GetNotebook(p Parameters, nb string, us []string) (result []Note
 }
 
 // operace=bloky-seznam
-func (c client) GetNotebookList(p Parameters) (result []NotebookInfo, err error) {
+func (c Client) GetNotebookList(p Parameters) (result []NotebookInfo, err error) {
 	operace := "bloky-seznam"
 	params := p.Values()
 	params.Add("operace", operace)
