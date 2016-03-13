@@ -10,14 +10,6 @@ print "NO";
 }
 print "\n";
 
-print "Completed How-to-work ROPOT:\t";
-if (odpovednik) {
-print "YES";
-} else {
-print "NO";
-}
-print "\n";
-
 print "Enrolled in a seminar group:\t";
 if (skupina) {
 print "YES";
@@ -26,13 +18,19 @@ print "assuming YES";
 }
 print "\n";
 
-if (!preview) {
-    print "\nSummary:\n"
-    if (test && odpovednik) {
-    print "\tDeadline Assignment 1 was completed on time.";
-    } else {
-    print "\tDeadline Assignment 1 was NOT COMPLETED on time. @N *1";
-    }
-
-    print "\n\nhttps://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp\n";
+print "Completed How-to-work ROPOT:\t";
+if (odpovednik) {
+print "YES";
+} else {
+print "NO";
 }
+print "\n";
+
+print "\nSummary:\n"
+if (test && odpovednik) {
+print "\tDeadline Assignment 1 was completed on time.";
+} else {
+print "\tDeadline Assignment 1 was NOT COMPLETED on time. @N *1";
+}
+
+print "\n\nhttps://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp\n";

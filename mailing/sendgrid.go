@@ -36,6 +36,7 @@ type sendGridMessage struct {
 
 func NewSendGridMessage() Message {
 	m := sendgrid.NewMail()
+	m.SetASMGroupID(521) //TODO(jirka): make a parameter when n > 1
 	return &sendGridMessage{m}
 }
 
@@ -44,10 +45,7 @@ func (m *sendGridMessage) SetFrom(a mail.Address) {
 }
 
 func (m *sendGridMessage) AddTo(a mail.Address) {
-	if a.Name != "" {
-		m.SGMail.AddToName(a.Name)
-	}
-	m.SGMail.AddTo(a.Address)
+	m.SGMail.AddRecipient(&a)
 }
 
 func (m *sendGridMessage) AddBcc(a mail.Address) {

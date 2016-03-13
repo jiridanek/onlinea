@@ -63,7 +63,7 @@ func TestGetNotebooks(t *testing.T) {
 	p := api.Parameters{Fakulta: "myfakulta", Kod: "mykod"}
 
 	wpr := NewWeeklyProgressReminders(apiclient, p)
-	reminders := wpr.Perform("Deadline Assignment 1", 1, "test.bc")
+	reminders := wpr.Perform("Deadline Assignment 1", 1, "March 15, 2016", "test.bc")
 	if wpr.Failed() {
 		panic(wpr.Err)
 	}
@@ -93,8 +93,9 @@ func testMaBody(t *testing.T) {
 
 }
 
-func TestWetRun(t *testing.T) {
-	WetRun()
+func TestFetchData(t *testing.T) {
+	d := FetchNotebookDataFromIS()
+	log.Printf("%+v", d)
 }
 
 func must(err error) {

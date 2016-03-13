@@ -27,6 +27,7 @@ type WeeklyProgressReminders struct {
 	parameters api.Parameters
 	name       string
 	number     int
+	due        string
 	program    string
 	variables  []string
 	students   []api.CourseStudent
@@ -42,12 +43,13 @@ func (r *WeeklyProgressReminders) Failed() bool {
 	return r.Err != nil
 }
 
-func (r *WeeklyProgressReminders) Deadline(name string, number int, skript string) {
+func (r *WeeklyProgressReminders) Deadline(name string, number int, due, skript string) {
 	if r.Failed() {
 		return
 	}
 	r.name = name
 	r.number = number
+	r.due = due
 	var program []byte
 	program, r.Err = ioutil.ReadFile(skript)
 	r.program = string(program)
@@ -119,8 +121,9 @@ func (r *WeeklyProgressReminders) Reminders() []mailing.ReminderData {
 			FullName:          s.CELE_JMENO,
 			DeadlineName:      r.name,
 			DeadlineNumber:    r.number,
+			DeadlineDate:      r.due,
 			DeadlineCompleted: completed(printout),
-			DeadlinePrintout:  printout,
+			DeadlinePrintout:  strings.Split(printout, "\nSummary:\n")[0],
 			DeadlinesMissed:   int(math.Floor(points(obsah(r.notebooks, "asumamiss", s.UCO)))),
 			Discussion:        points(obsah(r.notebooks, "asumadisk", s.UCO)),
 			Total:             points(obsah(r.notebooks, "asumatotal", s.UCO)),
@@ -129,8 +132,8 @@ func (r *WeeklyProgressReminders) Reminders() []mailing.ReminderData {
 	return rs
 }
 
-func (r *WeeklyProgressReminders) Perform(name string, number int, skript string) []mailing.ReminderData {
-	r.Deadline(name, number, skript)
+func (r *WeeklyProgressReminders) Perform(name string, number int, due string, skript string) []mailing.ReminderData {
+	r.Deadline(name, number, due, skript)
 	r.GetStudents()
 	r.GetNotebooks()
 	return r.Reminders()
@@ -165,13 +168,13 @@ func obsah(bloky map[string][]api.Notebook, zkratka, uco string) string {
 	return record
 }
 
-func WetRun() {
+func FetchNotebookDataFromIS() []mailing.ReminderData {
 	parameters := api.Parameters{Fakulta: "1441", Kod: "ONLINE_A"}
 	client := api.NewClient(secrets.APIKEY, nil)
 	pc := NewWeeklyProgressReminders(client, parameters)
-	reminders := pc.Perform("Deadline Assignment 1", 1, "first.bc")
+	reminders := pc.Perform("Deadline Assignment 1", 1, "March 15, 2016 23:59", "first.bc") // FIXME: parametrize this
 	if pc.Failed() {
 		log.Fatal(pc.Err)
 	}
-	log.Printf("%+v", reminders)
+	return reminders
 }

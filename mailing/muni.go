@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"github.com/jaytaylor/html2text"
+	"github.com/jirkadanek/onlinea/secrets"
 	"gopkg.in/gomail.v2"
 	"html/template"
 	"io/ioutil"
@@ -34,9 +35,9 @@ func DuolingoDokonceteRegistraci(descs []DuolingoFailure) []*gomail.Message {
 func NewMessage(to string) *gomail.Message {
 	m := gomail.NewMessage()
 
-	//m.SetHeader("To", to)
-	m.SetHeader("Bcc", "dnk@mail.muni.cz")
-	m.SetAddressHeader("From", "anglictina-online@appspot.gserviceaccount.com", "Angličtina online")
+	m.SetHeader("To", to)
+	m.SetHeader("Bcc", "j@dnk.cz")
+	m.SetAddressHeader("From", "dnk@mail.muni.cz", "Angličtina online")
 	m.SetAddressHeader("Sender", "dnk@mail.muni.cz", "Jiří Daněk")
 	m.SetAddressHeader("Reply-To", "anglictina-online@googlegroups.com", "Angličtina online")
 
@@ -77,12 +78,8 @@ func SendMessages(m ...*gomail.Message) {
 		log.Fatal("appending cert failed")
 	}
 
-	d := gomail.NewPlainDialer("mail.muni.cz", 465, "dnk", "fethem3fis")
-	d.TLSConfig = &tls.Config{RootCAs: pool}
-
-	//if err := d.DialAndSend(m...); err != nil {
-	//	log.Fatal(err)
-	//}
+	d := gomail.NewPlainDialer("mail.muni.cz", 465, secrets.NICKNAME, secrets.SECONDARYPASSWORD)
+	d.TLSConfig = &tls.Config{RootCAs: pool, ServerName: "mail.muni.cz"}
 
 	// retry until success
 	i := 0
@@ -90,15 +87,16 @@ func SendMessages(m ...*gomail.Message) {
 	for i < len(m) {
 		c, err := d.Dial()
 		if err != nil {
-			log.Println(err)
+			log.Println("muni.go SendMessages A", err)
 			goto sleep
 		}
 		for i < len(m) {
 			err = gomail.Send(c, m[i])
 			if err != nil {
-				log.Println(err)
+				log.Println("muni.go SendMessages B", err)
 				goto sleep
 			}
+			log.Println("muni.go SeendMessages C", "sent mail no.", i)
 			i++
 			t = 3 * time.Second
 		}

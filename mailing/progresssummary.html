@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your weekly progress summary in Angličtina online</title>
+</head>
+<body>
+<table style="width: 100%; border-spacing: 1.5em 0.5em;">
+    <tr>
+        <td lang="cs" style="width: 50%; vertical-align: top;">
+            <p>Pěkný den!</p>
+            <p>Toto je stručný přehled vašich dosažených výsledků v kurzu Angličtina online.</p>
+            <h3>Body</h3>
+            <p>V bloku Total Points máte k dnešnímu dni {{.Total}}&nbsp;bodů a v bloku Discussion Points máte {{.Discussion}}&nbsp;bodů.</p>
+            <h3>Dedlajny</h3>
+            <p>Nadcházející {{.DeadlineName}} (do {{.DeadlineDate}}) {{if .DeadlineCompleted}}máte již splněn. Tak to má být!{{else}}ještě nemáte splněný. Otevřete si <a href="https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp">interaktivní osnovu</a> a pusťte se s chutí do práce!{{end}}</p>
+            <pre>{{.DeadlinePrintout}}</pre>
+            {{if and (not .DeadlineCompleted) (eq .DeadlineNumber 4) -}}
+            <p>Upozornění: Myslete na to, že poslední den výuky v semestru se zavírá Discussion Forum for Points. Do té doby musíte napsat všechny diskusní příspěvky.</p>
+            {{- end}}
+            <p>Na tento e-mail prosím neodpovídejte. Pro vaše dotazy slouží diskusní fórum předmětu.</p>
+            <pre>--
+Jiří Daněk
+<a href="https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/">https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/</a>
+ONLINE_A Angličtina Online</pre>
+        </td>
+        <td lang="en" stýle="width: 50%; vertical-align: top;">
+            <p>Greetings!</p>
+            <p>Here's a look at what you've already achieved in the course. Check it out, and keep learning!</p>
+            <h3>Points</h3>
+            <p>As of this moment, you have {{.Total}} points in your Total Points Notebook and {{.Discussion}} points in your Discussion Points Notebook.</p>
+            <h3>Deadline</h3>
+            The upcoming {{.DeadlineName}} (due {{.DeadlineDate}}) {{if .DeadlineCompleted}}is already completed. Good job!{{else}}is not yet completed. Open up the <a href="https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp">Interactive Syllabus</a> and get cracking!{{end}}
+            <pre>{{.DeadlinePrintout}}</pre>
+            {{if and (not .DeadlineCompleted) (eq .DeadlineNumber 4)}}
+            <p>NOTE: Discussion Forum for Points closes on the last day of instruction of the semester. After the forum closes, you will be unable to write new messages there. Write enough messages before the forum closes, or you fail the course.</p>
+            {{- end}}
+            Do not reply to this e-mail. Ask your questions in the Course discussion forum.
+            <pre>--
+Jiří Daněk
+<a href="https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/">https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/</a>
+ONLINE_A Angličtina Online</pre>
+        </td>
+    </tr>
+</table>
+<hr>
+</body>
+</html>

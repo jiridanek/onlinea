@@ -1,8 +1,8 @@
-# Don’t commit the following directories created by pub.
+# directories created by Dart pub.
 build/
 packages/
 
-# Or the files created by dart2js.
+# files created by dart2js.
 *.dart.js
 *.dart.precompiled.js
 *.js_
@@ -11,6 +11,9 @@ packages/
 
 # Include when developing application packages.
 pubspec.lock
+
+# passwords
+secrets/secrets.go
 
 .DS_Store
 /node_modules

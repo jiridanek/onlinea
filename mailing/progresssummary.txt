@@ -1,6 +1,8 @@
 Pěkný den!
 
-Toto je stručný přehled vašich dosažených výsledků v kurzu Angličtina online. {{/*Čtete plaintextovou verzi e-mailu, ve které nejsou grafy. Přepněte si na HTML verzi, pokud je chcete vidět.*/}}
+(English version is below.)
+
+Toto je stručný přehled vašich dosažených výsledků v kurzu Angličtina online. Pokud Weekly progress summary nechcete dostávat, odkaz na odhlášení z odběru je na konci e-mailu, pod anglickou verzí.{{/*Čtete plaintextovou verzi e-mailu, ve které nejsou grafy. Přepněte si na HTML verzi, pokud je chcete vidět.*/}}
 
 ## Body
 
@@ -8,29 +10,55 @@ V bloku Total Points máte k dnešnímu dni {{.Total}} bodů a v bloku Discussio
 
 ## Dedlajny
 
-Nadcházející {{.DeadlineName}} (do ) {{if .DeadlineCompleted}}máte již splněn. Tak to má být!{{else}}ještě nemáte splněný. Tak s chutí do práce!{{end}}
+Nadcházející {{.DeadlineName}} (do {{.DeadlineDate}}) {{if .DeadlineCompleted}}máte již splněn. Tak to má být!{{else}}ještě nemáte splněný. Otevřete si interaktivní osnovu https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp a pusťte se s chutí do práce!{{end}}
 
 {{.DeadlinePrintout}}
-{{- if (not .DeadlineCompleted) and .DeadlineNumber eq 4 -}}
+{{if and (not .DeadlineCompleted) (eq .DeadlineNumber 4)}}
 Upozornění: Myslete na to, že poslední den výuky v semestru se zavírá Discussion Forum for Points. Do té doby musíte napsat všechny diskusní příspěvky.
-{{- end}}
-
+{{end -}}
+{{/*
 ### Předchozí dedlajny
 
 Doposud jste včas nesplnili {{.DeadlinesMissed}} dedlajnů. {{if eq .DeadlinesMissed 0 -}}
     Jen tak dál!
 {{- else if eq .DeadlinesMissed 1 -}}
-    To se ještě toleruje. Pokud předmět opakujete poté, co jste jej ukončíli naposledy neúspěšně, musíte všechny další dedlajny splnit včas.
+    To se ještě toleruje. Pokud předmět opakujete poté, co jste jej ukončíli naposledy neúspěšně, musíte všechny další dedlajny splnit včas. Pokud máte předmět zapsaný poprve, nebo znovu poté, co jste jej ukončíli úspěšně, ještě vám jeden další nesplněný dedlajn promineme.
 {{- else if eq .DeadlinesMissed 2 -}}
-    pokud předmět opakujete po neúspěšném ukončení, právě jste předmět ukončili napodruhé neúspěšně. Pokud máte předmět zapsaný poprve, nebo znovu po úspěšném ukončení, jste v pohodě, jen nesmíte zaváhat znova
+    Pokud předmět opakujete po neúspěšném ukončení, právě jste předmět ukončili napodruhé neúspěšně. Pokud máte předmět zapsaný poprve, nebo znovu po úspěšném ukončení, jste ještě v pohodě, jen už nesmíte zaváhat znova.
 {{- else -}}
-    to už je příliš, předmět jste ukončili neúspěšně.{{end}}
+    To už je příliš, předmět jste ukončili neúspěšně.{{end}}
 
-Požadavky ukončení předmětu najdete v interaktivní osnově ( https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp ).
+Požadavky ukončení předmětu najdete v interaktivní osnově https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp
+*/}}Na tento e-mail prosím neodpovídejte. Pro vaše dotazy slouží diskusní fórum předmětu https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/
 --
 Jiří Daněk
 https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/
 ONLINE_A Angličtina Online
 
+=================================
+*       ENGLISH VERSION         *
+=================================
 
+Greetings!
+
+Here's a look at what you've already achieved in the course. Check it out, and keep learning!
+
+## Points
+
+As of this moment, you have {{.Total}} points in your Total Points Notebook and {{.Discussion}} points in your Discussion Points Notebook.
+
+## Deadlines
+
+The upcoming {{.DeadlineName}} (due {{.DeadlineDate}}) {{if .DeadlineCompleted}}is already completed. Good job!{{else}}is not yet completed. Open up the Interactive Syllabus https://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp and get cracking!{{end}}
+
+{{.DeadlinePrintout}}
+{{if and (not .DeadlineCompleted) (eq .DeadlineNumber 4)}}
+NOTE: Discussion Forum for Points closes on the last day of instruction of the semester. After the forum closes, you will be unable to write new messages there. Write enough messages before the forum closes, or you fail the course.
+{{end -}}
+
+Do not reply to this e-mail. Ask your questions in the Course discussion forum, https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/
+--
+Jiří Daněk
+https://is.muni.cz/auth/cd/1441/jaro2016/ONLINE_A/
+ONLINE_A Angličtina Online
 
