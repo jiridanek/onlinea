@@ -101,12 +101,13 @@ func (r *WeeklyProgressReminders) Reminders() []mailing.ReminderData {
 	for i, s := range r.students {
 		defs := make(map[string]string)
 		for k, _ := range r.notebooks {
-			p := points(obsah(r.notebooks, k, s.UCO))
+			t := obsah(r.notebooks, k, s.UCO)
+			p := points(t)
 
 			defs[k] = fmt.Sprintf("%f", p)
 
 			defs["ma_body_"+k] = "0"
-			if p != 0 {
+			if hasPoints(t) {
 				defs["ma_body_"+k] = "1"
 			}
 		}
@@ -139,10 +140,15 @@ func (r *WeeklyProgressReminders) Perform(name string, number int, due string, s
 	return r.Reminders()
 }
 
+var pointsRegexp = regexp.MustCompile(`\*(-?\d+(?:[\.,]\d+)?)`)
+
+func hasPoints(s string) bool {
+	return pointsRegexp.MatchString(s)
+}
+
 func points(s string) float64 {
 	sum := 0.0
-	r := regexp.MustCompile(`\*(-?\d+(?:[\.,]\d+)?)`)
-	for _, m := range r.FindAllStringSubmatch(s, -1) {
+	for _, m := range pointsRegexp.FindAllStringSubmatch(s, -1) {
 		if len(m) == 2 {
 			f, err := strconv.ParseFloat(strings.Replace(m[1], ",", ".", -1), 64)
 			if err != nil {

@@ -89,8 +89,31 @@ func TestPoints(t *testing.T) {
 	}
 }
 
-func testMaBody(t *testing.T) {
+func TestHasPoints(t *testing.T) {
+	for _, v := range [][]string{
+		{"", "false"},
+		{"*", "false"},
+		{"*a", "false"},
+		{"*3", "true"},
+		{"*3.3", "true"},
+		{"*3,3", "true"},
+		{"*0", "true"},
+	} {
+		var e bool
+		switch v[1] {
+		case "true":
+			e = true
+		case "false":
+			e = false
+		default:
+			t.Fatalf("Wrong expected value: %v", v[1])
+		}
 
+		actual := hasPoints(v[0])
+		if e != actual {
+			t.Errorf("String %v, expected %v, actual %v", v[0], v[1], actual)
+		}
+	}
 }
 
 func TestFetchData(t *testing.T) {
