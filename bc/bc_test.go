@@ -1,6 +1,7 @@
 package bc
 
 import (
+	"fmt"
 	"io/ioutil"
 	"testing"
 )
@@ -75,6 +76,24 @@ func TestVariables(t *testing.T) {
 			variables = c[1:len(c)]
 		}
 		testVariables(t, program, variables)
+	}
+}
+
+func TestNoLineBreaksEval(t *testing.T) {
+	longstring := "A very long string A very long string A very long string A very long string A very long string"
+	result, err := Eval(fmt.Sprintf(`print "%v"`, longstring))
+	must(err)
+	if result != longstring {
+		t.Errorf("Long string result is %v", result)
+	}
+}
+
+func TestNoLineBreaksRun(t *testing.T) {
+	longstring := "A very long string A very long string A very long string A very long string A very long string"
+	result, err := Run(fmt.Sprintf(`print "%v"`, longstring), make(map[string]string))
+	must(err)
+	if result != longstring {
+		t.Errorf("Long string result is %v", result)
 	}
 }
 

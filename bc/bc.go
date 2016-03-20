@@ -30,7 +30,8 @@ func Eval(exp string) (string, error) {
 
 	err := eval(in, &out)
 
-	return strings.TrimSpace(out.String()), err
+	return strings.TrimSpace(
+		strings.Replace(out.String(), "\\\n", "", -1)), err
 }
 
 func Run(program string, variables map[string]string) (string, error) {
@@ -43,7 +44,7 @@ func Run(program string, variables map[string]string) (string, error) {
 	var out bytes.Buffer
 
 	err := eval(&in, &out)
-	return out.String(), err
+	return strings.Replace(out.String(), "\\\n", "", -1), err
 }
 
 func isAlphaNum(r rune) bool {
