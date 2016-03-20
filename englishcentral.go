@@ -28,7 +28,6 @@ func EnglishCentral(args []string) {
 	flagset := flag.NewFlagSet("englishcentral", flag.PanicOnError)
 	month := flagset.Int("month", 0, "month number of the semester, starting from 1")
 	url := flagset.Bool("url", false, "print Progress Report URL")
-	blok := flagset.String("blok", "", "filepath to csv exported blok")
 	xls := flagset.String("xls", "", "filepath to xls Progress Report")
 	flagset.Parse(args)
 
@@ -37,21 +36,25 @@ func EnglishCentral(args []string) {
 			log.Fatal("month must be >= 1")
 		}
 		printUrl(*month)
-	} else if *blok != "" && *xls != "" {
-		//students := readBlok(*blok)
-
+	} else if *xls != "" {
 		r, err := os.Open(*xls)
+		check(err)
 		w, err := ec.ParseWorkbook(r)
+		check(err)
 		results, err := ec.ParseProgressReport(w)
+		check(err)
 
-		_ = err
-
-		//log.Println(students)
 		//log.Println(results)
 
 		printBlok(os.Stdout, results)
 	} else {
-		log.Fatal("specify either url or blok and xls")
+		log.Fatal("specify either url or xls")
+	}
+}
+
+func check(err error) {
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 
