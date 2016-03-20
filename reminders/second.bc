@@ -1,0 +1,35 @@
+  min_celkem = 333
+  min_diskuse = 15
+  
+  celkem = asumatotal
+  diskuse = asumadisk
+  
+  ###########################################################
+  
+  splnil_celkem = (celkem >= min_celkem);
+  splnil_diskuse = (diskuse >= min_diskuse);
+  
+  print "Have you earned at least ", min_celkem, " points in total?\t\t";
+  if (splnil_celkem) print "YES" else print "NO"
+  print " (", celkem,")\n";
+  
+  print "Have you earned at least ", min_diskuse, " points from discussions?\t";
+  if (splnil_diskuse) print "YES" else print "NO"
+  print " (", diskuse, ")\n";
+  
+  if (!splnil_diskuse) {
+      print " - What counts is when you wrote the messages, not when you are given the points.\n"
+      print "   If you wrote the messages on time and your moderator did not give you points\n"
+      print "   on time, you may get an N wrongfully. If you get an N, write to the 'I got an N! What now?!'\n"
+      print "   thread in Course Discussion and include links to all your messages in Discussion forum for points.\n"
+  }
+  
+  print "\nSummary:\n"
+  if (!splnil_celkem || !splnil_diskuse) {
+      print "\tDeadline Assignment was NOT COMPLETED on time @N *1"
+  } else {
+      print "\tDeadline Assignment was completed on time."
+  }
+  
+  print "\n\nhttps://is.muni.cz/auth/el/1441/jaro2016/ONLINE_A/index.qwarp\n";
+  quit

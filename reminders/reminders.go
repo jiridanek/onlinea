@@ -105,6 +105,10 @@ func (r *WeeklyProgressReminders) Reminders() []mailing.ReminderData {
 			p := points(t)
 
 			defs[k] = fmt.Sprintf("%f", p)
+			if strings.Index(defs[k], ".") != -1 {
+				// trim trailing zeros from decimals
+				defs[k] = strings.TrimRight(defs[k], "0")
+			}
 
 			defs["ma_body_"+k] = "0"
 			if hasPoints(t) {
@@ -178,7 +182,7 @@ func FetchNotebookDataFromIS() []mailing.ReminderData {
 	parameters := api.Parameters{Fakulta: "1441", Kod: "ONLINE_A"}
 	client := api.NewClient(secrets.APIKEY, nil)
 	pc := NewWeeklyProgressReminders(client, parameters)
-	reminders := pc.Perform("Deadline Assignment 1", 1, "March 15, 2016 23:59", "first.bc") // FIXME: parametrize this
+	reminders := pc.Perform("Deadline Assignment 2", 1, "March 22, 2016 23:59", "second.bc") // FIXME: parametrize this
 	if pc.Failed() {
 		log.Fatal(pc.Err)
 	}

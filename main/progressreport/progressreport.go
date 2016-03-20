@@ -7,9 +7,7 @@ import (
 	"github.com/jirkadanek/onlinea/reminders"
 	"github.com/jirkadanek/onlinea/secrets"
 	"log"
-	"net/http"
 	"net/mail"
-	"time"
 )
 
 var live = flag.Bool("live", false, "If set, it will actually send the mail")
@@ -45,12 +43,13 @@ func send(s mailing.Service, d mailing.ReminderData) {
 func main() {
 	flag.Parse()
 
-	http.DefaultTransport.(*http.Transport).ResponseHeaderTimeout = time.Second * 45
+	//http.DefaultTransport.(*http.Transport).ResponseHeaderTimeout = time.Second * 45
 
 	service := mailing.NewSendGridService(secrets.SendGridKey)
 	data := reminders.FetchNotebookDataFromIS()
 	for i, datum := range data {
 		//datum.Email = "j@dnk.cz"
+		//datum.Email = "dnk@mail.muni.cz"
 
 		// list of students that should not get this mail
 		mark := struct{}{}
